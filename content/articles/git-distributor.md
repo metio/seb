@@ -23,6 +23,24 @@ In case of the first scenario, tools like [copybara](https://github.com/google/c
 
 The second scenario can be solved with [Gitlab](https://gitlab.com)'s [mirror feature](https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html) quite easy. It allows to create a single pull-mirror and multiple push-mirrors. Thus, it can be used to pull from your central server and push into all mirrors.
 
+```
+               +----------------+               
+               |     GitHub     |               
+               +--------|-------+               
+                        |                       
+                        |                       
+                        |                       
+               +--------|-------+               
+         +------     Gitlab     -------+        
+         |     +----------------+      |        
+         |                             |        
+         |                             |        
+         |                             |        
++--------|-------+            +--------|-------+
+|    Codeberg    |            |    BitBucket   |
++----------------+            +----------------+
+```
+
 1. Go to `Settings > Repository` and expand `Mirroring repositories`
 2. Enter the URL of your central Git repository as the pull source, e.g. `https://github.com/metio/krei.git`
 3. Enter one push target for each mirror. Since pushing usually requires authentication, make sure the URL of the mirror contains a username, e.g. `https://YOUR_USER@codeberg.org/metio.wtf/krei.git`. Add an access token for each mirror and select `password` as authentication method.
