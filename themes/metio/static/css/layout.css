@@ -19,3 +19,7 @@
 #footer {
     grid-area: footer;
 }
+
+img {
+    max-width: 80vw;
+}
