@@ -44,10 +44,10 @@ The second scenario can be solved with [Gitlab](https://gitlab.com)'s [mirror fe
 In order to create such a setup, follow these steps:
 
 1. Go to `Settings > Repository` and expand `Mirroring repositories`
-   ![Code Flow](/image/gitlab-mirror-settings.png)
+   ![Code Flow](/images/gitlab-mirror-settings.png)
 2. Enter the URL of your central Git repository as the pull source, e.g. `https://github.com/metio/krei.git`
-   ![Code Flow](/image/gitlab-pull-mirror.png)
+   ![Code Flow](/images/gitlab-pull-mirror.png)
 3. Enter one push target for each mirror. Since pushing usually requires authentication, make sure the URL of the mirror contains a username, e.g. `https://YOUR_USER@codeberg.org/metio.wtf/krei.git`. Add an access token for each mirror and select `password` as authentication method.
-   ![Code Flow](/image/gitlab-push-mirror.png)
+   ![Code Flow](/images/gitlab-push-mirror.png)
 
 In case you prefer SSH keys over HTTP access tokens, just select `SSH public key` as authentication method and make sure your key is both saved in Gitlab and all mirrors.
