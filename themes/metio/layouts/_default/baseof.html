@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{ partial "head/metadata.html" . }}
+    {{ partial "head/opengraph.html" . }}
+    {{ partial "head/links.html" . }}
+    {{ partial "head/styles.html" . }}
+</head>
+<body id="site">
+{{ partial "body/site-header.html" . }}
+{{ partial "body/site-navigation.html" . }}
+<main id="content">
+    {{ block "main" . }}
+    <!-- The part of the page that begins to differ between templates -->
+    {{ end }}
+</main>
+{{ partial "body/site-footer.html" . }}
+</body>
+</html>

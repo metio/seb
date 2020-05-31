@@ -1,8 +1,8 @@
 ---
 title: Gitlab the Git Distributor
-date: 2020-05-31
+date: 2020-09-30
 categories:
-- how-to
+- configuration
 tags:
 - git
 - gitlab
@@ -23,20 +23,22 @@ In case of the first scenario, tools like [copybara](https://github.com/google/c
 
 The second scenario can be solved with [Gitlab](https://gitlab.com)'s [mirror feature](https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html) quite easy. It allows to create a single pull-mirror and multiple push-mirrors. Thus, it can be used to pull from your central server and push into all mirrors.
 
+![Code Flow](/image/git-distributor.svg)
+
 ```
                +----------------+               
                |     GitHub     |               
-               +--------|-------+               
+               +----------------+               
+                        ^                       
                         |                       
                         |                       
-                        |                       
-               +--------|-------+               
-         +------     Gitlab     -------+        
+               +----------------+               
+         +-----|     Gitlab     |------+        
          |     +----------------+      |        
          |                             |        
          |                             |        
-         |                             |        
-+--------|-------+            +--------|-------+
+         v                             v        
++----------------+            +----------------+
 |    Codeberg    |            |    BitBucket   |
 +----------------+            +----------------+
 ```
