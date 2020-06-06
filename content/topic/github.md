@@ -1,6 +1,6 @@
 ---
 title: GitHub
-date: 2020-06-30
+draft: true
 categories:
 - snippets
 tags:

@@ -1,10 +1,13 @@
+{{ define "title" }}
+    {{ .Site.Title }} &ndash; {{ .Title }}
+{{ end }}
 {{ define "main" }}
-{{.Content}}
-<ul>
+    {{.Content}}
     {{ range .Pages }}
-    <a href="{{.Permalink}}">
-        <li>{{ .Title }}</li>
-    </a>
+        <ul>
+            <a href="{{ .Permalink }}">
+                <li>{{ .Title }}</li>
+            </a>
+        </ul>
     {{ end }}
-</ul>
 {{ end }}

@@ -15,11 +15,14 @@
     padding-left: 15px;
     padding-right: 30px;
 }
+#content img {
+    max-width: 95%;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
 
 #footer {
     grid-area: footer;
 }
 
-img {
-    max-width: 80vw;
-}
+
