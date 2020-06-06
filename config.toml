@@ -16,7 +16,7 @@ DefaultContentLanguage = "en"
 [params]
   mainSections = ["topic"]
   author = "Sebastian Hoß"
-  email = "seb@hoß.de"
+  email = "sebhoss@pm.me"
   matrix = "@sebhoss:matrix.org"
   github = "sebhoss"
   mastodon = "https://mastodon.technology/@sebhoss"
