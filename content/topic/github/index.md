@@ -12,6 +12,7 @@ This page contains useful [GitHub](https://github.com/) snippets which are being
 ## Manage default community health files
 
 https://help.github.com/en/github/building-a-strong-community/creating-a-default-community-health-file
+https://github.com/actions/.github
 
 You can add default community health files to the root of a public repository called .github that is owned by an organization or user account.
 
