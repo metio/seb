@@ -8,3 +8,8 @@
     visibility: visible;
 }
 
+#content img {
+    width: calc(90vw - 250px);
+    margin-top: 24px;
+    margin-bottom: 24px;
+}

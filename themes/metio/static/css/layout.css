@@ -27,3 +27,9 @@
     padding-top: 5px;
     padding-bottom: 10px;
 }
+
+#content img {
+    width: 80vw;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
