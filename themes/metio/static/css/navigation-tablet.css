@@ -1,4 +1,5 @@
-#homelink {
+.mobileonly {
     display: none;
     visibility: hidden;
 }
+
