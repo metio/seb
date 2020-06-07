@@ -1,6 +1,7 @@
 ---
 title: Artificial Intelligence
 draft: true
+menu: topic
 categories:
 - snippets
 tags:

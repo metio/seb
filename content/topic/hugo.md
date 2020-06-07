@@ -1,6 +1,7 @@
 ---
-title: Working with Hugo
+title: Creating Websites with Hugo
 draft: true
+menu: topic
 categories:
 - snippets
 tags:

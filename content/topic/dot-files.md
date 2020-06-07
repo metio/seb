@@ -1,6 +1,7 @@
 ---
 title: Manage your Dot-files
 draft: true
+menu: topic
 categories:
 - snippets
 tags:

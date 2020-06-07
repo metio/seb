@@ -1,6 +1,7 @@
 ---
 title: SwayWM
 draft: true
+menu: topic
 categories:
 - snippets
 tags:

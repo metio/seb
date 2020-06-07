@@ -1,6 +1,7 @@
 ---
 title: Gitlab the Git Distributor
 date: 2020-09-30
+menu: topic
 categories:
 - configuration
 tags:

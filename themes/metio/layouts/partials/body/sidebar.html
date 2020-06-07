@@ -3,16 +3,9 @@
     {{ if ne $currentPage.URL "/" }}
         <li id="homelink"><a href="{{ "/" | absLangURL }}">Home</a></li>
     {{ end }}
-    {{ range .Site.Menus.main }}
+    {{ range .Site.Menus.topic }}
         <li>
-            <a href="{{ .URL }}" class="{{ if (or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .)) }}active{{ end }}">{{ .Pre }}{{ .Name }}</a>
-            <ul>
-                {{ range .Children }}
-                    <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
-                    <a href="{{ .URL }}">{{ .Name }}</a>
-                    </li>
-                {{ end }}
-            </ul>
+            <a href="{{ .URL }}" class="{{ if $currentPage.IsMenuCurrent "topic" . }}active{{ end }}">{{ .Pre }}{{ .Name }}</a>
         </li>
     {{ end }}
 </ul>

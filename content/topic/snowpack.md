@@ -1,6 +1,7 @@
 ---
 title: Working with Snowpack
 draft: true
+menu: topic
 categories:
 - snippets
 tags:

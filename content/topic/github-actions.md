@@ -1,6 +1,7 @@
 ---
 title: GitHub Actions
 date: 2020-06-30
+menu: topic
 categories:
 - snippets
 tags:
