@@ -1,6 +1,5 @@
 {{ define "main" }}
-    {{ .Content }}
-    {{ range first 1 .Site.Pages.ByLastmod }}
+    {{ range first 1 (where site.RegularPages "Type" "in" site.Params.mainSections) }}
         <h1>{{ .Title }}</h1>
         {{ .Content }}
     {{ end }}
