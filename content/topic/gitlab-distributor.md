@@ -52,3 +52,9 @@ In order to create such a setup, follow these steps:
    ![Code Flow](/images/gitlab-push-mirror.png)
 
 In case you prefer SSH keys over HTTP access tokens, just select `SSH public key` as authentication method and make sure your key is both saved in Gitlab and all mirrors.
+
+## Examples Projects
+
+The following projects are using the above approach to synchronize multiple git repositories:
+
+- [krei](https://github.com/metio/krei)
