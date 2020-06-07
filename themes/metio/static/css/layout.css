@@ -13,16 +13,17 @@
 #content {
     grid-area: content;
     padding-left: 15px;
-    padding-right: 30px;
-}
-#content img {
-    max-width: 95%;
-    margin-top: 12px;
-    margin-bottom: 12px;
+    padding-right: 15px;
 }
 
 #footer {
     grid-area: footer;
 }
 
-
+#content pre {
+    overflow: scroll;
+    max-width: 90vw;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}

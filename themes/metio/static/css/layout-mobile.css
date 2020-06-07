@@ -6,4 +6,9 @@
 
 #header {
     visibility: hidden;
+    display: none;
+}
+
+#content img {
+    width: 80vw;
 }
