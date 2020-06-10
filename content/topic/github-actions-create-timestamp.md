@@ -1,6 +1,6 @@
 ---
 title: Create Timestamp with GitHub Actions
-date: 2020-06-30
+date: 2020-06-11
 menu: topic
 categories:
 - devops
