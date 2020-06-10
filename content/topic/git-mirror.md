@@ -12,3 +12,6 @@ tags:
 ---
 
 https://krei.projects.metio.wtf/contributors/git-mirrors/#manual-mirroring
+
+- 1) push-only mirror
+- 2) additional push targets for upstream
