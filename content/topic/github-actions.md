@@ -15,23 +15,6 @@ This page contains useful [GitHub Actions](https://github.com/features/actions) 
 - `<RUN_ON>`: The runner to use, see GitHub's own [documentation](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on) for possible values.
 - `<PROJECT>`: The name of your project.
 
-## Create a timestamped release version
-
-```yaml
-name: <NAME>
-jobs:
-  build:
-    runs-on: <RUN_ON>
-    steps:
-      - name: Create release version
-        id: release
-        run: echo "::set-output name=version::$(date +'%Y.%m.%d-%H%M%S')"
-```
-
-The special syntax `::set-output name=version::` declares that the output of the command (`echo`) should be saves as version. Together with the `id` of the pipeline step, this value can be referenced like this `${{ steps.release.outputs.version }}` in the next steps of your pipeline.
-
-See https://calver.org/ for timestamp/calendar versioning.
-
 ## Setup a specific Java version
 
 Uses https://github.com/actions/setup-java.
