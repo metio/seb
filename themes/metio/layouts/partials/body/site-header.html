@@ -19,7 +19,7 @@
             </a>
         {{ end }}
         {{ with .Site.Params.mastodon }}
-            <a href="{{ . }}" id="mastodon" title="toot toot toot">
+            <a rel="me" href="{{ . }}" id="mastodon" title="toot toot toot">
                 <img class="svgimg" src="{{ "/images/mastodon.svg" | absURL }}" alt="mastodon" width="32" height="32">
             </a>
         {{ end }}
