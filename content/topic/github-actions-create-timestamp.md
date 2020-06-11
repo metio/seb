@@ -12,7 +12,7 @@ tags:
 - timestamp
 ---
 
-In case you are into [calver](https://calver.org/) or have another reason to create a timestamp with GitHub Actions, do the following:
+In case you are into [calver](https://calver.org/) or have another reason to create a timestamp with [GitHub Actions](https://github.com/features/actions), do the following:
 
 ```yaml
 name: <PIPELINE>
