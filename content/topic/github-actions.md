@@ -1,6 +1,6 @@
 ---
 title: GitHub Actions
-date: 2020-06-30
+draft: true
 menu: topic
 categories:
 - snippets
