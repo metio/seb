@@ -21,4 +21,4 @@ bindsym $mod+Print exec /usr/bin/grim -o $(swaymsg -t get_outputs | jq -r '.[] |
 bindsym $mod+Shift+p exec /usr/bin/grim -g "$(/usr/bin/slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S.png')
 ```
 
-`$mod+Print` will take a screenshot of the entire screen (with focus) and `$mod+Shift+p` allows to select just a part of a screen.
+`$mod+Print` will take a screenshot of the entire screen (with focus) and `$mod+Shift+p` allows selecting just a part of a screen.
