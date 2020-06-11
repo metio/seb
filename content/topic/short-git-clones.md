@@ -1,6 +1,6 @@
 ---
 title: Short Git Clones
-draft: true
+date: 2020-06-15
 menu: topic
 categories:
 - snippets
