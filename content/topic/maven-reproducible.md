@@ -13,9 +13,9 @@ tags:
 In order to create [reproducible builds](https://reproducible-builds.org/) with [Maven](https://maven.apache.org/) projects, it's enough to specify the `project.build.outputTimestamp` property like this:
 
 ```xml
-    <properties>
-        <project.build.outputTimestamp>2020</project.build.outputTimestamp>
-    </properties>
+<properties>
+    <project.build.outputTimestamp>2020</project.build.outputTimestamp>
+</properties>
 ```
 
 ## Links
