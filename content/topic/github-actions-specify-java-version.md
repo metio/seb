@@ -11,7 +11,7 @@ tags:
 - java
 ---
 
-The [setup-java](https://github.com/actions/setup-java) action allows to set up a specific Java version in your [GitHub Action](https://github.com/features/actions).
+The [setup-java](https://github.com/actions/setup-java) action allows to use a specific Java version in your [GitHub Action](https://github.com/features/actions).
 
 ```yaml
 name: <PIPELINE>

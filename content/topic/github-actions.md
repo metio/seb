@@ -15,22 +15,6 @@ This page contains useful [GitHub Actions](https://github.com/features/actions) 
 - `<RUN_ON>`: The runner to use, see GitHub's own [documentation](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on) for possible values.
 - `<PROJECT>`: The name of your project.
 
-## Setup a specific Hugo version
-
-```yaml
-name: <NAME>
-jobs:
-  build:
-    runs-on: <RUN_ON>
-    steps:
-      - name: Setup hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: <HUGO_VERSION>
-```
-
-Replace `<HUGO_VERSION>` with one of the [released versions](https://github.com/gohugoio/hugo/releases) or use `latest` to always use the latest version of Hugo.
-
 ## Cache Maven downloads
 
 Uses https://github.com/actions/cache.
