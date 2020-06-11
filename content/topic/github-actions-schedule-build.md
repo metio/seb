@@ -11,7 +11,7 @@ tags:
 - schedule
 ---
 
-In order to delay the execution of an [GitHub Action](https://github.com/features/actions), use a mixture of the `on: schedule: ...` config, and a conditional build step.
+In order to delay the execution of an [GitHub Action](https://github.com/features/actions), use a mixture of the `on: schedule: ...` config, and a [conditional build step](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif).
 
 ```yaml
 name: <PIPELINE>
