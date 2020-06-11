@@ -3,6 +3,7 @@ title: Analyse Maven projects with SonarCloud using GitHub Actions
 date: 2021-05-03
 menu: topic
 categories:
+- devops
 - snippet
 tags:
 - maven
