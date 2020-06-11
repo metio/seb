@@ -30,4 +30,4 @@ jobs:
 - `<ID>`: The unique ID of the timestamp step.
 - `<NAME>`: The name of the created timestamp.
 
-The special syntax `::set-output name=<NAME>::` declares that the output of the command (`echo`) should be saved in a variable called `<NAME>`. Together with the `<ID>` of the pipeline step, this value can be referenced with the expression `${{ steps.<ID>.outputs.<NAME> }}` in the next steps of your pipeline.
+The special syntax `::set-output name=<NAME>::` declares that the output of the command (`echo`) should be saved in a variable called `<NAME>`. Together with the `<ID>` of the pipeline step, this value can be referenced with the expression `${{ steps.<ID>.outputs.<NAME> }}` in the following steps of your pipeline.
