@@ -5,7 +5,7 @@ menu: topic
 categories:
 - devops
 - cd
-- snippets
+- snippet
 tags:
 - github
 - github actions

@@ -3,7 +3,7 @@ title: Artificial Intelligence
 draft: true
 menu: topic
 categories:
-- snippets
+- snippet
 tags:
 - ai
 - artificial

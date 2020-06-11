@@ -3,7 +3,7 @@ title: Not Found with Hugo
 draft: true
 menu: topic
 categories:
-- snippets
+- snippet
 - website
 tags:
 - hugo

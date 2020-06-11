@@ -3,7 +3,7 @@ title: Atom Feed with Hugo
 date: 2020-11-16
 menu: topic
 categories:
-- snippets
+- snippet
 - website
 tags:
 - hugo

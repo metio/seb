@@ -3,7 +3,7 @@ title: GitHub
 draft: true
 menu: topic
 categories:
-- snippets
+- snippet
 tags:
 - github
 ---

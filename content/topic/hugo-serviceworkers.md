@@ -1,9 +1,9 @@
 ---
 title: Service workers with Hugo
-date: 2020-01-25
+date: 2021-01-25
 menu: topic
 categories:
-- snippets
+- snippet
 - website
 tags:
 - hugo

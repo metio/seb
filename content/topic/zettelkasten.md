@@ -3,7 +3,7 @@ title: Zettelkasten
 draft: true
 menu: topic
 categories:
-- snippets
+- snippet
 tags:
 - zettelkasten
 - hugo

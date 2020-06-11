@@ -3,7 +3,7 @@ title: Makefile Help Target
 date: 2020-06-29
 menu: topic
 categories:
-- snippets
+- snippet
 tags:
 - make
 - Makefile

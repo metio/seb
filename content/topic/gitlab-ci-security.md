@@ -3,7 +3,7 @@ title: GitLab-CI Security Scans
 draft: true
 menu: topic
 categories:
-- snippets
+- snippet
 - devops
 tags:
 - gitlab

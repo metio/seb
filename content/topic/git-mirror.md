@@ -3,7 +3,7 @@ title: Mirror Git Repositories
 draft: true
 menu: topic
 categories:
-- snippets
+- snippet
 - decentralized
 tags:
 - git

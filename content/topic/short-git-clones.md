@@ -3,7 +3,7 @@ title: Short Git Clones
 date: 2020-06-15
 menu: topic
 categories:
-- snippets
+- snippet
 tags:
 - git
 - clone

@@ -4,7 +4,7 @@ date: 2020-10-19
 menu: topic
 categories:
 - devops
-- snippets
+- snippet
 tags:
 - github
 - github actions

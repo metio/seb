@@ -3,7 +3,7 @@ title: humans.txt with Hugo
 date: 2020-12-14
 menu: topic
 categories:
-- snippets
+- snippet
 - website
 tags:
 - hugo

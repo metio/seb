@@ -3,7 +3,7 @@ title: Performance Testing
 draft: true
 menu: topic
 categories:
-- snippets
+- snippet
 tags:
 - testing
 - performance

@@ -3,7 +3,7 @@ title: Creating Websites with Hugo
 draft: true
 menu: topic
 categories:
-- snippets
+- snippet
 tags:
 - hugo
 - static

@@ -3,7 +3,7 @@ title: Hugo Tag Cloud
 draft: true
 menu: topic
 categories:
-- snippets
+- snippet
 - website
 tags:
 - hugo
