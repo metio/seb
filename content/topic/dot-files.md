@@ -5,8 +5,8 @@ menu: topic
 categories:
 - snippets
 tags:
-- dot
-- files
+- dot files
+- chezmoi
 ---
 
 https://www.chezmoi.io/
