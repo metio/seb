@@ -1,6 +1,6 @@
 # seb.people.metio.wtf
 
-[hugo](https://gohugo.io/) powered blog/wiki of Sebastian Hoß
+[hugo](https://gohugo.io/) powered blog/wiki/zettelkasten of Sebastian Hoß
 
 ## License
 
