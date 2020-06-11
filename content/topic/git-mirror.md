@@ -1,6 +1,6 @@
 ---
 title: Mirror Git Repositories
-draft: true
+date: 2021-06-28
 menu: topic
 categories:
 - snippet
@@ -11,7 +11,16 @@ tags:
 - mirror
 ---
 
-https://krei.projects.metio.wtf/contributors/git-mirrors/#manual-mirroring
+In case you want to make use of the decentralized nature of [Git](https://git-scm.com/), consider using multiple push targets like this:
 
-- 1) push-only mirror
-- 2) additional push targets for upstream
+```shell script
+$ git remote set-url origin --push --add git@example.com/project.git
+$ git remote set-url origin --push --add git@another.com/project.git
+```
+
+Note that the first call to `set-url` will overwrite an existing remote creating with `git clone`. Any additional call will actually recognize the `--add` option and add the new target to an existing remote. 
+
+## Links
+
+- [push only mirrors](../git-push-only-mirror)
+- [gitlab-distributor](../gitlab-distributor)
