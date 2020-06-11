@@ -54,3 +54,4 @@ Finally, add a step to your workflow:
 ## Links
 
 - https://maven.apache.org/settings.html
+- https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven/
