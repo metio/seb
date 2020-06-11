@@ -1,6 +1,6 @@
 ---
 title: XDG Base Directory Specification
-draft: true
+date: 2020-07-27
 menu: topic
 categories:
 - snippets
@@ -32,5 +32,3 @@ export npm_config_cache="$XDG_CACHE_HOME/npm"
 # password-store
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 ```
-
-Take a look at my current setup [here](link to xdg-compat git repo).
