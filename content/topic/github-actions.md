@@ -15,24 +15,6 @@ This page contains useful [GitHub Actions](https://github.com/features/actions) 
 - `<RUN_ON>`: The runner to use, see GitHub's own [documentation](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on) for possible values.
 - `<PROJECT>`: The name of your project.
 
-## Setup a specific Java version
-
-Uses https://github.com/actions/setup-java.
-
-```yaml
-name: <NAME>
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up JDK <JDK_VERSION>
-        uses: actions/setup-java@v1
-        with:
-          java-version: <JDK_VERSION>
-```
-
-Replace `<JDK_VERSION>` with the required Java version for your project.
-
 ## Setup a specific Hugo version
 
 ```yaml
