@@ -17,7 +17,7 @@ In order to delay the execution of an [GitHub Action](https://github.com/feature
 name: <PIPELINE>
 on:
   schedule:
-    - cron:  '<CRON>'
+    - cron: '<CRON>'
 jobs:
   build:
     runs-on: <RUN_ON>
