@@ -2,6 +2,11 @@
     {{ .Site.Title }} &ndash; {{ .Title }}
 {{ end }}
 {{ define "main" }}
-    <h1>{{ .Title }}</h1>
+    <a class="post-titel" href="{{ .Permalink }}">
+        <h1>{{ .Title }}</h1>
+    </a>
+    {{ with .Params.tags }}
+        <span class="tag">Talks about: {{ delimit . ", " ", and " }}</span>
+    {{ end }}
     {{ .Content }}
 {{ end }}

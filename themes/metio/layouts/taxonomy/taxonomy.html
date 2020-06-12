@@ -3,10 +3,9 @@
 {{ end }}
 {{ define "main" }}
     <a class="post-titel" href="{{ .Permalink }}">
-        <h1>{{ .Title }}</h1>
+        <h1>Tag: {{ .Title }}</h1>
     </a>
     {{ .Content }}
-    <h2>Pages</h2>
     {{ range .Pages }}
         <ul>
             <a href="{{ .Permalink }}">

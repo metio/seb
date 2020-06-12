@@ -27,7 +27,7 @@ Restart=on-failure
 WantedBy=default.target
 ```
 
-Enable it with `systemctl --user enable emacs@user` and define the following aliases:
+Enable it with `systemctl --user enable emacs@user` and define any number of aliases to make connecting to the emacs daemon easier:
 
 ```shell script
 alias e='emacsclient --tty --socket-name=user'

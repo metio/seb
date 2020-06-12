@@ -18,3 +18,10 @@ blockquote > p::before, blockquote > p::after {
 code {
     font-weight: bold;
 }
+
+.post-titel {
+    text-decoration: none;
+}
+.post-titel > h1 {
+    color: white;
+}

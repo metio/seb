@@ -10,7 +10,7 @@
     <li class="mobileonly"><a href="{{ "/sitemap" | absURL }}">Sitemap</a></li>
     <li class="mobileonly"><a href="{{ "/atom.xml" | absURL }}">Atom Feed</a></li>
     <hr class="mobileonly menudivider" />
-    {{ range .Site.Menus.topic }}
+    {{ range first 15 (sort .Site.Menus.topic "Page.Date" "desc") }}
         <li>
             <a href="{{ .URL }}" class="{{ if $currentPage.IsMenuCurrent "topic" . }}active{{ end }}">{{ .Pre }}{{ .Name }}</a>
         </li>

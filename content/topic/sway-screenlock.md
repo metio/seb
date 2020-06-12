@@ -11,7 +11,7 @@ tags:
 
 [SwayWM](https://swaywm.org/) uses can use a mixture of [swaylock](https://github.com/swaywm/swaylock) to lock their screen. Place the following key binding in your Sway config:
 
-```
+```shell script
 #
 # Screen lock
 #

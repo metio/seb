@@ -1,6 +1,12 @@
 {{ define "main" }}
+    {{ .Content }}
     {{ range first 1 (where site.RegularPages "Type" "in" site.Params.mainSections) }}
-        <h1>{{ .Title }}</h1>
+        <a class="post-titel" href="{{ .Permalink }}">
+            <h1>{{ .Title }}</h1>
+        </a>
+        {{ with .Params.tags }}
+            <span class="tag">Talks about: {{ delimit . ", " ", and " }}</span>
+        {{ end }}
         {{ .Content }}
     {{ end }}
 {{ end }}

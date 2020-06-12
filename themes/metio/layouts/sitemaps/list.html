@@ -7,7 +7,7 @@
     </a>
     {{ .Content }}
     <h2>Pages</h2>
-    {{ range .Pages }}
+    {{ range .Site.RegularPages }}
         <ul>
             <a href="{{ .Permalink }}">
                 <li>{{ .Title }}</li>
