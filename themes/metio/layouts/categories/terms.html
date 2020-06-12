@@ -6,7 +6,7 @@
         <h1>{{ .Title }}</h1>
     </a>
     {{ .Content }}
-    {{ range .Pages }}
+    {{ range (sort .Pages "Title" "asc") }}
         <ul>
             <a href="{{ .Permalink }}">
                 <li>{{ .Title }}</li>
