@@ -1,15 +1,11 @@
 #navigation {
     border-width: 2px 0 0 0;
-    padding-left: 15px;
-    padding-right: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 #navigation li {
     padding-top: 0.6rem;
-}
-
-.menudivider {
-    margin-top: 16px;
 }
 
 .mobileonly {

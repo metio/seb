@@ -1,7 +1,7 @@
 #navigation {
     border-width: 2px 0 0 0;
-    padding-left: 15px;
-    padding-right: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 #navigation li {
@@ -10,4 +10,10 @@
 
 .menudivider {
     margin-top: 16px;
+    margin-left: -12px;
+}
+
+.menutitle {
+    margin-top: 0;
+    margin-bottom: 0;
 }
