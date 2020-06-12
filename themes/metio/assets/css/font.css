@@ -24,4 +24,5 @@ code {
 }
 .post-titel > h1 {
     color: black;
+    margin-bottom: 0;
 }
