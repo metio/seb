@@ -33,3 +33,8 @@
     margin-top: 24px;
     margin-bottom: 24px;
 }
+
+#home-divider {
+    border: 0 dotted gray;
+    border-top-width: 2px;
+}

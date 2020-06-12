@@ -1,5 +1,6 @@
 {{ define "main" }}
     {{ .Content }}
+    <div id="home-divider"></div>
     {{ range first 1 (where site.RegularPages "Type" "in" site.Params.mainSections) }}
         <a class="post-titel" href="{{ .Permalink }}">
             <h1>{{ .Title }}</h1>
