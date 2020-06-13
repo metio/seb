@@ -14,11 +14,14 @@ tags:
 [SwayWM](https://swaywm.org/) uses can use a mixture of [grim](https://github.com/emersion/grim) and [slurp](https://github.com/emersion/slurp) to take screenshots of their desktop. Place the following key binding in your Sway config:
 
 ```shell script
-#
-# Screenshots
-#
+# take screenshot of currently focused screen
 bindsym $mod+Print exec /usr/bin/grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S.png')
+
+# take screenshot of selection
 bindsym $mod+Shift+p exec /usr/bin/grim -g "$(/usr/bin/slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S.png')
 ```
 
-`$mod+Print` will take a screenshot of the entire screen (with focus) and `$mod+Shift+p` allows selecting just a part of a screen.
+## Links
+
+- [grim](https://github.com/emersion/grim)
+- [slurp](https://github.com/emersion/slurp)
