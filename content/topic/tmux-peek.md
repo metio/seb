@@ -11,7 +11,7 @@ tags:
 
 [tmux](https://github.com/tmux/tmux) uses can use the following snippet to peek at files. Place it in your `.bashrc` or similar file.
 
-```
+```shell script
 peek() { tmux split-window -p 33 "$EDITOR" "$@" }
 ```
 
