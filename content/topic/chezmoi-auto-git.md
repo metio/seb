@@ -1,5 +1,5 @@
 ---
-title: Use chezmoi to manage dotfiles
+title: Manage dotfiles with chezmoi and git
 date: 2021-09-06
 menu: topic
 categories:
@@ -18,4 +18,4 @@ tags:
     autoPush = true
 ```
 
-Every time you call `chezmoi add ...` will now create a new commit in your local chezmoi repository and push those changes into your configured remote repository.
+Every time you call `chezmoi add /path/to/file` will now create a new commit in your local chezmoi repository and push those changes into your configured remote repository.
