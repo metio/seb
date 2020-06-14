@@ -20,8 +20,3 @@ bindsym $mod+Print exec /usr/bin/grim -o $(swaymsg -t get_outputs | jq -r '.[] |
 # take screenshot of selection
 bindsym $mod+Shift+p exec /usr/bin/grim -g "$(/usr/bin/slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S.png')
 ```
-
-## Links
-
-- [grim](https://github.com/emersion/grim)
-- [slurp](https://github.com/emersion/slurp)
