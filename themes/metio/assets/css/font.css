@@ -19,10 +19,14 @@ code {
     font-weight: bold;
 }
 
-.post-titel {
+.post-titel > a {
     text-decoration: none;
 }
 .post-titel > h1 {
     color: black;
     margin-bottom: 0;
+}
+
+.icon {
+    margin: 0;
 }

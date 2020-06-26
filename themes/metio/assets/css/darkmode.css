@@ -28,6 +28,6 @@ a,a:visited,a>span {
 li::marker {
     color: white;
 }
-.post-titel > h1 {
+.post-titel,.post-titel > a:visited {
     color: white;
 }

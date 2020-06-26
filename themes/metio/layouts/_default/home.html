@@ -2,13 +2,21 @@
     {{ .Content }}
     <div id="home-divider"></div>
     {{ range first 1 (where site.RegularPages "Type" "in" site.Params.mainSections) }}
-        <a class="post-titel" href="{{ .Permalink }}">
-            <h1>{{ .Title }}</h1>
-        </a>
+        <h1 class="post-titel">
+            <a class="post-titel" href="{{ .Permalink }}">
+                {{ .Title }}
+            </a>
+            <a href="https://github.com/metio/seb/commits/master/content/{{ .File }}">
+                <img src="{{ "/images/history.svg" | absURL }}" alt="View article history" height="16" width="14" class="icon svgimg">
+            </a>
+            <a href="https://github.com/metio/seb/edit/master/content/{{ .File }}">
+                <img src="{{ "/images/pencil.svg" | absURL }}" alt="Edit article" height="16" width="14" class="icon svgimg">
+            </a>
+        </h1>
         <div class="subtitle">
-            Published: {{ .Date.Format "2006-01-02" }}
+            Published: <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
             {{ if ne .Date .Lastmod }}
-                , Updated: {{ .Lastmod.Format "2006-01-02" }}
+                , Updated: <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Lastmod.Format "January 2, 2006" }}</time>
             {{ end }}
         </div>
         {{ with .Params.tags }}
@@ -20,6 +28,8 @@
                 {{ delimit $clean ", " ", and " }}
             </div>
         {{ end }}
-        {{ .Content }}
+        <div id="post-content">
+            {{ .Content }}
+        </div>
     {{ end }}
 {{ end }}
