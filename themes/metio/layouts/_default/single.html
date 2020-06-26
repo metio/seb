@@ -5,8 +5,14 @@
     <a class="post-titel" href="{{ .Permalink }}">
         <h1>{{ .Title }}</h1>
     </a>
+    <div class="subtitle">
+        Published: {{ .Date.Format "2006-01-02" }}
+        {{ if ne .Date .Lastmod }}
+            , Updated: {{ .Lastmod.Format "2006-01-02" }}
+        {{ end }}
+    </div>
     {{ with .Params.tags }}
-        <span class="tag">Talks about: {{ delimit . ", " ", and " }}</span>
+        <div class="subtitle">Talks about: {{ delimit . ", " ", and " }}</div>
     {{ end }}
     {{ .Content }}
 {{ end }}
