@@ -11,7 +11,7 @@ DefaultContentLanguage = "en"
 [outputs]
   home = [ "HTML", "RSS", "ATOM", "HUMANS", "FOAF"]
   section = ["HTML", "RSS", "ATOM"]
-  taxonomy = ["HTML", "RSS", "ATOM"]
+  term = ["HTML", "RSS", "ATOM"]
 
 [params]
   mainSections = ["topic"]
