@@ -33,10 +33,6 @@ help: ##@other Show this help
 site: ##@hacking Build website
 	hugo --minify --i18n-warnings --path-warnings
 
-.PHONY: site-watch
-site-watch: ##@hacking Build and watch website
-	hugo --minify --i18n-warnings --path-warnings --buildDrafts --buildFuture --watch
-
-.PHONY: site-serve
-site-serve: ##@hacking Build and serve website in watch mode
+.PHONY: serve
+serve: ##@hacking Serve website in watch mode
 	hugo server --minify --i18n-warnings --path-warnings --buildDrafts --buildFuture --watch
