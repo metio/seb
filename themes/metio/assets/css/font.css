@@ -27,8 +27,12 @@ code {
     color: black;
     margin-bottom: 0;
 }
-.post-titel,.post-titel > a:visited {
+.post-titel,.post-tag,.post-titel > a:visited {
     color: black;
+    text-decoration: none;
+}
+.post-tag {
+    color: gray;
 }
 .icon {
     margin: 0;
