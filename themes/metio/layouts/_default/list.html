@@ -2,9 +2,11 @@
     {{ .Site.Title }} &ndash; {{ .Title }}
 {{ end }}
 {{ define "main" }}
-    <a class="post-titel" href="{{ .Permalink }}">
-        <h1>{{ .Title }}</h1>
-    </a>
+    <h1 class="post-titel">
+        <a class="post-titel" href="{{ .Permalink }}">
+            {{ .Title }}
+        </a>
+    </h1>
     {{ .Content }}
     <h2>Pages</h2>
     {{ range .Pages }}
