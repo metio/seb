@@ -37,8 +37,8 @@ Host codeberg
 Once configured, you can now write:
 
 ```shell script
-$ git clone github:orga/repo.git
-$ git clone gitlab:orga/repo.git
-$ git clone bitbucket:orga/repo.git
-$ git clone codeberg:orga/repo.git
+$ git clone github:orga/repo
+$ git clone gitlab:orga/repo
+$ git clone bitbucket:orga/repo
+$ git clone codeberg:orga/repo
 ```
