@@ -1,0 +1,18 @@
+{{ define "title" }}
+    {{ .Site.Title }} &ndash; {{ .Title }}
+{{ end }}
+{{ define "main" }}
+    <h1 class="post-titel">
+        <a class="post-titel" href="{{ .Permalink }}">
+            {{ .Title }}
+        </a>
+    </h1>
+    {{ .Content }}
+    {{ range (sort .Pages "Title" "asc") }}
+        <ul>
+            <a href="{{ .Permalink }}">
+                <li>{{ .Title }}</li>
+            </a>
+        </ul>
+    {{ end }}
+{{ end }}
