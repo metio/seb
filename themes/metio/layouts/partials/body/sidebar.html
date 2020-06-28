@@ -11,7 +11,7 @@
     <li class="mobileonly"><a href="{{ "/sitemap" | absURL }}">See all pages at the sitemap</a></li>
     <li class="mobileonly"><a href="{{ "/atom.xml" | absURL }}">Subscribe to the Atom feed</a></li>
     <hr class="mobileonly menudivider" />
-    <h3 class="mobileonly menutitle">Pages</h3>
+    <h3 class="mobile-and-tablet menutitle">Navigation</h3>
     {{ range first 15 (sort .Site.Menus.topic "Page.Date" "desc") }}
         <li>
             <a href="{{ .URL }}" class="{{ if $currentPage.IsMenuCurrent "topic" . }}active{{ end }}">{{ .Pre }}{{ .Name }}</a>
