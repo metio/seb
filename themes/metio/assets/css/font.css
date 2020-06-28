@@ -1,5 +1,6 @@
 body {
-    font-family: 'DejaVu Sans', Georgia, sans-serifs, serif
+    font-family: 'DejaVu Sans', Georgia, sans-serifs, serif;
+    color: black;
 }
 
 .subtitle {
@@ -26,7 +27,9 @@ code {
     color: black;
     margin-bottom: 0;
 }
-
+.post-titel,.post-titel > a:visited {
+    color: black;
+}
 .icon {
     margin: 0;
 }
