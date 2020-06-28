@@ -43,7 +43,7 @@ $ git clone bitbucket:orga/repo
 $ git clone codeberg:orga/repo
 ```
 
-In case you are working with lots of repositories inside a single organization, consider adding the following git configuration (`~/.gitconfig`):
+In case you are working with lots of repositories inside a single organization, consider adding the following git configuration (`$XDG_CONFIG_HOME/git/config` or `~/.gitconfig`):
 
 ```
 [url "github:orga/"]
