@@ -20,7 +20,6 @@ li::marker {
 }
 .post-titel,.post-titel > a:visited {
     color: white;
-    text-decoration: none;
 }
 .post-tag {
     color: gray;
