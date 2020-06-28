@@ -48,6 +48,21 @@ In case you are working with lots of repositories inside a single organization, 
 ```
 [url "github:orga/"]
   insteadOf = orga:
+[url "gitlab:orga/"]
+  insteadOf = orgl:
+[url "bitbucket:orga/"]
+  insteadOf = orgb:
+[url "codeberg:orga/"]
+  insteadOf = orgc:
 ``` 
 
-Which allows you to just write `git clone orga:repo`. Git will substitute `orga:` with `github:orga/`, therefore execute `git clone github:orga/repo`. Since we are using SSH to perform the clone, SSH will use its own config to figure out that `github` is an alias for `github.com`.
+Which allows you to just write:
+
+```shell script
+$ git clone orga:repo
+$ git clone orgl:repo
+$ git clone orgb:repo
+$ git clone orgc:repo
+``` 
+ 
+Git will substitute the `insteadOf` values like `orga:` with the configured `url` (e.g. `github:orga/`). The actual clone URL is `github:orga/repo` at this point, which can be used by Git together with the SSH config mentioned above to clone repositories.
