@@ -8,13 +8,12 @@ tags:
 - make
 - Makefile
 - help
+- perl
 ---
 
-Use the following snippet to generate help output for your `Makefile`:
+Use the following [Perl](https://www.perl.org/) snippet to generate help output for your `Makefile`:
 
 ```makefile
-.DEFAULT_GOAL := help
-
 GREEN  := $(shell tput -Txterm setaf 2)
 WHITE  := $(shell tput -Txterm setaf 7)
 YELLOW := $(shell tput -Txterm setaf 3)
@@ -31,18 +30,28 @@ HELP_FUN = \
     print "  ${YELLOW}$$_->[0]${RESET}$$sep${GREEN}$$_->[1]${RESET}\n"; \
     }; \
     print "\n"; }
+```
+
+In order to use `HELP_FUN`, add the following to the same `Makefile`:
+
+```makefile
+.DEFAULT_GOAL := help
 
 .PHONY: help
 help: ##@other Show this help
 	@perl -e '$(HELP_FUN)' $(MAKEFILE_LIST)
 ```
 
-Each target in the `Makefile` is marked as [phony](https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html) to signal that those targets are not actually files that are generated as part of your build process. The optional description of a target can be placed after the `##@` prefix. All other targets should be formatted just like the `help` target:
+Each target in the `Makefile` is marked as [phony](https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html) to signal that those targets are not actually files that are generated as part of your build process. The optional description of a target can be placed after the `##@` prefix. The first word represents the group of a target and everything that follows is the description of a target. All targets should be formatted just like the `help` target:
 
 ```makefile
 .PHONY: compile
 compile: ##@hacking Compile your code
 	<compile some code>
+
+.PHONY: test
+test: ##@hacking Test your code
+	<test some code>
 ```
 
 Once in place, you can either use `make` without any argument to call the `help` target or use `make help` to see the following output:
@@ -53,6 +62,7 @@ usage: make [target]
 
 hacking:
   compile             Compile your code
+  test                Test your code
 
 other:
   help                Show this help
