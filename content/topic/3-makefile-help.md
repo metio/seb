@@ -1,5 +1,5 @@
 ---
-title: Makefile Help Target
+title: Makefile Help
 date: 2020-06-29
 menu: topic
 categories:
@@ -11,7 +11,7 @@ tags:
 - perl
 ---
 
-Use the following [Perl](https://www.perl.org/) snippet to generate help output for your `Makefile`:
+Use the following [Perl](https://www.perl.org/) snippet to automatically generate help output for your `Makefile`:
 
 ```makefile
 GREEN  := $(shell tput -Txterm setaf 2)
@@ -32,7 +32,7 @@ HELP_FUN = \
     print "\n"; }
 ```
 
-In order to use `HELP_FUN`, add the following to the same `Makefile`:
+In order to use `HELP_FUN`, add the following `help` target to the same `Makefile`:
 
 ```makefile
 .DEFAULT_GOAL := help
@@ -52,13 +52,20 @@ compile: ##@hacking Compile your code
 .PHONY: test
 test: ##@hacking Test your code
 	<test some code>
+
+.PHONY: sign-cla
+sign-cla: ##@contrib Sign the contributor license agreement
+	<sign some file>
 ```
 
-Once in place, you can either use `make` without any argument to call the `help` target or use `make help` to see the following output:
+Once in place, you can either use `make` without any argument to call the `help` target or use `make help` to see the generated output:
 
 ```shell script
 $ make
 usage: make [target]
+
+contrib:
+  sign-cla            Sign the contributor license agreement
 
 hacking:
   compile             Compile your code

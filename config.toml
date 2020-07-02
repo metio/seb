@@ -22,3 +22,6 @@ DefaultContentLanguage = "en"
   mastodon = "https://mastodon.technology/@sebhoss"
   work = "seb.people.metio.wtf"
   description = "articles about software engineering"
+
+[permalinks]
+  topic = "/topic/:title/"
