@@ -58,8 +58,3 @@ In case you prefer SSH keys over HTTP access tokens, just select `SSH public key
 The following projects are using the above approach to synchronize multiple git repositories:
 
 - [krei](https://github.com/metio/krei)
-
-## Links
-
-- [git mirror](../git-mirror)
-- [push only mirrors](../git-push-only-mirror)
