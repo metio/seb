@@ -1,5 +1,5 @@
 ---
-title: Gitlab the Git Distributor
+title: GitLab the Git Distributor
 date: 2020-07-13
 menu: topic
 categories:
@@ -22,7 +22,7 @@ While the central server approach is easy to use, it might not work in all scena
 
 In case of the first scenario, tools like [copybara](https://github.com/google/copybara), [repoSpanner](https://github.com/repoSpanner/repoSpanner), or [distributed-git-forks](https://github.com/google/distributed-git-forks) offer a wide range of features to cover most details.
 
-The second scenario can be solved with [Gitlab](https://gitlab.com)'s [mirror feature](https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html) quite easy. It allows to create a single pull-mirror and multiple push-mirrors. Thus, it can be used to pull from your central server and push into all mirrors.
+The second scenario can be solved manually with tools like [gitomatic](https://github.com/muesli/gitomatic) or automatically with [GitLab](https://gitlab.com)'s [mirror feature](https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html) quite easy. GitLab allows to create a single pull-mirror and multiple push-mirrors. Thus, it can be used to pull from your central server and push into all mirrors.
 
 ```
                +----------------+               
@@ -32,7 +32,7 @@ The second scenario can be solved with [Gitlab](https://gitlab.com)'s [mirror fe
                         |                       
                         |                       
                +----------------+               
-         +-----|     Gitlab     |------+        
+         +-----|     GitLab     |------+        
          |     +----------------+      |        
          |                             |        
          |                             |        
@@ -51,7 +51,7 @@ In order to create such a setup, follow these steps:
 3. Enter one push target for each mirror. Since pushing usually requires authentication, make sure the URL of the mirror contains a username, e.g. `https://YOUR_USER@codeberg.org/metio.wtf/krei.git`. Add an access token for each mirror and select `password` as authentication method.
    ![Code Flow](/images/gitlab-push-mirror.png)
 
-In case you prefer SSH keys over HTTP access tokens, just select `SSH public key` as authentication method and make sure your key is both saved in Gitlab and all mirrors.
+In case you prefer SSH keys over HTTP access tokens, just select `SSH public key` as authentication method and make sure your key is both saved in GitLab and all mirrors.
 
 ## Examples Projects
 
