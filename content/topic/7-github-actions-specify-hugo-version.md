@@ -11,7 +11,7 @@ tags:
 - hugo
 ---
 
-The [actions-hugo](https://github.com/peaceiris/actions-hugo) action allows to use a specific Java version in your [GitHub Action](https://github.com/features/actions).
+The [actions-hugo](https://github.com/peaceiris/actions-hugo) action allows to use a specific [Hugo](https://gohugo.io/) version in your [GitHub Action](https://github.com/features/actions).
 
 ```yaml
 name: <PIPELINE>
