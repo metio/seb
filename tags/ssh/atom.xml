@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.82.0">Hugo</generator><title type="html">ssh on Sebastian Hoß</title><link href="https://seb.people.metio.wtf/tags/ssh/" rel="alternate" type="text/html" title="HTML"/><link href="https://seb.people.metio.wtf/tags/ssh/index.xml" rel="alternate" type="application/rss+xml" title="RSS"/><link href="https://seb.people.metio.wtf/tags/ssh/atom.xml" rel="self" type="application/atom+xml" title="Atom"/><updated>2021-04-19T02:41:01+00:00</updated><id>https://seb.people.metio.wtf/tags/ssh/</id><entry><title type="html">Short Git Clones</title><link href="https://seb.people.metio.wtf/topic/short-git-clones/?utm_source=atom_feed" rel="alternate" type="text/html"/><id>https://seb.people.metio.wtf/topic/short-git-clones/</id><published>2020-06-15T00:00:00+00:00</published><updated>2020-06-15T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In case you don&rsquo;t want to write <code>git clone git@github.com:orga/repo.git</code> all the time, consider using a custom SSH config (<code>~/.ssh/config</code>) like this:</p>
+<pre><code>Host github
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-GITHUB&gt;
+
+Host gitlab
+    HostName gitlab.com
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-GITLAB&gt;
+
+Host bitbucket
+    HostName bitbucket.org
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-BITBUCKET&gt;
+
+Host codeberg
+    HostName codeberg.org
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-CODEBERG&gt;
+</code></pre><p>Once configured, you can now write:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ git clone github:orga/repo
+$ git clone gitlab:orga/repo
+$ git clone bitbucket:orga/repo
+$ git clone codeberg:orga/repo
+</code></pre></div><p>In case you are working with lots of repositories inside a single organization, consider adding the following git configuration (<code>$XDG_CONFIG_HOME/git/config</code> or <code>~/.gitconfig</code>):</p>
+<pre><code>[url &quot;github:orga/&quot;]
+  insteadOf = orga:
+[url &quot;gitlab:orga/&quot;]
+  insteadOf = orgl:
+[url &quot;bitbucket:orga/&quot;]
+  insteadOf = orgb:
+[url &quot;codeberg:orga/&quot;]
+  insteadOf = orgc:
+</code></pre><p>Which allows you to just write:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ git clone orga:repo
+$ git clone orgl:repo
+$ git clone orgb:repo
+$ git clone orgc:repo
+</code></pre></div><p>Git will substitute the <code>insteadOf</code> values like <code>orga:</code> with the configured <code>url</code> (e.g. <code>github:orga/</code>). The actual clone URL is <code>github:orga/repo</code> at this point, which can be used by Git together with the SSH config mentioned above to clone repositories.</p>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/git" term="git" label="git"/><category scheme="https://seb.people.metio.wtf/tags/clone" term="clone" label="clone"/><category scheme="https://seb.people.metio.wtf/tags/ssh" term="ssh" label="ssh"/></entry></feed>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.82.0">Hugo</generator><title type="html">bundle on Sebastian Hoß</title><link href="https://seb.people.metio.wtf/tags/bundle/" rel="alternate" type="text/html" title="HTML"/><link href="https://seb.people.metio.wtf/tags/bundle/index.xml" rel="alternate" type="application/rss+xml" title="RSS"/><link href="https://seb.people.metio.wtf/tags/bundle/atom.xml" rel="self" type="application/atom+xml" title="Atom"/><updated>2021-04-19T02:41:01+00:00</updated><id>https://seb.people.metio.wtf/tags/bundle/</id><entry><title type="html">Bundling with Hugo</title><link href="https://seb.people.metio.wtf/topic/bundling-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/humans.txt-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="humans.txt with Hugo"/><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/bundling-with-hugo/</id><published>2020-12-28T00:00:00+00:00</published><updated>2020-12-28T00:00:00+00:00</updated><content type="html"><![CDATA[<p><a href="gohugo.io/">Hugo</a> allows <a href="https://gohugo.io/hugo-pipes/bundling/">bundling</a> of assets with several built-in functions:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">{{ $normalize := resources.Get &quot;/css/normalize.css&quot; }}
+{{ $font := resources.Get &quot;/css/font.css&quot; }}
+{{ $header := resources.Get &quot;/css/header.css&quot; }}
+{{ $footer := resources.Get &quot;/css/footer.css&quot; }}
+{{ $navigation := resources.Get &quot;/css/navigation.css&quot; }}
+{{ $navigation_mobile := resources.Get &quot;/css/navigation-mobile.css&quot; }}
+{{ $layout := resources.Get &quot;/css/layout.css&quot; }}
+{{ $layout_mobile := resources.Get &quot;/css/layout-mobile.css&quot; }}
+{{ $syntax := resources.Get &quot;/css/syntax.css&quot; }}
+{{ $darkmode := resources.Get &quot;/css/darkmode.css&quot; | resources.Minify | resources.Fingerprint &quot;sha512&quot; }}
+
+{{ $base := slice $normalize $font $header $footer $navigation $layout $syntax | resources.Concat &quot;css/base.css&quot; | resources.Minify | resources.Fingerprint &quot;sha512&quot; }}
+{{ $mobile := slice $navigation_mobile $layout_mobile | resources.Concat &quot;css/mobile.css&quot; | resources.Minify | resources.Fingerprint &quot;sha512&quot; }}
+
+&lt;link href=&quot;{{ $base.Permalink }}&quot; integrity=&quot;{{ $base.Data.Integrity }}&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;{{ $mobile.Permalink }}&quot; integrity=&quot;{{ $mobile.Data.Integrity }}&quot; media=&quot;screen and (max-width: 800px)&quot; rel=&quot;stylesheet&quot;&gt;
+
+&lt;link href=&quot;{{ $darkmode.Permalink }}&quot; integrity=&quot;{{ $darkmode.Data.Integrity }}&quot; media=&quot;screen and (prefers-color-scheme: dark)&quot; rel=&quot;stylesheet&quot;&gt;
+</code></pre>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/bundle" term="bundle" label="bundle"/><category scheme="https://seb.people.metio.wtf/tags/assets" term="assets" label="assets"/></entry></feed>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.82.0">Hugo</generator><title type="html">login shell on Sebastian Hoß</title><link href="https://seb.people.metio.wtf/tags/login-shell/" rel="alternate" type="text/html" title="HTML"/><link href="https://seb.people.metio.wtf/tags/login-shell/index.xml" rel="alternate" type="application/rss+xml" title="RSS"/><link href="https://seb.people.metio.wtf/tags/login-shell/atom.xml" rel="self" type="application/atom+xml" title="Atom"/><updated>2021-04-19T02:41:01+00:00</updated><id>https://seb.people.metio.wtf/tags/login-shell/</id><entry><title type="html">Use tmux as your login shell</title><link href="https://seb.people.metio.wtf/topic/use-tmux-as-your-login-shell/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/peeking-with-tmux/?utm_source=atom_feed" rel="related" type="text/html" title="Peeking with tmux"/><id>https://seb.people.metio.wtf/topic/use-tmux-as-your-login-shell/</id><published>2021-04-19T00:00:00+00:00</published><updated>2021-04-19T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to use <a href="https://github.com/tmux/tmux">tmux</a> as your login shell, use <code>chsh</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># list all available shells</span>
+$ chsh --list-shells
+/bin/sh
+/bin/bash
+/sbin/nologin
+/usr/bin/sh
+/usr/bin/bash
+/usr/sbin/nologin
+/usr/bin/zsh
+/bin/zsh
+/usr/bin/tmux
+/bin/tmux
+
+<span class="c1"># select login shell</span>
+$ chsh --shell /usr/bin/tmux
+</code></pre></div>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/tmux" term="tmux" label="tmux"/><category scheme="https://seb.people.metio.wtf/tags/login-shell" term="login-shell" label="login shell"/><category scheme="https://seb.people.metio.wtf/tags/chsh" term="chsh" label="chsh"/></entry></feed>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.82.0">Hugo</generator><title type="html">atom on Sebastian Hoß</title><link href="https://seb.people.metio.wtf/tags/atom/" rel="alternate" type="text/html" title="HTML"/><link href="https://seb.people.metio.wtf/tags/atom/index.xml" rel="alternate" type="application/rss+xml" title="RSS"/><link href="https://seb.people.metio.wtf/tags/atom/atom.xml" rel="self" type="application/atom+xml" title="Atom"/><updated>2021-04-19T02:41:01+00:00</updated><id>https://seb.people.metio.wtf/tags/atom/</id><entry><title type="html">Atom Feed with Hugo</title><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/atom-feed-with-hugo/</id><published>2020-11-16T00:00:00+00:00</published><updated>2020-11-16T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to publish Atom feeds for your <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/atom+xml&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;xml&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">Atom</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Atom&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/atom+xml&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;atom&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/list.atom.xml</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">{{ printf `&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;` | safeHTML }}
+&lt;feed xmlns=&quot;http://www.w3.org/2005/Atom&quot;{{ with site.LanguageCode }} xml:lang=&quot;{{ . }}&quot;{{ end }}&gt;
+    &lt;generator uri=&quot;https://gohugo.io/&quot; version=&quot;{{ hugo.Version }}&quot;&gt;Hugo&lt;/generator&gt;
+    {{- $title := site.Title -}}
+    {{- with .Title -}}
+        {{- if (not (eq . site.Title)) -}}
+            {{- $title = printf `%s %s %s` . (i18n &quot;feed_title_on&quot; | default &quot;on&quot;) site.Title -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if .IsTranslated -}}
+        {{ $title = printf &quot;%s (%s)&quot; $title (index site.Data.i18n.languages .Lang) }}
+    {{- end -}}
+    {{ printf `&lt;title type=&quot;html&quot;&gt;&lt;![CDATA[%s]]&gt;&lt;/title&gt;` $title | safeHTML }}
+    {{ with (or (.Param &quot;subtitle&quot;) (.Param &quot;tagline&quot;)) }}
+        {{ printf `&lt;subtitle type=&quot;html&quot;&gt;&lt;![CDATA[%s]]&gt;&lt;/subtitle&gt;` . | safeHTML }}
+    {{ end }}
+    {{ $output_formats := .OutputFormats }}
+    {{ range $output_formats -}}
+        {{- $rel := (or (and (eq &quot;atom&quot; (.Name | lower)) &quot;self&quot;) &quot;alternate&quot;) -}}
+        {{ with $output_formats.Get .Name }}
+            {{ printf `&lt;link href=%q rel=%q type=%q title=%q /&gt;` .Permalink $rel .MediaType.Type .Name | safeHTML }}
+        {{- end -}}
+    {{- end }}
+    {{- range .Translations }}
+        {{ $output_formats := .OutputFormats }}
+        {{- $lang := .Lang }}
+        {{- $langstr := index site.Data.i18n.languages .Lang }}
+        {{ range $output_formats -}}
+            {{ with $output_formats.Get .Name }}
+                {{ printf `&lt;link href=%q rel=&quot;alternate&quot; type=%q hreflang=%q title=&quot;[%s] %s&quot; /&gt;` .Permalink .MediaType.Type $lang $langstr .Name | safeHTML }}
+            {{- end -}}
+        {{- end }}
+    {{- end }}
+    &lt;updated&gt;{{ now.Format &quot;2006-01-02T15:04:05-07:00&quot; | safeHTML }}&lt;/updated&gt;
+    {{ with site.Copyright }}
+        {{- $copyright := replace . &quot;{year}&quot; now.Year -}} {{/* In case the site.copyright uses a special string &quot;{year}&quot; */}}
+        {{- $copyright = replace $copyright &quot;&amp;copy;&quot; &quot;©&quot; -}}
+        &lt;rights&gt;{{ $copyright | plainify }}&lt;/rights&gt;
+    {{- end }}
+    {{ with .Param &quot;feed&quot; }}
+        {{/* For this to work, the $icon file should be present in the assets/ directory */}}
+        {{- $icon := .icon | default &quot;icon.svg&quot; -}}
+        {{- with resources.Get $icon -}}
+            &lt;icon&gt;{{ (. | fingerprint).Permalink }}&lt;/icon&gt;
+        {{- end }}
+
+        {{/* For this to work, the $logo file should be present in the assets/ directory */}}
+        {{- $logo := .logo | default &quot;logo.svg&quot; -}}
+        {{- with resources.Get $logo -}}
+            &lt;logo&gt;{{ (. | fingerprint).Permalink }}&lt;/logo&gt;
+        {{- end }}
+    {{ end }}
+    {{ with site.Author.name -}}
+        &lt;author&gt;
+            &lt;name&gt;{{ . }}&lt;/name&gt;
+            {{ with site.Author.email }}
+                &lt;email&gt;{{ . }}&lt;/email&gt;
+            {{ end -}}
+        &lt;/author&gt;
+    {{- end }}
+    {{ with site.Params.id }}
+        &lt;id&gt;{{ . | plainify }}&lt;/id&gt;
+    {{ else }}
+        &lt;id&gt;{{ .Permalink }}&lt;/id&gt;
+    {{ end }}
+    {{- $limit := (cond (le site.Config.Services.RSS.Limit 0) 65536 site.Config.Services.RSS.Limit) }}
+    {{- $feed_sections := site.Params.feedSections | default site.Params.mainSections -}}
+    {{/* Range through only the pages with a Type in $feed_sections. */}}
+    {{- $pages := where .RegularPages &quot;Type&quot; &quot;in&quot; $feed_sections -}}
+    {{- if (eq .Kind &quot;home&quot;) -}}
+        {{- $pages = where site.RegularPages &quot;Type&quot; &quot;in&quot; $feed_sections -}}
+    {{- end -}}
+    {{/* Remove the pages that have the disable_feed parameter set to true. */}}
+    {{- $pages = where $pages &quot;.Params.disable_feed&quot; &quot;!=&quot; true -}}
+    {{- range first $limit $pages }}
+        {{ $page := . }}
+        &lt;entry&gt;
+            {{ printf `&lt;title type=&quot;html&quot;&gt;&lt;![CDATA[%s]]&gt;&lt;/title&gt;` .Title | safeHTML }}
+            &lt;link href=&quot;{{ .Permalink }}?utm_source=atom_feed&quot; rel=&quot;alternate&quot; type=&quot;text/html&quot; /&gt;
+            {{- range .Translations }}
+                {{- $link := printf &quot;%s?utm_source=atom_feed&quot; .Permalink | safeHTML }}
+                {{- printf `&lt;link href=%q rel=&quot;alternate&quot; type=&quot;text/html&quot; hreflang=%q /&gt;` $link .Lang | safeHTML }}
+            {{- end }}
+            {{/* rel=related: See https://validator.w3.org/feed/docs/atom.html#link */}}
+            {{- range first 5 (site.RegularPages.Related .) }}
+                &lt;link href=&quot;{{ .Permalink }}?utm_source=atom_feed&quot; rel=&quot;related&quot; type=&quot;text/html&quot; title=&quot;{{ .Title }}&quot; /&gt;
+            {{- end }}
+            {{ with .Params.id }}
+                &lt;id&gt;{{ . | plainify }}&lt;/id&gt;
+            {{ else }}
+                &lt;id&gt;{{ .Permalink }}&lt;/id&gt;
+            {{ end }}
+            {{ with .Params.author -}}
+                {{- range . -}} &lt;!-- Assuming the author front-matter to be a list --&gt;
+                    &lt;author&gt;
+                        &lt;name&gt;{{ . }}&lt;/name&gt;
+                    &lt;/author&gt;
+                {{- end -}}
+            {{- end }}
+            &lt;published&gt;{{ .Date.Format &quot;2006-01-02T15:04:05-07:00&quot; | safeHTML }}&lt;/published&gt;
+            &lt;updated&gt;{{ .Lastmod.Format &quot;2006-01-02T15:04:05-07:00&quot; | safeHTML }}&lt;/updated&gt;
+            {{ $description1 := .Description | default &quot;&quot; }}
+            {{ $description := (cond (eq &quot;&quot; $description1) &quot;&quot; (printf &quot;&lt;blockquote&gt;%s&lt;/blockquote&gt;&quot; ($description1 | markdownify))) }}
+            {{ printf `&lt;content type=&quot;html&quot;&gt;&lt;![CDATA[%s%s]]&gt;&lt;/content&gt;` $description .Content | safeHTML }}
+            {{ with site.Taxonomies }}
+                {{ range $taxo,$_ := . }} &lt;!-- Defaults taxos: &quot;tags&quot;, &quot;categories&quot; --&gt;
+                    {{ with $page.Param $taxo }}
+                        {{ $taxo_list := . }} &lt;!-- $taxo_list will be the tags/categories list --&gt;
+                        {{ with site.GetPage (printf &quot;/%s&quot; $taxo) }}
+                            {{ $taxonomy_page := . }}
+                            {{ range $taxo_list }} &lt;!-- Below, assuming pretty URLs --&gt;
+                                &lt;category scheme=&quot;{{ printf &quot;%s%s&quot; $taxonomy_page.Permalink (. | urlize) }}&quot; term=&quot;{{ (. | urlize) }}&quot; label=&quot;{{ . }}&quot; /&gt;
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        &lt;/entry&gt;
+    {{ end }}
+&lt;/feed&gt;
+</code></pre>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/atom" term="atom" label="atom"/></entry></feed>

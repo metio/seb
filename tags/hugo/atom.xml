@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.82.0">Hugo</generator><title type="html">hugo on Sebastian Hoß</title><link href="https://seb.people.metio.wtf/tags/hugo/" rel="alternate" type="text/html" title="HTML"/><link href="https://seb.people.metio.wtf/tags/hugo/index.xml" rel="alternate" type="application/rss+xml" title="RSS"/><link href="https://seb.people.metio.wtf/tags/hugo/atom.xml" rel="self" type="application/atom+xml" title="Atom"/><updated>2021-04-19T02:41:01+00:00</updated><id>https://seb.people.metio.wtf/tags/hugo/</id><entry><title type="html">Service workers with Hugo</title><link href="https://seb.people.metio.wtf/topic/service-workers-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/web-app-manifests-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Web app manifests with Hugo"/><link href="https://seb.people.metio.wtf/topic/bundling-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Bundling with Hugo"/><link href="https://seb.people.metio.wtf/topic/humans.txt-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="humans.txt with Hugo"/><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><id>https://seb.people.metio.wtf/topic/service-workers-with-hugo/</id><published>2021-01-25T00:00:00+00:00</published><updated>2021-01-25T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to use a <a href="https://serviceworke.rs/">serviceworker</a> to cache a <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/javascript&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;js&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">ServiceWorker</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;ServiceWorker&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/javascript&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;serviceworker&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/home.serviceworker.js</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">const CACHE = 'cache-and-update';
+
+self.addEventListener('install', (event) =&gt; {
+  event.waitUntil(precache());
+});
+
+self.addEventListener('fetch', (event) =&gt; {
+  event.respondWith(fromCache(event.request));
+  event.waitUntil(update(event.request));
+});
+
+const precache = async () =&gt; {
+    const cache = await caches.open(CACHE);
+    return await cache.addAll([
+        {{ range $i, $e := .Site.RegularPages }}
+        '{{ $.RelPermalink }}'{{ if $i }}, {{ end }}
+        {{ end }}
+    ]);
+}
+
+const fromCache = async (request) =&gt; {
+    const cache = await caches.open(CACHE);
+    const match = await cache.match(request);
+    return match || Promise.reject('no-match');
+}
+
+const update = async (request) =&gt; {
+    const cache = await caches.open(CACHE);
+    const response = await fetch(request);
+    return await cache.put(request, response);
+}
+</code></pre><h2 id="links">Links</h2>
+<ul>
+<li><a href="https://github.com/gohugoio/hugo/issues/5495">https://github.com/gohugoio/hugo/issues/5495</a></li>
+<li><a href="https://github.com/wildhaber/offline-first-sw">https://github.com/wildhaber/offline-first-sw</a></li>
+<li><a href="https://gohugohq.com/howto/go-offline-with-service-worker/">https://gohugohq.com/howto/go-offline-with-service-worker/</a></li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/service-worker" term="service-worker" label="service worker"/></entry><entry><title type="html">Web app manifests with Hugo</title><link href="https://seb.people.metio.wtf/topic/web-app-manifests-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/bundling-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Bundling with Hugo"/><link href="https://seb.people.metio.wtf/topic/humans.txt-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="humans.txt with Hugo"/><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/web-app-manifests-with-hugo/</id><published>2021-01-11T00:00:00+00:00</published><updated>2021-01-11T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to publish a <a href="https://developer.mozilla.org/en-US/docs/Web/Manifest">web app manifest</a> document with your <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/manifest+json&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;webmanifest&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">Webmanifest</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Web App Manifest&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/manifest+json&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;manifest&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/home.manifest.json</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">{
+  &quot;name&quot;: &quot;{{ .Site.Title }}&quot;,
+  &quot;short_name&quot;: &quot;{{ .Site.Title }}&quot;,
+  &quot;start_url&quot;: &quot;.&quot;,
+  &quot;display&quot;: &quot;minimal-ui&quot;,
+  &quot;background_color&quot;: &quot;#fff&quot;,
+  &quot;description&quot;: &quot;{{ .Site.Params.description }}&quot;
+}
+</code></pre><h2 id="links">Links</h2>
+<ul>
+<li><a href="https://web.dev/add-manifest/">https://web.dev/add-manifest/</a></li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/web-app" term="web-app" label="web app"/><category scheme="https://seb.people.metio.wtf/tags/manifest" term="manifest" label="manifest"/></entry><entry><title type="html">Bundling with Hugo</title><link href="https://seb.people.metio.wtf/topic/bundling-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/humans.txt-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="humans.txt with Hugo"/><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/bundling-with-hugo/</id><published>2020-12-28T00:00:00+00:00</published><updated>2020-12-28T00:00:00+00:00</updated><content type="html"><![CDATA[<p><a href="gohugo.io/">Hugo</a> allows <a href="https://gohugo.io/hugo-pipes/bundling/">bundling</a> of assets with several built-in functions:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">{{ $normalize := resources.Get &quot;/css/normalize.css&quot; }}
+{{ $font := resources.Get &quot;/css/font.css&quot; }}
+{{ $header := resources.Get &quot;/css/header.css&quot; }}
+{{ $footer := resources.Get &quot;/css/footer.css&quot; }}
+{{ $navigation := resources.Get &quot;/css/navigation.css&quot; }}
+{{ $navigation_mobile := resources.Get &quot;/css/navigation-mobile.css&quot; }}
+{{ $layout := resources.Get &quot;/css/layout.css&quot; }}
+{{ $layout_mobile := resources.Get &quot;/css/layout-mobile.css&quot; }}
+{{ $syntax := resources.Get &quot;/css/syntax.css&quot; }}
+{{ $darkmode := resources.Get &quot;/css/darkmode.css&quot; | resources.Minify | resources.Fingerprint &quot;sha512&quot; }}
+
+{{ $base := slice $normalize $font $header $footer $navigation $layout $syntax | resources.Concat &quot;css/base.css&quot; | resources.Minify | resources.Fingerprint &quot;sha512&quot; }}
+{{ $mobile := slice $navigation_mobile $layout_mobile | resources.Concat &quot;css/mobile.css&quot; | resources.Minify | resources.Fingerprint &quot;sha512&quot; }}
+
+&lt;link href=&quot;{{ $base.Permalink }}&quot; integrity=&quot;{{ $base.Data.Integrity }}&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;{{ $mobile.Permalink }}&quot; integrity=&quot;{{ $mobile.Data.Integrity }}&quot; media=&quot;screen and (max-width: 800px)&quot; rel=&quot;stylesheet&quot;&gt;
+
+&lt;link href=&quot;{{ $darkmode.Permalink }}&quot; integrity=&quot;{{ $darkmode.Data.Integrity }}&quot; media=&quot;screen and (prefers-color-scheme: dark)&quot; rel=&quot;stylesheet&quot;&gt;
+</code></pre>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/bundle" term="bundle" label="bundle"/><category scheme="https://seb.people.metio.wtf/tags/assets" term="assets" label="assets"/></entry><entry><title type="html">humans.txt with Hugo</title><link href="https://seb.people.metio.wtf/topic/humans.txt-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/humans.txt-with-hugo/</id><published>2020-12-14T00:00:00+00:00</published><updated>2020-12-14T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to publish a <a href="http://humanstxt.org/">humans.txt</a> document with your <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;text/plain&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;txt&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">Humans</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Humans&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;text/plain&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;humans&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/home.humans.txt</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">/* TEAM */
+{{ range $.Site.Data.contributors }}
+{{ .title }}: {{ .first_name }} {{ .last_name }}
+Site: {{ .website }}
+{{ end }}
+</code></pre>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/humans.txt" term="humans.txt" label="humans.txt"/></entry><entry><title type="html">FOAF with Hugo</title><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/foaf-with-hugo/</id><published>2020-11-30T00:00:00+00:00</published><updated>2020-11-30T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to publish a <a href="http://www.foaf-project.org/">FOAF</a> document with your <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/rdf+xml&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;rdf&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">Foaf</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;FOAF&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/rdf+xml&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;foaf&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/home.foaf.rdf</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">&lt;rdf:RDF xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:rdfs=&quot;http://www.w3.org/2000/01/rdf-schema#&quot; xmlns:foaf=&quot;http://xmlns.com/foaf/0.1/&quot;&gt;
+  &lt;foaf:PersonalProfileDocument rdf:about=&quot;&quot;&gt;
+    &lt;foaf:maker rdf:resource=&quot;#me&quot; /&gt;
+    &lt;foaf:primaryTopic rdf:resource=&quot;{{ .Site.Title }}&quot; /&gt;
+  &lt;/foaf:PersonalProfileDocument&gt;
+
+  &lt;foaf:Project rdf:ID=&quot;{{ .Site.Title }}&quot;&gt;
+    &lt;foaf:name&gt;{{ .Site.Title }}&lt;/foaf:name&gt;
+    &lt;foaf:homepage rdf:resource=&quot;{{ .Site.BaseURL }}&quot; /&gt;
+  &lt;/foaf:Project&gt;
+
+  {{ range $.Site.Data.contributors }}
+  &lt;foaf:Person rdf:ID=&quot;{{ .id }}&quot;&gt;
+    &lt;foaf:name&gt;{{ .first_name }} {{ .last_name }}&lt;/foaf:name&gt;
+    &lt;foaf:title&gt;{{ .title }}&lt;/foaf:title&gt;
+    &lt;foaf:givenname&gt;{{ .first_name }}&lt;/foaf:givenname&gt;
+    &lt;foaf:family_name&gt;{{ .last_name }}&lt;/foaf:family_name&gt;
+    &lt;foaf:mbox rdf:resource=&quot;mailto:{{ .email }}&quot; /&gt;
+    &lt;foaf:homepage rdf:resource=&quot;{{ .website }}&quot; /&gt;
+  &lt;/foaf:Person&gt;
+  {{ end }}
+&lt;/rdf:RDF&gt;
+</code></pre>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/foaf" term="foaf" label="foaf"/></entry><entry><title type="html">Atom Feed with Hugo</title><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/atom-feed-with-hugo/</id><published>2020-11-16T00:00:00+00:00</published><updated>2020-11-16T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to publish Atom feeds for your <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/atom+xml&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;xml&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">Atom</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Atom&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/atom+xml&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;atom&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/list.atom.xml</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">{{ printf `&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;` | safeHTML }}
+&lt;feed xmlns=&quot;http://www.w3.org/2005/Atom&quot;{{ with site.LanguageCode }} xml:lang=&quot;{{ . }}&quot;{{ end }}&gt;
+    &lt;generator uri=&quot;https://gohugo.io/&quot; version=&quot;{{ hugo.Version }}&quot;&gt;Hugo&lt;/generator&gt;
+    {{- $title := site.Title -}}
+    {{- with .Title -}}
+        {{- if (not (eq . site.Title)) -}}
+            {{- $title = printf `%s %s %s` . (i18n &quot;feed_title_on&quot; | default &quot;on&quot;) site.Title -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if .IsTranslated -}}
+        {{ $title = printf &quot;%s (%s)&quot; $title (index site.Data.i18n.languages .Lang) }}
+    {{- end -}}
+    {{ printf `&lt;title type=&quot;html&quot;&gt;&lt;![CDATA[%s]]&gt;&lt;/title&gt;` $title | safeHTML }}
+    {{ with (or (.Param &quot;subtitle&quot;) (.Param &quot;tagline&quot;)) }}
+        {{ printf `&lt;subtitle type=&quot;html&quot;&gt;&lt;![CDATA[%s]]&gt;&lt;/subtitle&gt;` . | safeHTML }}
+    {{ end }}
+    {{ $output_formats := .OutputFormats }}
+    {{ range $output_formats -}}
+        {{- $rel := (or (and (eq &quot;atom&quot; (.Name | lower)) &quot;self&quot;) &quot;alternate&quot;) -}}
+        {{ with $output_formats.Get .Name }}
+            {{ printf `&lt;link href=%q rel=%q type=%q title=%q /&gt;` .Permalink $rel .MediaType.Type .Name | safeHTML }}
+        {{- end -}}
+    {{- end }}
+    {{- range .Translations }}
+        {{ $output_formats := .OutputFormats }}
+        {{- $lang := .Lang }}
+        {{- $langstr := index site.Data.i18n.languages .Lang }}
+        {{ range $output_formats -}}
+            {{ with $output_formats.Get .Name }}
+                {{ printf `&lt;link href=%q rel=&quot;alternate&quot; type=%q hreflang=%q title=&quot;[%s] %s&quot; /&gt;` .Permalink .MediaType.Type $lang $langstr .Name | safeHTML }}
+            {{- end -}}
+        {{- end }}
+    {{- end }}
+    &lt;updated&gt;{{ now.Format &quot;2006-01-02T15:04:05-07:00&quot; | safeHTML }}&lt;/updated&gt;
+    {{ with site.Copyright }}
+        {{- $copyright := replace . &quot;{year}&quot; now.Year -}} {{/* In case the site.copyright uses a special string &quot;{year}&quot; */}}
+        {{- $copyright = replace $copyright &quot;&amp;copy;&quot; &quot;©&quot; -}}
+        &lt;rights&gt;{{ $copyright | plainify }}&lt;/rights&gt;
+    {{- end }}
+    {{ with .Param &quot;feed&quot; }}
+        {{/* For this to work, the $icon file should be present in the assets/ directory */}}
+        {{- $icon := .icon | default &quot;icon.svg&quot; -}}
+        {{- with resources.Get $icon -}}
+            &lt;icon&gt;{{ (. | fingerprint).Permalink }}&lt;/icon&gt;
+        {{- end }}
+
+        {{/* For this to work, the $logo file should be present in the assets/ directory */}}
+        {{- $logo := .logo | default &quot;logo.svg&quot; -}}
+        {{- with resources.Get $logo -}}
+            &lt;logo&gt;{{ (. | fingerprint).Permalink }}&lt;/logo&gt;
+        {{- end }}
+    {{ end }}
+    {{ with site.Author.name -}}
+        &lt;author&gt;
+            &lt;name&gt;{{ . }}&lt;/name&gt;
+            {{ with site.Author.email }}
+                &lt;email&gt;{{ . }}&lt;/email&gt;
+            {{ end -}}
+        &lt;/author&gt;
+    {{- end }}
+    {{ with site.Params.id }}
+        &lt;id&gt;{{ . | plainify }}&lt;/id&gt;
+    {{ else }}
+        &lt;id&gt;{{ .Permalink }}&lt;/id&gt;
+    {{ end }}
+    {{- $limit := (cond (le site.Config.Services.RSS.Limit 0) 65536 site.Config.Services.RSS.Limit) }}
+    {{- $feed_sections := site.Params.feedSections | default site.Params.mainSections -}}
+    {{/* Range through only the pages with a Type in $feed_sections. */}}
+    {{- $pages := where .RegularPages &quot;Type&quot; &quot;in&quot; $feed_sections -}}
+    {{- if (eq .Kind &quot;home&quot;) -}}
+        {{- $pages = where site.RegularPages &quot;Type&quot; &quot;in&quot; $feed_sections -}}
+    {{- end -}}
+    {{/* Remove the pages that have the disable_feed parameter set to true. */}}
+    {{- $pages = where $pages &quot;.Params.disable_feed&quot; &quot;!=&quot; true -}}
+    {{- range first $limit $pages }}
+        {{ $page := . }}
+        &lt;entry&gt;
+            {{ printf `&lt;title type=&quot;html&quot;&gt;&lt;![CDATA[%s]]&gt;&lt;/title&gt;` .Title | safeHTML }}
+            &lt;link href=&quot;{{ .Permalink }}?utm_source=atom_feed&quot; rel=&quot;alternate&quot; type=&quot;text/html&quot; /&gt;
+            {{- range .Translations }}
+                {{- $link := printf &quot;%s?utm_source=atom_feed&quot; .Permalink | safeHTML }}
+                {{- printf `&lt;link href=%q rel=&quot;alternate&quot; type=&quot;text/html&quot; hreflang=%q /&gt;` $link .Lang | safeHTML }}
+            {{- end }}
+            {{/* rel=related: See https://validator.w3.org/feed/docs/atom.html#link */}}
+            {{- range first 5 (site.RegularPages.Related .) }}
+                &lt;link href=&quot;{{ .Permalink }}?utm_source=atom_feed&quot; rel=&quot;related&quot; type=&quot;text/html&quot; title=&quot;{{ .Title }}&quot; /&gt;
+            {{- end }}
+            {{ with .Params.id }}
+                &lt;id&gt;{{ . | plainify }}&lt;/id&gt;
+            {{ else }}
+                &lt;id&gt;{{ .Permalink }}&lt;/id&gt;
+            {{ end }}
+            {{ with .Params.author -}}
+                {{- range . -}} &lt;!-- Assuming the author front-matter to be a list --&gt;
+                    &lt;author&gt;
+                        &lt;name&gt;{{ . }}&lt;/name&gt;
+                    &lt;/author&gt;
+                {{- end -}}
+            {{- end }}
+            &lt;published&gt;{{ .Date.Format &quot;2006-01-02T15:04:05-07:00&quot; | safeHTML }}&lt;/published&gt;
+            &lt;updated&gt;{{ .Lastmod.Format &quot;2006-01-02T15:04:05-07:00&quot; | safeHTML }}&lt;/updated&gt;
+            {{ $description1 := .Description | default &quot;&quot; }}
+            {{ $description := (cond (eq &quot;&quot; $description1) &quot;&quot; (printf &quot;&lt;blockquote&gt;%s&lt;/blockquote&gt;&quot; ($description1 | markdownify))) }}
+            {{ printf `&lt;content type=&quot;html&quot;&gt;&lt;![CDATA[%s%s]]&gt;&lt;/content&gt;` $description .Content | safeHTML }}
+            {{ with site.Taxonomies }}
+                {{ range $taxo,$_ := . }} &lt;!-- Defaults taxos: &quot;tags&quot;, &quot;categories&quot; --&gt;
+                    {{ with $page.Param $taxo }}
+                        {{ $taxo_list := . }} &lt;!-- $taxo_list will be the tags/categories list --&gt;
+                        {{ with site.GetPage (printf &quot;/%s&quot; $taxo) }}
+                            {{ $taxonomy_page := . }}
+                            {{ range $taxo_list }} &lt;!-- Below, assuming pretty URLs --&gt;
+                                &lt;category scheme=&quot;{{ printf &quot;%s%s&quot; $taxonomy_page.Permalink (. | urlize) }}&quot; term=&quot;{{ (. | urlize) }}&quot; label=&quot;{{ . }}&quot; /&gt;
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        &lt;/entry&gt;
+    {{ end }}
+&lt;/feed&gt;
+</code></pre>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/atom" term="atom" label="atom"/></entry><entry><title type="html">Publish Hugo site with GitHub Actions</title><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/cache-maven-artifacts-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Cache Maven artifacts with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-java-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Java version with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/create-timestamp-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create Timestamp with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/gitlab-the-git-distributor/?utm_source=atom_feed" rel="related" type="text/html" title="GitLab the Git Distributor"/><id>https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/</id><published>2020-09-21T00:00:00+00:00</published><updated>2020-09-21T00:00:00+00:00</updated><content type="html"><![CDATA[<p>The <a href="https://github.com/peaceiris/actions-gh-pages">peaceiris/actions-gh-pages</a> action allows to publish a <a href="https://gohugo.io/">Hugo</a> site in your <a href="https://github.com/features/actions">GitHub Action</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PIPELINE&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy Website</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-gh-pages@v3</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">github_token</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.GITHUB_TOKEN }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">publish_dir</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PUBLISH_DIR&gt;</span><span class="w">
+</span><span class="w">          </span><span class="nt">force_orphan</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">          </span><span class="nt">cname</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;CNAME&gt;</span><span class="w">
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+<li><code>&lt;PUBLISH_DIR&gt;</code>: The file system location of the built site.</li>
+<li><code>&lt;CNAME&gt;</code>: The <code>CNAME</code> of your custom domain.</li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/publish" term="publish" label="publish"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/></entry><entry><title type="html">Use a specific Hugo version with GitHub Actions</title><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-java-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Java version with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/create-timestamp-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create Timestamp with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/gitlab-the-git-distributor/?utm_source=atom_feed" rel="related" type="text/html" title="GitLab the Git Distributor"/><id>https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/</id><published>2020-08-24T00:00:00+00:00</published><updated>2020-08-24T00:00:00+00:00</updated><content type="html"><![CDATA[<p>The <a href="https://github.com/peaceiris/actions-hugo">actions-hugo</a> action allows to use a specific <a href="https://gohugo.io/">Hugo</a> version in your <a href="https://github.com/features/actions">GitHub Action</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PIPELINE&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Setup hugo</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-hugo@v2</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;HUGO_VERSION&gt;</span><span class="w">
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+<li><code>&lt;HUGO_VERSION&gt;</code>: The <a href="https://github.com/gohugoio/hugo/releases">released versions</a> or use <code>latest</code> to always use the latest version of Hugo.</li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/></entry></feed>

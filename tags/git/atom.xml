@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.82.0">Hugo</generator><title type="html">git on Sebastian Hoß</title><link href="https://seb.people.metio.wtf/tags/git/" rel="alternate" type="text/html" title="HTML"/><link href="https://seb.people.metio.wtf/tags/git/index.xml" rel="alternate" type="application/rss+xml" title="RSS"/><link href="https://seb.people.metio.wtf/tags/git/atom.xml" rel="self" type="application/atom+xml" title="Atom"/><updated>2021-04-19T02:41:01+00:00</updated><id>https://seb.people.metio.wtf/tags/git/</id><entry><title type="html">GitLab the Git Distributor</title><link href="https://seb.people.metio.wtf/topic/gitlab-the-git-distributor/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/short-git-clones/?utm_source=atom_feed" rel="related" type="text/html" title="Short Git Clones"/><link href="https://seb.people.metio.wtf/topic/create-timestamp-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create Timestamp with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/gitlab-the-git-distributor/</id><published>2020-07-13T00:00:00+00:00</published><updated>2020-07-13T00:00:00+00:00</updated><content type="html"><![CDATA[<p><a href="https://git-scm.com/">Git</a> at its core is a decentralized version control system. Yet a lot of people are relying on a single central server (github.com at the time of this writing) to share their work with others. <a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows">Pro Git</a> rightfully mentions it at first position in its chapter about distributed workflows because using a central server is usually the simplest approach to sharing code.</p>
+<p>While the central server approach is easy to use, it might not work in all scenarios:</p>
+<ol>
+<li>An enterprise wants to share internal code as part of an open source project. All development is happening internally, and the public mirror gets an occasional update once in a while.</li>
+<li>In order to protect against outages of the central server, mirrors should be created and be kept up-to-date.</li>
+</ol>
+<p>In case of the first scenario, tools like <a href="https://github.com/google/copybara">copybara</a>, <a href="https://github.com/repoSpanner/repoSpanner">repoSpanner</a>, or <a href="https://github.com/google/distributed-git-forks">distributed-git-forks</a> offer a wide range of features to cover most details.</p>
+<p>The second scenario can be solved manually with tools like <a href="https://github.com/muesli/gitomatic">gitomatic</a> or automatically with <a href="https://gitlab.com">GitLab</a>&rsquo;s <a href="https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html">mirror feature</a> quite easy. GitLab allows to create a single pull-mirror and multiple push-mirrors. Thus, it can be used to pull from your central server and push into all mirrors.</p>
+<pre><code>               +----------------+               
+               |     GitHub     |               
+               +----------------+               
+                        ^                       
+                        |                       
+                        |                       
+               +----------------+               
+         +-----|     GitLab     |------+        
+         |     +----------------+      |        
+         |                             |        
+         |                             |        
+         v                             v        
++----------------+            +----------------+
+|    Codeberg    |            |    BitBucket   |
++----------------+            +----------------+
+</code></pre><p>In order to create such a setup, follow these steps:</p>
+<ol>
+<li>Go to <code>Settings &gt; Repository</code> and expand <code>Mirroring repositories</code>
+<img src="/images/gitlab-mirror-settings.png" alt="Code Flow"></li>
+<li>Enter the URL of your central Git repository as the pull source, e.g. <code>https://github.com/metio/krei.git</code>
+<img src="/images/gitlab-pull-mirror.png" alt="Code Flow"></li>
+<li>Enter one push target for each mirror. Since pushing usually requires authentication, make sure the URL of the mirror contains a username, e.g. <code>https://YOUR_USER@codeberg.org/metio.wtf/krei.git</code>. Add an access token for each mirror and select <code>password</code> as authentication method.
+<img src="/images/gitlab-push-mirror.png" alt="Code Flow"></li>
+</ol>
+<p>In case you prefer SSH keys over HTTP access tokens, just select <code>SSH public key</code> as authentication method and make sure your key is both saved in GitLab and all mirrors.</p>
+<h2 id="examples-projects">Examples Projects</h2>
+<p>The following projects are using the above approach to synchronize multiple git repositories:</p>
+<ul>
+<li><a href="https://github.com/metio/krei">krei</a></li>
+<li><a href="https://github.com/metio/ilo">ilo</a></li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/configuration" term="configuration" label="configuration"/><category scheme="https://seb.people.metio.wtf/tags/git" term="git" label="git"/><category scheme="https://seb.people.metio.wtf/tags/gitlab" term="gitlab" label="gitlab"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/codeberg" term="codeberg" label="codeberg"/><category scheme="https://seb.people.metio.wtf/tags/bitbucket" term="bitbucket" label="bitbucket"/><category scheme="https://seb.people.metio.wtf/tags/repo.or.cz" term="repo.or.cz" label="repo.or.cz"/></entry><entry><title type="html">Short Git Clones</title><link href="https://seb.people.metio.wtf/topic/short-git-clones/?utm_source=atom_feed" rel="alternate" type="text/html"/><id>https://seb.people.metio.wtf/topic/short-git-clones/</id><published>2020-06-15T00:00:00+00:00</published><updated>2020-06-15T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In case you don&rsquo;t want to write <code>git clone git@github.com:orga/repo.git</code> all the time, consider using a custom SSH config (<code>~/.ssh/config</code>) like this:</p>
+<pre><code>Host github
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-GITHUB&gt;
+
+Host gitlab
+    HostName gitlab.com
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-GITLAB&gt;
+
+Host bitbucket
+    HostName bitbucket.org
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-BITBUCKET&gt;
+
+Host codeberg
+    HostName codeberg.org
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-CODEBERG&gt;
+</code></pre><p>Once configured, you can now write:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ git clone github:orga/repo
+$ git clone gitlab:orga/repo
+$ git clone bitbucket:orga/repo
+$ git clone codeberg:orga/repo
+</code></pre></div><p>In case you are working with lots of repositories inside a single organization, consider adding the following git configuration (<code>$XDG_CONFIG_HOME/git/config</code> or <code>~/.gitconfig</code>):</p>
+<pre><code>[url &quot;github:orga/&quot;]
+  insteadOf = orga:
+[url &quot;gitlab:orga/&quot;]
+  insteadOf = orgl:
+[url &quot;bitbucket:orga/&quot;]
+  insteadOf = orgb:
+[url &quot;codeberg:orga/&quot;]
+  insteadOf = orgc:
+</code></pre><p>Which allows you to just write:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ git clone orga:repo
+$ git clone orgl:repo
+$ git clone orgb:repo
+$ git clone orgc:repo
+</code></pre></div><p>Git will substitute the <code>insteadOf</code> values like <code>orga:</code> with the configured <code>url</code> (e.g. <code>github:orga/</code>). The actual clone URL is <code>github:orga/repo</code> at this point, which can be used by Git together with the SSH config mentioned above to clone repositories.</p>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/git" term="git" label="git"/><category scheme="https://seb.people.metio.wtf/tags/clone" term="clone" label="clone"/><category scheme="https://seb.people.metio.wtf/tags/ssh" term="ssh" label="ssh"/></entry></feed>

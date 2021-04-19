@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.82.0">Hugo</generator><title type="html">foaf on Sebastian Hoß</title><link href="https://seb.people.metio.wtf/tags/foaf/" rel="alternate" type="text/html" title="HTML"/><link href="https://seb.people.metio.wtf/tags/foaf/index.xml" rel="alternate" type="application/rss+xml" title="RSS"/><link href="https://seb.people.metio.wtf/tags/foaf/atom.xml" rel="self" type="application/atom+xml" title="Atom"/><updated>2021-04-19T02:41:01+00:00</updated><id>https://seb.people.metio.wtf/tags/foaf/</id><entry><title type="html">FOAF with Hugo</title><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/foaf-with-hugo/</id><published>2020-11-30T00:00:00+00:00</published><updated>2020-11-30T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to publish a <a href="http://www.foaf-project.org/">FOAF</a> document with your <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/rdf+xml&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;rdf&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">Foaf</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;FOAF&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/rdf+xml&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;foaf&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/home.foaf.rdf</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">&lt;rdf:RDF xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:rdfs=&quot;http://www.w3.org/2000/01/rdf-schema#&quot; xmlns:foaf=&quot;http://xmlns.com/foaf/0.1/&quot;&gt;
+  &lt;foaf:PersonalProfileDocument rdf:about=&quot;&quot;&gt;
+    &lt;foaf:maker rdf:resource=&quot;#me&quot; /&gt;
+    &lt;foaf:primaryTopic rdf:resource=&quot;{{ .Site.Title }}&quot; /&gt;
+  &lt;/foaf:PersonalProfileDocument&gt;
+
+  &lt;foaf:Project rdf:ID=&quot;{{ .Site.Title }}&quot;&gt;
+    &lt;foaf:name&gt;{{ .Site.Title }}&lt;/foaf:name&gt;
+    &lt;foaf:homepage rdf:resource=&quot;{{ .Site.BaseURL }}&quot; /&gt;
+  &lt;/foaf:Project&gt;
+
+  {{ range $.Site.Data.contributors }}
+  &lt;foaf:Person rdf:ID=&quot;{{ .id }}&quot;&gt;
+    &lt;foaf:name&gt;{{ .first_name }} {{ .last_name }}&lt;/foaf:name&gt;
+    &lt;foaf:title&gt;{{ .title }}&lt;/foaf:title&gt;
+    &lt;foaf:givenname&gt;{{ .first_name }}&lt;/foaf:givenname&gt;
+    &lt;foaf:family_name&gt;{{ .last_name }}&lt;/foaf:family_name&gt;
+    &lt;foaf:mbox rdf:resource=&quot;mailto:{{ .email }}&quot; /&gt;
+    &lt;foaf:homepage rdf:resource=&quot;{{ .website }}&quot; /&gt;
+  &lt;/foaf:Person&gt;
+  {{ end }}
+&lt;/rdf:RDF&gt;
+</code></pre>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/foaf" term="foaf" label="foaf"/></entry></feed>

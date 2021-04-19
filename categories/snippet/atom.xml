@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.82.0">Hugo</generator><title type="html">snippet on Sebastian Hoß</title><link href="https://seb.people.metio.wtf/categories/snippet/" rel="alternate" type="text/html" title="HTML"/><link href="https://seb.people.metio.wtf/categories/snippet/index.xml" rel="alternate" type="application/rss+xml" title="RSS"/><link href="https://seb.people.metio.wtf/categories/snippet/atom.xml" rel="self" type="application/atom+xml" title="Atom"/><updated>2021-04-19T02:41:01+00:00</updated><id>https://seb.people.metio.wtf/categories/snippet/</id><entry><title type="html">Use tmux as your login shell</title><link href="https://seb.people.metio.wtf/topic/use-tmux-as-your-login-shell/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/peeking-with-tmux/?utm_source=atom_feed" rel="related" type="text/html" title="Peeking with tmux"/><id>https://seb.people.metio.wtf/topic/use-tmux-as-your-login-shell/</id><published>2021-04-19T00:00:00+00:00</published><updated>2021-04-19T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to use <a href="https://github.com/tmux/tmux">tmux</a> as your login shell, use <code>chsh</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># list all available shells</span>
+$ chsh --list-shells
+/bin/sh
+/bin/bash
+/sbin/nologin
+/usr/bin/sh
+/usr/bin/bash
+/usr/sbin/nologin
+/usr/bin/zsh
+/bin/zsh
+/usr/bin/tmux
+/bin/tmux
+
+<span class="c1"># select login shell</span>
+$ chsh --shell /usr/bin/tmux
+</code></pre></div>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/tmux" term="tmux" label="tmux"/><category scheme="https://seb.people.metio.wtf/tags/login-shell" term="login-shell" label="login shell"/><category scheme="https://seb.people.metio.wtf/tags/chsh" term="chsh" label="chsh"/></entry><entry><title type="html">Lock your screen on SwayWM</title><link href="https://seb.people.metio.wtf/topic/lock-your-screen-on-swaywm/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/taken-screenshots-on-swaywm/?utm_source=atom_feed" rel="related" type="text/html" title="Taken screenshots on SwayWM"/><id>https://seb.people.metio.wtf/topic/lock-your-screen-on-swaywm/</id><published>2021-04-05T00:00:00+00:00</published><updated>2021-04-05T00:00:00+00:00</updated><content type="html"><![CDATA[<p><a href="https://swaywm.org/">SwayWM</a> uses can use a mixture of <a href="https://github.com/swaywm/swaylock">swaylock</a> to lock their screen. Place the following key binding in your Sway config:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#</span>
+<span class="c1"># Screen lock</span>
+<span class="c1">#</span>
+bindsym <span class="nv">$mod</span>+Ctrl+l <span class="nb">exec</span> swaylock -c <span class="m">000000</span>
+</code></pre></div><p><code>$mod+Ctrl+l</code> will lock your screen and turn it to black.</p>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/swaywm" term="swaywm" label="swaywm"/><category scheme="https://seb.people.metio.wtf/tags/screenlock" term="screenlock" label="screenlock"/></entry><entry><title type="html">Peeking with tmux</title><link href="https://seb.people.metio.wtf/topic/peeking-with-tmux/?utm_source=atom_feed" rel="alternate" type="text/html"/><id>https://seb.people.metio.wtf/topic/peeking-with-tmux/</id><published>2021-04-05T00:00:00+00:00</published><updated>2021-04-05T00:00:00+00:00</updated><content type="html"><![CDATA[<p><a href="https://github.com/tmux/tmux">tmux</a> uses can use the following snippet to peek at files. Place it in your <code>.bashrc</code> or similar file.</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">peek<span class="o">()</span> <span class="o">{</span> tmux split-window -p <span class="m">33</span> <span class="s2">&#34;</span><span class="nv">$EDITOR</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span> <span class="o">}</span>
+</code></pre></div><p>Calling <code>peek &lt;file&gt;</code> will open <code>&lt;file&gt;</code> in lower third of tmux window.</p>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/tmux" term="tmux" label="tmux"/><category scheme="https://seb.people.metio.wtf/tags/peek" term="peek" label="peek"/></entry><entry><title type="html">Taken screenshots on SwayWM</title><link href="https://seb.people.metio.wtf/topic/taken-screenshots-on-swaywm/?utm_source=atom_feed" rel="alternate" type="text/html"/><id>https://seb.people.metio.wtf/topic/taken-screenshots-on-swaywm/</id><published>2021-03-22T00:00:00+00:00</published><updated>2021-03-22T00:00:00+00:00</updated><content type="html"><![CDATA[<p><a href="https://swaywm.org/">SwayWM</a> uses can use a mixture of <a href="https://github.com/emersion/grim">grim</a> and <a href="https://github.com/emersion/slurp">slurp</a> to take screenshots of their desktop. Place the following key binding in your Sway config:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># take screenshot of currently focused screen</span>
+bindsym <span class="nv">$mod</span>+Print <span class="nb">exec</span> /usr/bin/grim -o <span class="k">$(</span>swaymsg -t get_outputs <span class="p">|</span> jq -r <span class="s1">&#39;.[] | select(.focused) | .name&#39;</span><span class="k">)</span> <span class="k">$(</span>xdg-user-dir PICTURES<span class="k">)</span>/<span class="k">$(</span>date +<span class="s1">&#39;%Y-%m-%d-%H%M%S.png&#39;</span><span class="k">)</span>
+
+<span class="c1"># take screenshot of selection</span>
+bindsym <span class="nv">$mod</span>+Shift+p <span class="nb">exec</span> /usr/bin/grim -g <span class="s2">&#34;</span><span class="k">$(</span>/usr/bin/slurp<span class="k">)</span><span class="s2">&#34;</span> <span class="k">$(</span>xdg-user-dir PICTURES<span class="k">)</span>/<span class="k">$(</span>date +<span class="s1">&#39;%Y-%m-%d-%H%M%S.png&#39;</span><span class="k">)</span>
+</code></pre></div>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/swaywm" term="swaywm" label="swaywm"/><category scheme="https://seb.people.metio.wtf/tags/screenshot" term="screenshot" label="screenshot"/><category scheme="https://seb.people.metio.wtf/tags/slurp" term="slurp" label="slurp"/><category scheme="https://seb.people.metio.wtf/tags/grim" term="grim" label="grim"/></entry><entry><title type="html">Executable READMEs</title><link href="https://seb.people.metio.wtf/topic/executable-readmes/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/ignore-exit-codes/?utm_source=atom_feed" rel="related" type="text/html" title="Ignore Exit Codes"/><link href="https://seb.people.metio.wtf/topic/makefile-help/?utm_source=atom_feed" rel="related" type="text/html" title="Makefile Help"/><id>https://seb.people.metio.wtf/topic/executable-readmes/</id><published>2021-03-08T00:00:00+00:00</published><updated>2021-03-08T00:00:00+00:00</updated><content type="html"><![CDATA[<p><code>README</code> file typically contain information about the project itself, e.g. how it can be installed/used/build. Most of the time these files contains command line instructions that users/contributors copy and paste into their terminal. Instead of doing that, consider placing a <code>Makefile</code> in the root of your project which contains the exact same instructions. Thanks to <code>make</code>, all your contributors can now use TAB-completion to run any of the pre-defined <code>make</code> targets.</p>
+<p>The following example is part of one of my projects, and I certainly don&rsquo;t want to type (or even copy) that all the time:</p>
+<div class="highlight"><pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">release</span>-<span class="n">into</span>-<span class="n">local</span>-<span class="n">nexus</span>
+<span class="nf">release-into-local-nexus</span><span class="o">:</span>
+	mvn versions:set <span class="se">\
+</span><span class="se"></span>	   -DnewVersion<span class="o">=</span><span class="k">$(</span>TIMESTAMPED_VERSION<span class="k">)</span> <span class="se">\
+</span><span class="se"></span>	   -DgenerateBackupPoms<span class="o">=</span><span class="nb">false</span>
+	-mvn clean deploy scm:tag <span class="se">\
+</span><span class="se"></span>	   -DpushChanges<span class="o">=</span><span class="nb">false</span> <span class="se">\
+</span><span class="se"></span>	   -DskipLocalStaging<span class="o">=</span><span class="nb">true</span> <span class="se">\
+</span><span class="se"></span>	   -Drelease<span class="o">=</span><span class="nb">local</span>
+	mvn versions:set <span class="se">\
+</span><span class="se"></span>	   -DnewVersion<span class="o">=</span>9999.99.99-SNAPSHOT <span class="se">\
+</span><span class="se"></span>	   -DgenerateBackupPoms<span class="o">=</span><span class="nb">false</span>
+</code></pre></div><p>With the above target in place, everyone can now do <code>make release-into-local-nexus</code> instead of typing/copying the commands themselves. Thanks to TAB-completion you just have to do <code>make r&lt;TAB&gt;</code> and confirm with <code>&gt;ENTER&gt;</code> to perform a release.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="https://www.makeareadme.com/">https://www.makeareadme.com/</a></li>
+<li><a href="https://opensource.guide/starting-a-project/#launching-your-own-open-source-project">https://opensource.guide/starting-a-project/#launching-your-own-open-source-project</a></li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/make" term="make" label="make"/><category scheme="https://seb.people.metio.wtf/tags/makefile" term="makefile" label="Makefile"/><category scheme="https://seb.people.metio.wtf/tags/readme" term="readme" label="README"/><category scheme="https://seb.people.metio.wtf/tags/teamwork" term="teamwork" label="teamwork"/></entry><entry><title type="html">Delay GitHub Actions builds</title><link href="https://seb.people.metio.wtf/topic/delay-github-actions-builds/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/send-toots-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Send toots with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/send-emails-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Send emails with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/upload-release-assets-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Upload release assets with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/create-github-releases-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create GitHub releases with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/delay-github-actions-builds/</id><published>2021-02-22T00:00:00+00:00</published><updated>2021-02-22T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to delay the execution of an <a href="https://github.com/features/actions">GitHub Action</a>, use a mixture of the <code>on: schedule: ...</code> config, and a <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif">conditional build step</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PIPELINE&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&lt;CRON&gt;&#39;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Count commits in last week</span><span class="w">
+</span><span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">commits</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">echo &#34;::set-output name=count::$(git rev-list --count HEAD --since=&#39;&lt;DATE&gt;&#39;)&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build project</span><span class="w">
+</span><span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">steps.commits.outputs.count &gt; 0</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">build-project</span><span class="w">
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+<li><code>&lt;CRON&gt;</code>: Cron expression - use <a href="https://crontab.guru/">https://crontab.guru/</a>.</li>
+<li><code>&lt;DATE&gt;</code>: Git date expression that matches <code>&lt;CRON&gt;</code>.</li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/schedule" term="schedule" label="schedule"/></entry><entry><title type="html">Ignore Exit Codes</title><link href="https://seb.people.metio.wtf/topic/ignore-exit-codes/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/makefile-help/?utm_source=atom_feed" rel="related" type="text/html" title="Makefile Help"/><id>https://seb.people.metio.wtf/topic/ignore-exit-codes/</id><published>2021-02-08T00:00:00+00:00</published><updated>2021-02-08T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In case you are using a <code>Makefile</code> to define a complex build step - e.g. start database, run tests, stop database - consider using the <code>-</code> qualifier in front of your actual build step like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">build</span>
+<span class="nf">build</span><span class="o">:</span>
+	start-database
+	-build-software
+	stop-database
+</code></pre></div><p>Thanks to <code>-</code>, the database will be stopped even if building your software fails, thus making sure to clean up after ourselves once the build finishes.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="https://www.gnu.org/software/make/manual/make.html#Recipe-Echoing">https://www.gnu.org/software/make/manual/make.html#Recipe-Echoing</a></li>
+<li><a href="https://www.gnu.org/software/make/manual/make.html#Errors-in-Recipes">https://www.gnu.org/software/make/manual/make.html#Errors-in-Recipes</a></li>
+<li><a href="https://www.gnu.org/software/make/manual/make.html#How-the-MAKE-Variable-Works">https://www.gnu.org/software/make/manual/make.html#How-the-MAKE-Variable-Works</a></li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/make" term="make" label="make"/><category scheme="https://seb.people.metio.wtf/tags/makefile" term="makefile" label="Makefile"/><category scheme="https://seb.people.metio.wtf/tags/exit-code" term="exit-code" label="exit code"/></entry><entry><title type="html">Service workers with Hugo</title><link href="https://seb.people.metio.wtf/topic/service-workers-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/web-app-manifests-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Web app manifests with Hugo"/><link href="https://seb.people.metio.wtf/topic/bundling-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Bundling with Hugo"/><link href="https://seb.people.metio.wtf/topic/humans.txt-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="humans.txt with Hugo"/><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><id>https://seb.people.metio.wtf/topic/service-workers-with-hugo/</id><published>2021-01-25T00:00:00+00:00</published><updated>2021-01-25T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to use a <a href="https://serviceworke.rs/">serviceworker</a> to cache a <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/javascript&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;js&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">ServiceWorker</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;ServiceWorker&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/javascript&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;serviceworker&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/home.serviceworker.js</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">const CACHE = 'cache-and-update';
+
+self.addEventListener('install', (event) =&gt; {
+  event.waitUntil(precache());
+});
+
+self.addEventListener('fetch', (event) =&gt; {
+  event.respondWith(fromCache(event.request));
+  event.waitUntil(update(event.request));
+});
+
+const precache = async () =&gt; {
+    const cache = await caches.open(CACHE);
+    return await cache.addAll([
+        {{ range $i, $e := .Site.RegularPages }}
+        '{{ $.RelPermalink }}'{{ if $i }}, {{ end }}
+        {{ end }}
+    ]);
+}
+
+const fromCache = async (request) =&gt; {
+    const cache = await caches.open(CACHE);
+    const match = await cache.match(request);
+    return match || Promise.reject('no-match');
+}
+
+const update = async (request) =&gt; {
+    const cache = await caches.open(CACHE);
+    const response = await fetch(request);
+    return await cache.put(request, response);
+}
+</code></pre><h2 id="links">Links</h2>
+<ul>
+<li><a href="https://github.com/gohugoio/hugo/issues/5495">https://github.com/gohugoio/hugo/issues/5495</a></li>
+<li><a href="https://github.com/wildhaber/offline-first-sw">https://github.com/wildhaber/offline-first-sw</a></li>
+<li><a href="https://gohugohq.com/howto/go-offline-with-service-worker/">https://gohugohq.com/howto/go-offline-with-service-worker/</a></li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/service-worker" term="service-worker" label="service worker"/></entry><entry><title type="html">Web app manifests with Hugo</title><link href="https://seb.people.metio.wtf/topic/web-app-manifests-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/bundling-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Bundling with Hugo"/><link href="https://seb.people.metio.wtf/topic/humans.txt-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="humans.txt with Hugo"/><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/web-app-manifests-with-hugo/</id><published>2021-01-11T00:00:00+00:00</published><updated>2021-01-11T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to publish a <a href="https://developer.mozilla.org/en-US/docs/Web/Manifest">web app manifest</a> document with your <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/manifest+json&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;webmanifest&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">Webmanifest</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Web App Manifest&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/manifest+json&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;manifest&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/home.manifest.json</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">{
+  &quot;name&quot;: &quot;{{ .Site.Title }}&quot;,
+  &quot;short_name&quot;: &quot;{{ .Site.Title }}&quot;,
+  &quot;start_url&quot;: &quot;.&quot;,
+  &quot;display&quot;: &quot;minimal-ui&quot;,
+  &quot;background_color&quot;: &quot;#fff&quot;,
+  &quot;description&quot;: &quot;{{ .Site.Params.description }}&quot;
+}
+</code></pre><h2 id="links">Links</h2>
+<ul>
+<li><a href="https://web.dev/add-manifest/">https://web.dev/add-manifest/</a></li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/web-app" term="web-app" label="web app"/><category scheme="https://seb.people.metio.wtf/tags/manifest" term="manifest" label="manifest"/></entry><entry><title type="html">Bundling with Hugo</title><link href="https://seb.people.metio.wtf/topic/bundling-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/humans.txt-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="humans.txt with Hugo"/><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/bundling-with-hugo/</id><published>2020-12-28T00:00:00+00:00</published><updated>2020-12-28T00:00:00+00:00</updated><content type="html"><![CDATA[<p><a href="gohugo.io/">Hugo</a> allows <a href="https://gohugo.io/hugo-pipes/bundling/">bundling</a> of assets with several built-in functions:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">{{ $normalize := resources.Get &quot;/css/normalize.css&quot; }}
+{{ $font := resources.Get &quot;/css/font.css&quot; }}
+{{ $header := resources.Get &quot;/css/header.css&quot; }}
+{{ $footer := resources.Get &quot;/css/footer.css&quot; }}
+{{ $navigation := resources.Get &quot;/css/navigation.css&quot; }}
+{{ $navigation_mobile := resources.Get &quot;/css/navigation-mobile.css&quot; }}
+{{ $layout := resources.Get &quot;/css/layout.css&quot; }}
+{{ $layout_mobile := resources.Get &quot;/css/layout-mobile.css&quot; }}
+{{ $syntax := resources.Get &quot;/css/syntax.css&quot; }}
+{{ $darkmode := resources.Get &quot;/css/darkmode.css&quot; | resources.Minify | resources.Fingerprint &quot;sha512&quot; }}
+
+{{ $base := slice $normalize $font $header $footer $navigation $layout $syntax | resources.Concat &quot;css/base.css&quot; | resources.Minify | resources.Fingerprint &quot;sha512&quot; }}
+{{ $mobile := slice $navigation_mobile $layout_mobile | resources.Concat &quot;css/mobile.css&quot; | resources.Minify | resources.Fingerprint &quot;sha512&quot; }}
+
+&lt;link href=&quot;{{ $base.Permalink }}&quot; integrity=&quot;{{ $base.Data.Integrity }}&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;{{ $mobile.Permalink }}&quot; integrity=&quot;{{ $mobile.Data.Integrity }}&quot; media=&quot;screen and (max-width: 800px)&quot; rel=&quot;stylesheet&quot;&gt;
+
+&lt;link href=&quot;{{ $darkmode.Permalink }}&quot; integrity=&quot;{{ $darkmode.Data.Integrity }}&quot; media=&quot;screen and (prefers-color-scheme: dark)&quot; rel=&quot;stylesheet&quot;&gt;
+</code></pre>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/bundle" term="bundle" label="bundle"/><category scheme="https://seb.people.metio.wtf/tags/assets" term="assets" label="assets"/></entry><entry><title type="html">humans.txt with Hugo</title><link href="https://seb.people.metio.wtf/topic/humans.txt-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/humans.txt-with-hugo/</id><published>2020-12-14T00:00:00+00:00</published><updated>2020-12-14T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to publish a <a href="http://humanstxt.org/">humans.txt</a> document with your <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;text/plain&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;txt&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">Humans</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Humans&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;text/plain&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;humans&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/home.humans.txt</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">/* TEAM */
+{{ range $.Site.Data.contributors }}
+{{ .title }}: {{ .first_name }} {{ .last_name }}
+Site: {{ .website }}
+{{ end }}
+</code></pre>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/humans.txt" term="humans.txt" label="humans.txt"/></entry><entry><title type="html">FOAF with Hugo</title><link href="https://seb.people.metio.wtf/topic/foaf-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/foaf-with-hugo/</id><published>2020-11-30T00:00:00+00:00</published><updated>2020-11-30T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to publish a <a href="http://www.foaf-project.org/">FOAF</a> document with your <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/rdf+xml&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;rdf&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">Foaf</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;FOAF&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/rdf+xml&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;foaf&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/home.foaf.rdf</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">&lt;rdf:RDF xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:rdfs=&quot;http://www.w3.org/2000/01/rdf-schema#&quot; xmlns:foaf=&quot;http://xmlns.com/foaf/0.1/&quot;&gt;
+  &lt;foaf:PersonalProfileDocument rdf:about=&quot;&quot;&gt;
+    &lt;foaf:maker rdf:resource=&quot;#me&quot; /&gt;
+    &lt;foaf:primaryTopic rdf:resource=&quot;{{ .Site.Title }}&quot; /&gt;
+  &lt;/foaf:PersonalProfileDocument&gt;
+
+  &lt;foaf:Project rdf:ID=&quot;{{ .Site.Title }}&quot;&gt;
+    &lt;foaf:name&gt;{{ .Site.Title }}&lt;/foaf:name&gt;
+    &lt;foaf:homepage rdf:resource=&quot;{{ .Site.BaseURL }}&quot; /&gt;
+  &lt;/foaf:Project&gt;
+
+  {{ range $.Site.Data.contributors }}
+  &lt;foaf:Person rdf:ID=&quot;{{ .id }}&quot;&gt;
+    &lt;foaf:name&gt;{{ .first_name }} {{ .last_name }}&lt;/foaf:name&gt;
+    &lt;foaf:title&gt;{{ .title }}&lt;/foaf:title&gt;
+    &lt;foaf:givenname&gt;{{ .first_name }}&lt;/foaf:givenname&gt;
+    &lt;foaf:family_name&gt;{{ .last_name }}&lt;/foaf:family_name&gt;
+    &lt;foaf:mbox rdf:resource=&quot;mailto:{{ .email }}&quot; /&gt;
+    &lt;foaf:homepage rdf:resource=&quot;{{ .website }}&quot; /&gt;
+  &lt;/foaf:Person&gt;
+  {{ end }}
+&lt;/rdf:RDF&gt;
+</code></pre>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/foaf" term="foaf" label="foaf"/></entry><entry><title type="html">Atom Feed with Hugo</title><link href="https://seb.people.metio.wtf/topic/atom-feed-with-hugo/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/atom-feed-with-hugo/</id><published>2020-11-16T00:00:00+00:00</published><updated>2020-11-16T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In order to publish Atom feeds for your <a href="gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/atom+xml&#34;</span><span class="p">]</span>
+  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;xml&#34;</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">Atom</span><span class="p">]</span>
+  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Atom&#34;</span>
+  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/atom+xml&#34;</span>
+  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;atom&#34;</span>
+  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</code></pre></div><p>Create a new layout, e.g. in <code>_default/list.atom.xml</code> with the following content:</p>
+<pre><code class="language-gotemplate" data-lang="gotemplate">{{ printf `&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;` | safeHTML }}
+&lt;feed xmlns=&quot;http://www.w3.org/2005/Atom&quot;{{ with site.LanguageCode }} xml:lang=&quot;{{ . }}&quot;{{ end }}&gt;
+    &lt;generator uri=&quot;https://gohugo.io/&quot; version=&quot;{{ hugo.Version }}&quot;&gt;Hugo&lt;/generator&gt;
+    {{- $title := site.Title -}}
+    {{- with .Title -}}
+        {{- if (not (eq . site.Title)) -}}
+            {{- $title = printf `%s %s %s` . (i18n &quot;feed_title_on&quot; | default &quot;on&quot;) site.Title -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if .IsTranslated -}}
+        {{ $title = printf &quot;%s (%s)&quot; $title (index site.Data.i18n.languages .Lang) }}
+    {{- end -}}
+    {{ printf `&lt;title type=&quot;html&quot;&gt;&lt;![CDATA[%s]]&gt;&lt;/title&gt;` $title | safeHTML }}
+    {{ with (or (.Param &quot;subtitle&quot;) (.Param &quot;tagline&quot;)) }}
+        {{ printf `&lt;subtitle type=&quot;html&quot;&gt;&lt;![CDATA[%s]]&gt;&lt;/subtitle&gt;` . | safeHTML }}
+    {{ end }}
+    {{ $output_formats := .OutputFormats }}
+    {{ range $output_formats -}}
+        {{- $rel := (or (and (eq &quot;atom&quot; (.Name | lower)) &quot;self&quot;) &quot;alternate&quot;) -}}
+        {{ with $output_formats.Get .Name }}
+            {{ printf `&lt;link href=%q rel=%q type=%q title=%q /&gt;` .Permalink $rel .MediaType.Type .Name | safeHTML }}
+        {{- end -}}
+    {{- end }}
+    {{- range .Translations }}
+        {{ $output_formats := .OutputFormats }}
+        {{- $lang := .Lang }}
+        {{- $langstr := index site.Data.i18n.languages .Lang }}
+        {{ range $output_formats -}}
+            {{ with $output_formats.Get .Name }}
+                {{ printf `&lt;link href=%q rel=&quot;alternate&quot; type=%q hreflang=%q title=&quot;[%s] %s&quot; /&gt;` .Permalink .MediaType.Type $lang $langstr .Name | safeHTML }}
+            {{- end -}}
+        {{- end }}
+    {{- end }}
+    &lt;updated&gt;{{ now.Format &quot;2006-01-02T15:04:05-07:00&quot; | safeHTML }}&lt;/updated&gt;
+    {{ with site.Copyright }}
+        {{- $copyright := replace . &quot;{year}&quot; now.Year -}} {{/* In case the site.copyright uses a special string &quot;{year}&quot; */}}
+        {{- $copyright = replace $copyright &quot;&amp;copy;&quot; &quot;©&quot; -}}
+        &lt;rights&gt;{{ $copyright | plainify }}&lt;/rights&gt;
+    {{- end }}
+    {{ with .Param &quot;feed&quot; }}
+        {{/* For this to work, the $icon file should be present in the assets/ directory */}}
+        {{- $icon := .icon | default &quot;icon.svg&quot; -}}
+        {{- with resources.Get $icon -}}
+            &lt;icon&gt;{{ (. | fingerprint).Permalink }}&lt;/icon&gt;
+        {{- end }}
+
+        {{/* For this to work, the $logo file should be present in the assets/ directory */}}
+        {{- $logo := .logo | default &quot;logo.svg&quot; -}}
+        {{- with resources.Get $logo -}}
+            &lt;logo&gt;{{ (. | fingerprint).Permalink }}&lt;/logo&gt;
+        {{- end }}
+    {{ end }}
+    {{ with site.Author.name -}}
+        &lt;author&gt;
+            &lt;name&gt;{{ . }}&lt;/name&gt;
+            {{ with site.Author.email }}
+                &lt;email&gt;{{ . }}&lt;/email&gt;
+            {{ end -}}
+        &lt;/author&gt;
+    {{- end }}
+    {{ with site.Params.id }}
+        &lt;id&gt;{{ . | plainify }}&lt;/id&gt;
+    {{ else }}
+        &lt;id&gt;{{ .Permalink }}&lt;/id&gt;
+    {{ end }}
+    {{- $limit := (cond (le site.Config.Services.RSS.Limit 0) 65536 site.Config.Services.RSS.Limit) }}
+    {{- $feed_sections := site.Params.feedSections | default site.Params.mainSections -}}
+    {{/* Range through only the pages with a Type in $feed_sections. */}}
+    {{- $pages := where .RegularPages &quot;Type&quot; &quot;in&quot; $feed_sections -}}
+    {{- if (eq .Kind &quot;home&quot;) -}}
+        {{- $pages = where site.RegularPages &quot;Type&quot; &quot;in&quot; $feed_sections -}}
+    {{- end -}}
+    {{/* Remove the pages that have the disable_feed parameter set to true. */}}
+    {{- $pages = where $pages &quot;.Params.disable_feed&quot; &quot;!=&quot; true -}}
+    {{- range first $limit $pages }}
+        {{ $page := . }}
+        &lt;entry&gt;
+            {{ printf `&lt;title type=&quot;html&quot;&gt;&lt;![CDATA[%s]]&gt;&lt;/title&gt;` .Title | safeHTML }}
+            &lt;link href=&quot;{{ .Permalink }}?utm_source=atom_feed&quot; rel=&quot;alternate&quot; type=&quot;text/html&quot; /&gt;
+            {{- range .Translations }}
+                {{- $link := printf &quot;%s?utm_source=atom_feed&quot; .Permalink | safeHTML }}
+                {{- printf `&lt;link href=%q rel=&quot;alternate&quot; type=&quot;text/html&quot; hreflang=%q /&gt;` $link .Lang | safeHTML }}
+            {{- end }}
+            {{/* rel=related: See https://validator.w3.org/feed/docs/atom.html#link */}}
+            {{- range first 5 (site.RegularPages.Related .) }}
+                &lt;link href=&quot;{{ .Permalink }}?utm_source=atom_feed&quot; rel=&quot;related&quot; type=&quot;text/html&quot; title=&quot;{{ .Title }}&quot; /&gt;
+            {{- end }}
+            {{ with .Params.id }}
+                &lt;id&gt;{{ . | plainify }}&lt;/id&gt;
+            {{ else }}
+                &lt;id&gt;{{ .Permalink }}&lt;/id&gt;
+            {{ end }}
+            {{ with .Params.author -}}
+                {{- range . -}} &lt;!-- Assuming the author front-matter to be a list --&gt;
+                    &lt;author&gt;
+                        &lt;name&gt;{{ . }}&lt;/name&gt;
+                    &lt;/author&gt;
+                {{- end -}}
+            {{- end }}
+            &lt;published&gt;{{ .Date.Format &quot;2006-01-02T15:04:05-07:00&quot; | safeHTML }}&lt;/published&gt;
+            &lt;updated&gt;{{ .Lastmod.Format &quot;2006-01-02T15:04:05-07:00&quot; | safeHTML }}&lt;/updated&gt;
+            {{ $description1 := .Description | default &quot;&quot; }}
+            {{ $description := (cond (eq &quot;&quot; $description1) &quot;&quot; (printf &quot;&lt;blockquote&gt;%s&lt;/blockquote&gt;&quot; ($description1 | markdownify))) }}
+            {{ printf `&lt;content type=&quot;html&quot;&gt;&lt;![CDATA[%s%s]]&gt;&lt;/content&gt;` $description .Content | safeHTML }}
+            {{ with site.Taxonomies }}
+                {{ range $taxo,$_ := . }} &lt;!-- Defaults taxos: &quot;tags&quot;, &quot;categories&quot; --&gt;
+                    {{ with $page.Param $taxo }}
+                        {{ $taxo_list := . }} &lt;!-- $taxo_list will be the tags/categories list --&gt;
+                        {{ with site.GetPage (printf &quot;/%s&quot; $taxo) }}
+                            {{ $taxonomy_page := . }}
+                            {{ range $taxo_list }} &lt;!-- Below, assuming pretty URLs --&gt;
+                                &lt;category scheme=&quot;{{ printf &quot;%s%s&quot; $taxonomy_page.Permalink (. | urlize) }}&quot; term=&quot;{{ (. | urlize) }}&quot; label=&quot;{{ . }}&quot; /&gt;
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        &lt;/entry&gt;
+    {{ end }}
+&lt;/feed&gt;
+</code></pre>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/categories/website" term="website" label="website"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.people.metio.wtf/tags/atom" term="atom" label="atom"/></entry><entry><title type="html">Send toots with GitHub Actions</title><link href="https://seb.people.metio.wtf/topic/send-toots-with-github-actions/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/send-emails-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Send emails with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/upload-release-assets-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Upload release assets with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/create-github-releases-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create GitHub releases with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/cache-maven-artifacts-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Cache Maven artifacts with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/send-toots-with-github-actions/</id><published>2020-11-16T00:00:00+00:00</published><updated>2020-11-16T00:00:00+00:00</updated><content type="html"><![CDATA[<p>The <a href="https://github.com/rzr/fediverse-action">rzr/fediverse-action</a> action allows to send a <a href="https://joinmastodon.org/">toot</a> in your <a href="https://github.com/features/actions">GitHub Action</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;NAME&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Publish Toot</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">rzr/fediverse-action@master</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">access-token</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.MASTODON_TOKEN }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;MESSAGE&gt;</span><span class="w">
+</span><span class="w">          </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.MASTODON_SERVER }}</span><span class="w">
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+<li><code>&lt;MESSAGE&gt;</code>: Message for the toot.</li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/toot" term="toot" label="toot"/><category scheme="https://seb.people.metio.wtf/tags/mastodon" term="mastodon" label="mastodon"/></entry><entry><title type="html">Send emails with GitHub Actions</title><link href="https://seb.people.metio.wtf/topic/send-emails-with-github-actions/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/upload-release-assets-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Upload release assets with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/create-github-releases-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create GitHub releases with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/cache-maven-artifacts-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Cache Maven artifacts with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/send-emails-with-github-actions/</id><published>2020-11-02T00:00:00+00:00</published><updated>2020-11-02T00:00:00+00:00</updated><content type="html"><![CDATA[<p>The <a href="https://github.com/dawidd6/action-send-mail">dawidd6/action-send-mail</a> action allows to send an email in your <a href="https://github.com/features/actions">GitHub Action</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PIPELINE&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Send mail</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">dawidd6/action-send-mail@v2</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">server_address</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.MAIL_SERVER }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">server_port</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.MAIL_PORT }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.MAIL_USERNAME }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.MAIL_PASSWORD }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">subject</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;SUBJECT&gt;</span><span class="w">
+</span><span class="w">          </span><span class="nt">body</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;BODY&gt;</span><span class="w">
+</span><span class="w">          </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.MAIL_RECIPIENT }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.MAIL_SENDER }}</span><span class="w">
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+<li><code>&lt;SUBJECT&gt;</code>: Subject for the email.</li>
+<li><code>&lt;BODY&gt;</code>: Body for the email.</li>
+</ul>
+<p>Create appropriate secrets in your organization or project. In case you are using an organization, but different mailing lists, define <code>MAIL_RECIPIENT</code> for each project.</p>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/email" term="email" label="email"/></entry><entry><title type="html">Upload release assets with GitHub Actions</title><link href="https://seb.people.metio.wtf/topic/upload-release-assets-with-github-actions/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/create-github-releases-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create GitHub releases with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/cache-maven-artifacts-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Cache Maven artifacts with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-java-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Java version with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/upload-release-assets-with-github-actions/</id><published>2020-10-19T00:00:00+00:00</published><updated>2020-10-19T00:00:00+00:00</updated><content type="html"><![CDATA[<p>The <a href="https://github.com/actions/upload-release-asset">actions/upload-release-asset</a> action allows to upload a <a href="https://developer.github.com/v3/repos/releases/#upload-a-release-asset">release artifact</a> in your <a href="https://github.com/features/actions">GitHub Action</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PIPELINE&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Upload Release Asset</span><span class="w">
+</span><span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">upload_release_asset</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/upload-release-asset@v1</span><span class="w">
+</span><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">GITHUB_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.GITHUB_TOKEN }}</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">upload_url</span><span class="p">:</span><span class="w"> </span><span class="l">${{ steps.create_release.outputs.upload_url }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">asset_path</span><span class="p">:</span><span class="w"> </span><span class="l">./some/path/to/file.zip</span><span class="w">
+</span><span class="w">          </span><span class="nt">asset_name</span><span class="p">:</span><span class="w"> </span><span class="l">public-name-for-file.zip</span><span class="w">
+</span><span class="w">          </span><span class="nt">asset_content_type</span><span class="p">:</span><span class="w"> </span><span class="l">application/zip</span><span class="w">
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/release" term="release" label="release"/><category scheme="https://seb.people.metio.wtf/tags/asset" term="asset" label="asset"/><category scheme="https://seb.people.metio.wtf/tags/upload" term="upload" label="upload"/></entry><entry><title type="html">Create GitHub releases with GitHub Actions</title><link href="https://seb.people.metio.wtf/topic/create-github-releases-with-github-actions/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/cache-maven-artifacts-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Cache Maven artifacts with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-java-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Java version with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/create-timestamp-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create Timestamp with GitHub Actions"/><id>https://seb.people.metio.wtf/topic/create-github-releases-with-github-actions/</id><published>2020-10-05T00:00:00+00:00</published><updated>2020-10-05T00:00:00+00:00</updated><content type="html"><![CDATA[<p>The <a href="https://github.com/actions/create-release">actions/create-release</a> action allows to create a new <a href="https://help.github.com/en/github/administering-a-repository/about-releases">GitHub releases</a> in your <a href="https://github.com/features/actions">GitHub Action</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PIPELINE&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">     </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create Release</span><span class="w">
+</span><span class="w">       </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/create-release@v1</span><span class="w">
+</span><span class="w">       </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span><span class="w">         </span><span class="nt">GITHUB_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.GITHUB_TOKEN }}</span><span class="w">
+</span><span class="w">       </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">         </span><span class="nt">tag_name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;TAG&gt;</span><span class="w">
+</span><span class="w">         </span><span class="nt">release_name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RELEASE&gt;</span><span class="w">
+</span><span class="w">         </span><span class="nt">draft</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w">         </span><span class="nt">prerelease</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w">         </span><span class="nt">body</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">           Your release text here
+</span><span class="sd">
+</span><span class="sd">           Some code block:
+</span><span class="sd">           ```yaml
+</span><span class="sd">           yaml:
+</span><span class="sd">             inside:
+</span><span class="sd">               of:
+</span><span class="sd">                 another: yaml
+</span><span class="sd">           ```</span><span class="w">           
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+<li><code>&lt;TAG&gt;</code>: The git tag to create.</li>
+<li><code>&lt;RELEASE&gt;</code>: The release name to use.</li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/release" term="release" label="release"/></entry><entry><title type="html">Publish Hugo site with GitHub Actions</title><link href="https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/cache-maven-artifacts-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Cache Maven artifacts with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-java-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Java version with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/create-timestamp-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create Timestamp with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/gitlab-the-git-distributor/?utm_source=atom_feed" rel="related" type="text/html" title="GitLab the Git Distributor"/><id>https://seb.people.metio.wtf/topic/publish-hugo-site-with-github-actions/</id><published>2020-09-21T00:00:00+00:00</published><updated>2020-09-21T00:00:00+00:00</updated><content type="html"><![CDATA[<p>The <a href="https://github.com/peaceiris/actions-gh-pages">peaceiris/actions-gh-pages</a> action allows to publish a <a href="https://gohugo.io/">Hugo</a> site in your <a href="https://github.com/features/actions">GitHub Action</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PIPELINE&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy Website</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-gh-pages@v3</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">github_token</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.GITHUB_TOKEN }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">publish_dir</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PUBLISH_DIR&gt;</span><span class="w">
+</span><span class="w">          </span><span class="nt">force_orphan</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">          </span><span class="nt">cname</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;CNAME&gt;</span><span class="w">
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+<li><code>&lt;PUBLISH_DIR&gt;</code>: The file system location of the built site.</li>
+<li><code>&lt;CNAME&gt;</code>: The <code>CNAME</code> of your custom domain.</li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/publish" term="publish" label="publish"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/></entry><entry><title type="html">Cache Maven artifacts with GitHub Actions</title><link href="https://seb.people.metio.wtf/topic/cache-maven-artifacts-with-github-actions/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-java-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Java version with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/create-timestamp-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create Timestamp with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/gitlab-the-git-distributor/?utm_source=atom_feed" rel="related" type="text/html" title="GitLab the Git Distributor"/><id>https://seb.people.metio.wtf/topic/cache-maven-artifacts-with-github-actions/</id><published>2020-09-07T00:00:00+00:00</published><updated>2020-09-07T00:00:00+00:00</updated><content type="html"><![CDATA[<p>The <a href="https://github.com/peaceiris/actions-hugo">actions/cache</a> action allows to cache artifacts in your <a href="https://github.com/features/actions">GitHub Action</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PIPELINE&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Cache Maven artifacts</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/cache@v1</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">~/.m2/repository</span><span class="w">
+</span><span class="w">          </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">${{ runner.os }}-maven-${{ hashFiles(&#39;**/pom.xml&#39;) }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">restore-keys</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">            </span><span class="w">            </span><span class="l">${{ runner.os }}-maven-</span><span class="w">
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/cache" term="cache" label="cache"/><category scheme="https://seb.people.metio.wtf/tags/maven" term="maven" label="maven"/></entry><entry><title type="html">Use a specific Hugo version with GitHub Actions</title><link href="https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/use-a-specific-java-version-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Java version with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/create-timestamp-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create Timestamp with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/gitlab-the-git-distributor/?utm_source=atom_feed" rel="related" type="text/html" title="GitLab the Git Distributor"/><id>https://seb.people.metio.wtf/topic/use-a-specific-hugo-version-with-github-actions/</id><published>2020-08-24T00:00:00+00:00</published><updated>2020-08-24T00:00:00+00:00</updated><content type="html"><![CDATA[<p>The <a href="https://github.com/peaceiris/actions-hugo">actions-hugo</a> action allows to use a specific <a href="https://gohugo.io/">Hugo</a> version in your <a href="https://github.com/features/actions">GitHub Action</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PIPELINE&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Setup hugo</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-hugo@v2</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;HUGO_VERSION&gt;</span><span class="w">
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+<li><code>&lt;HUGO_VERSION&gt;</code>: The <a href="https://github.com/gohugoio/hugo/releases">released versions</a> or use <code>latest</code> to always use the latest version of Hugo.</li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/hugo" term="hugo" label="hugo"/></entry><entry><title type="html">Use a specific Java version with GitHub Actions</title><link href="https://seb.people.metio.wtf/topic/use-a-specific-java-version-with-github-actions/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.people.metio.wtf/topic/create-timestamp-with-github-actions/?utm_source=atom_feed" rel="related" type="text/html" title="Create Timestamp with GitHub Actions"/><link href="https://seb.people.metio.wtf/topic/gitlab-the-git-distributor/?utm_source=atom_feed" rel="related" type="text/html" title="GitLab the Git Distributor"/><id>https://seb.people.metio.wtf/topic/use-a-specific-java-version-with-github-actions/</id><published>2020-08-10T00:00:00+00:00</published><updated>2020-08-10T00:00:00+00:00</updated><content type="html"><![CDATA[<p>The <a href="https://github.com/actions/setup-java">setup-java</a> action allows to use a specific Java version in your <a href="https://github.com/features/actions">GitHub Action</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PIPELINE&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Set up JDK &lt;JDK_VERSION&gt;</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/setup-java@v1</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;JDK_VERSION&gt;</span><span class="w">
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+<li><code>&lt;JDK_VERSION&gt;</code>: The required Java version for your project.</li>
+</ul>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/java" term="java" label="java"/></entry><entry><title type="html">XDG Base Directory Specification</title><link href="https://seb.people.metio.wtf/topic/xdg-base-directory-specification/?utm_source=atom_feed" rel="alternate" type="text/html"/><id>https://seb.people.metio.wtf/topic/xdg-base-directory-specification/</id><published>2020-07-27T00:00:00+00:00</published><updated>2020-07-27T00:00:00+00:00</updated><content type="html"><![CDATA[<p>The <a href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html">XDG Base Directory Specification</a> has been around for a while, yet not every software has adopted it yet. Here is an incomplete list of fixes:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># use existing env variables or define new</span>
+<span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$XDG_CACHE_HOME</span><span class="s2">&#34;</span>  <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">export</span> <span class="nv">XDG_CACHE_HOME</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/.cache&#34;</span>
+<span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$XDG_CONFIG_DIRS</span><span class="s2">&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">export</span> <span class="nv">XDG_CONFIG_DIRS</span><span class="o">=</span><span class="s2">&#34;/etc/xdg&#34;</span>
+<span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">export</span> <span class="nv">XDG_CONFIG_HOME</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/.config&#34;</span>
+<span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$XDG_DATA_DIRS</span><span class="s2">&#34;</span>   <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">export</span> <span class="nv">XDG_DATA_DIRS</span><span class="o">=</span><span class="s2">&#34;/usr/local/share:/usr/share&#34;</span>
+<span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$XDG_DATA_HOME</span><span class="s2">&#34;</span>   <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">export</span> <span class="nv">XDG_DATA_HOME</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/.local/share&#34;</span>
+
+<span class="c1"># gradle</span>
+<span class="nb">export</span> <span class="nv">GRADLE_USER_HOME</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$XDG_DATA_HOME</span><span class="s2">/gradle&#34;</span>
+
+<span class="c1"># httpie</span>
+<span class="nb">export</span> <span class="nv">HTTPIE_CONFIG_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">/httpie&#34;</span>
+
+<span class="c1"># npm</span>
+<span class="nb">export</span> <span class="nv">NPM_CONFIG_USERCONFIG</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">/npm/npmrc&#34;</span>
+<span class="nb">export</span> <span class="nv">npm_config_cache</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$XDG_CACHE_HOME</span><span class="s2">/npm&#34;</span>
+
+<span class="c1"># password-store</span>
+<span class="nb">export</span> <span class="nv">PASSWORD_STORE_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$XDG_DATA_HOME</span><span class="s2">/password-store&#34;</span>
+</code></pre></div><p>In order to make your own software XDG-aware, consider using the <a href="https://github.com/dirs-dev">dirs-dev</a> or <a href="https://github.com/shibukawa/configdir">configdir</a> libraries.</p>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/dot-files" term="dot-files" label="dot files"/><category scheme="https://seb.people.metio.wtf/tags/xdg" term="xdg" label="xdg"/></entry><entry><title type="html">Makefile Help</title><link href="https://seb.people.metio.wtf/topic/makefile-help/?utm_source=atom_feed" rel="alternate" type="text/html"/><id>https://seb.people.metio.wtf/topic/makefile-help/</id><published>2020-06-29T00:00:00+00:00</published><updated>2020-06-29T00:00:00+00:00</updated><content type="html"><![CDATA[<p>Use the following <a href="https://www.perl.org/">Perl</a> snippet to automatically generate help output for your <code>Makefile</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nv">GREEN</span>  <span class="o">:=</span> <span class="k">$(</span>shell tput -Txterm setaf 2<span class="k">)</span>
+<span class="nv">WHITE</span>  <span class="o">:=</span> <span class="k">$(</span>shell tput -Txterm setaf 7<span class="k">)</span>
+<span class="nv">YELLOW</span> <span class="o">:=</span> <span class="k">$(</span>shell tput -Txterm setaf 3<span class="k">)</span>
+<span class="nv">RESET</span>  <span class="o">:=</span> <span class="k">$(</span>shell tput -Txterm sgr0<span class="k">)</span>
+
+<span class="nv">HELP_FUN</span> <span class="o">=</span> <span class="se">\
+</span><span class="se"></span>    %help<span class="p">;</span> <span class="se">\
+</span><span class="se"></span>    <span class="k">while</span><span class="o">(</span>&lt;&gt;<span class="o">)</span> <span class="o">{</span> push @<span class="o">{</span><span class="nv">$$</span>help<span class="o">{</span><span class="nv">$$</span><span class="m">2</span> // <span class="s1">&#39;targets&#39;</span><span class="o">}}</span>, <span class="o">[</span><span class="nv">$$</span>1, <span class="nv">$$</span>3<span class="o">]</span> <span class="k">if</span> /^<span class="o">([</span>a-zA-Z<span class="se">\-</span><span class="o">]</span>+<span class="o">)</span><span class="se">\s</span>*:.*<span class="se">\#\#</span><span class="o">(</span>?:@<span class="o">([</span>a-zA-Z<span class="se">\-</span><span class="o">]</span>+<span class="o">))</span>?<span class="se">\s</span><span class="o">(</span>.*<span class="o">)</span><span class="nv">$$</span>/ <span class="o">}</span><span class="p">;</span> <span class="se">\
+</span><span class="se"></span>    print <span class="s2">&#34;usage: make [target]\n\n&#34;</span><span class="p">;</span> <span class="se">\
+</span><span class="se"></span>    <span class="k">for</span> <span class="o">(</span>sort keys %help<span class="o">)</span> <span class="o">{</span> <span class="se">\
+</span><span class="se"></span>    print <span class="s2">&#34;</span><span class="si">${</span><span class="nv">WHITE</span><span class="si">}</span><span class="nv">$$</span><span class="s2">_:</span><span class="si">${</span><span class="nv">RESET</span><span class="si">}</span><span class="s2">\n&#34;</span><span class="p">;</span> <span class="se">\
+</span><span class="se"></span>    <span class="k">for</span> <span class="o">(</span>@<span class="o">{</span><span class="nv">$$</span>help<span class="o">{</span><span class="nv">$$</span>_<span class="o">}})</span> <span class="o">{</span> <span class="se">\
+</span><span class="se"></span>    <span class="nv">$$sep</span> <span class="o">=</span> <span class="s2">&#34; &#34;</span> x <span class="o">(</span><span class="m">32</span> - length <span class="nv">$$</span>_-&gt;<span class="o">[</span>0<span class="o">])</span><span class="p">;</span> <span class="se">\
+</span><span class="se"></span>    print <span class="s2">&#34;  </span><span class="si">${</span><span class="nv">YELLOW</span><span class="si">}</span><span class="nv">$$</span><span class="s2">_-&gt;[0]</span><span class="si">${</span><span class="nv">RESET</span><span class="si">}</span><span class="nv">$$</span><span class="s2">sep</span><span class="si">${</span><span class="nv">GREEN</span><span class="si">}</span><span class="nv">$$</span><span class="s2">_-&gt;[1]</span><span class="si">${</span><span class="nv">RESET</span><span class="si">}</span><span class="s2">\n&#34;</span><span class="p">;</span> <span class="se">\
+</span><span class="se"></span>    <span class="o">}</span><span class="p">;</span> <span class="se">\
+</span><span class="se"></span>    print <span class="s2">&#34;\n&#34;</span><span class="p">;</span> <span class="o">}</span>
+</code></pre></div><p>In order to use <code>HELP_FUN</code>, add the following <code>help</code> target to the same <code>Makefile</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nv">.DEFAULT_GOAL</span> <span class="o">:=</span> <span class="nb">help</span>
+
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">help</span>
+<span class="nf">help</span><span class="o">:</span> <span class="c">##@other Show this help
+</span><span class="c"></span>	@perl -e <span class="s1">&#39;$(HELP_FUN)&#39;</span> <span class="k">$(</span>MAKEFILE_LIST<span class="k">)</span>
+</code></pre></div><p>Each target in the <code>Makefile</code> is marked as <a href="https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html">phony</a> to signal that those targets are not actually files that are generated as part of your build process. The optional description of a target can be placed after the <code>##@</code> prefix. The first word represents the group of a target and everything that follows is the description of a target. All targets should be formatted just like the <code>help</code> target:</p>
+<div class="highlight"><pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">compile</span>
+<span class="nf">compile</span><span class="o">:</span> <span class="c">##@hacking Compile your code
+</span><span class="c"></span>	&lt;compile some code&gt;
+
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">test</span>
+<span class="nf">test</span><span class="o">:</span> <span class="c">##@hacking Test your code
+</span><span class="c"></span>	&lt;<span class="nb">test</span> some code&gt;
+
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">sign</span>-<span class="n">cla</span>
+<span class="nf">sign-cla</span><span class="o">:</span> <span class="c">##@contrib Sign the contributor license agreement
+</span><span class="c"></span>	&lt;sign some file&gt;
+</code></pre></div><p>Once in place, you can either use <code>make</code> without any argument to call the <code>help</code> target or use <code>make help</code> to see the generated output:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ make
+usage: make <span class="o">[</span>target<span class="o">]</span>
+
+contrib:
+  sign-cla            Sign the contributor license agreement
+
+hacking:
+  compile             Compile your code
+  <span class="nb">test</span>                Test your code
+
+other:
+  <span class="nb">help</span>                Show this <span class="nb">help</span>
+</code></pre></div>]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/make" term="make" label="make"/><category scheme="https://seb.people.metio.wtf/tags/makefile" term="makefile" label="Makefile"/><category scheme="https://seb.people.metio.wtf/tags/help" term="help" label="help"/><category scheme="https://seb.people.metio.wtf/tags/perl" term="perl" label="perl"/></entry><entry><title type="html">Short Git Clones</title><link href="https://seb.people.metio.wtf/topic/short-git-clones/?utm_source=atom_feed" rel="alternate" type="text/html"/><id>https://seb.people.metio.wtf/topic/short-git-clones/</id><published>2020-06-15T00:00:00+00:00</published><updated>2020-06-15T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In case you don&rsquo;t want to write <code>git clone git@github.com:orga/repo.git</code> all the time, consider using a custom SSH config (<code>~/.ssh/config</code>) like this:</p>
+<pre><code>Host github
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-GITHUB&gt;
+
+Host gitlab
+    HostName gitlab.com
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-GITLAB&gt;
+
+Host bitbucket
+    HostName bitbucket.org
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-BITBUCKET&gt;
+
+Host codeberg
+    HostName codeberg.org
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-CODEBERG&gt;
+</code></pre><p>Once configured, you can now write:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ git clone github:orga/repo
+$ git clone gitlab:orga/repo
+$ git clone bitbucket:orga/repo
+$ git clone codeberg:orga/repo
+</code></pre></div><p>In case you are working with lots of repositories inside a single organization, consider adding the following git configuration (<code>$XDG_CONFIG_HOME/git/config</code> or <code>~/.gitconfig</code>):</p>
+<pre><code>[url &quot;github:orga/&quot;]
+  insteadOf = orga:
+[url &quot;gitlab:orga/&quot;]
+  insteadOf = orgl:
+[url &quot;bitbucket:orga/&quot;]
+  insteadOf = orgb:
+[url &quot;codeberg:orga/&quot;]
+  insteadOf = orgc:
+</code></pre><p>Which allows you to just write:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ git clone orga:repo
+$ git clone orgl:repo
+$ git clone orgb:repo
+$ git clone orgc:repo
+</code></pre></div><p>Git will substitute the <code>insteadOf</code> values like <code>orga:</code> with the configured <code>url</code> (e.g. <code>github:orga/</code>). The actual clone URL is <code>github:orga/repo</code> at this point, which can be used by Git together with the SSH config mentioned above to clone repositories.</p>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/git" term="git" label="git"/><category scheme="https://seb.people.metio.wtf/tags/clone" term="clone" label="clone"/><category scheme="https://seb.people.metio.wtf/tags/ssh" term="ssh" label="ssh"/></entry><entry><title type="html">Create Timestamp with GitHub Actions</title><link href="https://seb.people.metio.wtf/topic/create-timestamp-with-github-actions/?utm_source=atom_feed" rel="alternate" type="text/html"/><id>https://seb.people.metio.wtf/topic/create-timestamp-with-github-actions/</id><published>2020-06-11T00:00:00+00:00</published><updated>2020-06-11T00:00:00+00:00</updated><content type="html"><![CDATA[<p>In case you are into <a href="https://calver.org/">calver</a> or have another reason to create a timestamp with <a href="https://github.com/features/actions">GitHub Actions</a>, do the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;PIPELINE&gt;</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;RUN_ON&gt;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create release version</span><span class="w">
+</span><span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;ID&gt;</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">echo &#34;::set-output name=&lt;NAME&gt;::$(date +&#39;%Y.%m.%d-%H%M%S&#39;)&#34;</span><span class="w">
+</span></code></pre></div><ul>
+<li><code>&lt;PIPELINE&gt;</code>: The name of your pipeline.</li>
+<li><code>&lt;RUN_ON&gt;</code>: The runner to use, see GitHub&rsquo;s own <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on">documentation</a> for possible values.</li>
+<li><code>&lt;ID&gt;</code>: The unique ID of the timestamp step.</li>
+<li><code>&lt;NAME&gt;</code>: The name of the created timestamp.</li>
+</ul>
+<p>The special syntax <code>::set-output name=&lt;NAME&gt;::</code> declares that the output of the command (<code>echo</code>) should be saved in a variable called <code>&lt;NAME&gt;</code>. Together with the <code>&lt;ID&gt;</code> of the pipeline step, this value can be referenced with the expression <code>${{ steps.&lt;ID&gt;.outputs.&lt;NAME&gt; }}</code> in the following steps of your pipeline.</p>
+]]></content><category scheme="https://seb.people.metio.wtf/categories/devops" term="devops" label="devops"/><category scheme="https://seb.people.metio.wtf/categories/cd" term="cd" label="cd"/><category scheme="https://seb.people.metio.wtf/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.people.metio.wtf/tags/github" term="github" label="github"/><category scheme="https://seb.people.metio.wtf/tags/github-actions" term="github-actions" label="github actions"/><category scheme="https://seb.people.metio.wtf/tags/timestamp" term="timestamp" label="timestamp"/></entry></feed>
