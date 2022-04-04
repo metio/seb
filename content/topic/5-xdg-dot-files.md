@@ -5,7 +5,7 @@ menu: topic
 categories:
 - snippet
 tags:
-- dot files
+- dotfiles
 - xdg
 ---
 
