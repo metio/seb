@@ -1,7 +1,8 @@
 name: Publish Page
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   schedule:
     - cron:  0 2 * * MON
 jobs:
@@ -18,6 +19,11 @@ jobs:
           hugo-version: latest
       - name: Build Website
         run: hugo --minify --printI18nWarnings --printPathWarnings --printUnusedTemplates
+      - id: htmltest
+        name: Run htmltest
+        uses: wjdp/htmltest-action@master
+        with:
+          config: ./htmltest.yml
       - name: Deploy Website
         uses: peaceiris/actions-gh-pages@v3
         with:
