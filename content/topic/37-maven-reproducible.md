@@ -22,5 +22,6 @@ In order to create [reproducible builds](https://reproducible-builds.org/) with 
 
 - https://maven.apache.org/pom.html#Properties
 - https://maven.apache.org/guides/mini/guide-reproducible-builds.html
-- https://github.com/apache/maven-studies/tree/maven-buildinfo-plugin
+- https://github.com/rodiontsev/maven-build-info-plugin
+- https://github.com/phax/ph-buildinfo-maven-plugin
 - https://github.com/Zlika/reproducible-build-maven-plugin

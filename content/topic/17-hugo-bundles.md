@@ -11,7 +11,7 @@ tags:
 - assets
 ---
 
-[Hugo](gohugo.io/) allows [bundling](https://gohugo.io/hugo-pipes/bundling/) of assets with several built-in functions:
+[Hugo](https://gohugo.io/) allows [bundling](https://gohugo.io/hugo-pipes/bundling/) of assets with several built-in functions:
 
 ```gotemplate
 {{ $normalize := resources.Get "/css/normalize.css" }}
