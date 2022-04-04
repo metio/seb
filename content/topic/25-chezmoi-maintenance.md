@@ -33,4 +33,4 @@ function m-dotfiles-ok {
 }
 ```
 
-Whenever I feel happy with my current setup, I just call `m-dotfiles-ok` to push my changes into my local chezmoi repository. Files will automatically be [encrypted](../chezmoi-gpg) with [gpg](https://www.gnupg.org/) and [committed/pushed](../chezmoi-auto-git) into a [git](https://git-scm.com/) repository.
+Whenever I feel happy with my current setup, I just call `m-dotfiles-ok` to push my changes into my local chezmoi repository. Files will automatically be [encrypted](../encrypt-dotfiles-with-chezmoi) with [gpg](https://www.gnupg.org/) and [committed/pushed](../manage-dotfiles-with-chezmoi-and-git) into a [git](https://git-scm.com/) repository.

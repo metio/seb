@@ -34,5 +34,5 @@ Calling `git push mirrors main:main` will push the local `main` branch into all 
 
 ## Links
 
-- [git mirror](../git-mirror)
-- [gitlab-distributor](../gitlab-distributor)
+- [git mirror](../mirror-git-repositories)
+- [gitlab-distributor](../gitlab-the-git-distributor)
