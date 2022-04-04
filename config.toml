@@ -9,9 +9,10 @@ enableRobotsTXT = true
 DefaultContentLanguage = "en"
 
 [outputs]
-  home = [ "HTML", "RSS", "ATOM", "HUMANS", "FOAF"]
+  home = [ "HTML", "RSS", "ATOM", "HUMANS", "FOAF", "JSONLD"]
   section = ["HTML", "RSS", "ATOM"]
   term = ["HTML", "RSS", "ATOM"]
+  page = ["HTML", "JSONLD"]
 
 [params]
   mainSections = ["topic"]
@@ -22,6 +23,7 @@ DefaultContentLanguage = "en"
   mastodon = "https://mastodon.technology/@sebhoss"
   work = "seb.people.metio.wtf"
   description = "articles about software engineering"
+  copyright = "Creative Commons Zero v1.0 Universal"
 
 [permalinks]
   topic = "/topic/:title/"

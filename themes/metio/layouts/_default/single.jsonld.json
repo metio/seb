@@ -1,0 +1,46 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "articleSection": {{ .Params.Categories | jsonify }},
+  "name": "{{ .Title | safeJS }}",
+  "headline": "{{ .Title | safeJS }}",
+  "inLanguage": "{{ .Site.LanguageCode }}",
+  "isFamilyFriendly": "true",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "{{ .Site.Params.author }}",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "creator" : {
+    "@type": "Person",
+    "name": "{{ .Site.Params.author }}",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "accountablePerson": {
+    "@type": "Person",
+    "name": "{{ .Site.Params.author }}",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "{{ .Site.Params.author }}",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "copyrightHolder": {
+    "@type": "Person",
+    "name": "{{ .Site.Params.author }}",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "copyrightYear": "{{ .Date.Format "2006" }}",
+  "dateCreated": "{{ .Date.Format "2006-01-02" }}",
+  "datePublished": "{{ .PublishDate.Format "2006-01-02" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
+  "url": "{{ .Permalink }}",
+  "wordCount": "{{ .WordCount }}",
+  "genre": {{ .Params.Tags | jsonify }},
+  "keywords": {{ .Params.Tags | jsonify }}
+}

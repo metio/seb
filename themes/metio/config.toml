@@ -1,5 +1,13 @@
-[mediaTypes."application/atom+xml"]
-  suffixes = ["xml"]
+[mediaTypes]
+  [mediaTypes.'application/atom+xml']
+    suffixes = ['xml']
+  [mediaTypes.'application/rdf+xml']
+    suffixes = ['rdf']
+  [mediaTypes.'application/ld+json']
+    suffixes = ['json']
+
+
+
 [outputFormats.Atom]
   name = "Atom"
   mediaType = "application/atom+xml"
@@ -10,8 +18,6 @@
   noUgly = true
   permalinkable = false
 
-[mediaTypes."application/rdf+xml"]
-  suffixes = ["rdf"]
 [outputFormats.Foaf]
   name = "FOAF"
   mediaType = "application/rdf+xml"
@@ -22,12 +28,20 @@
   noUgly = true
   permalinkable = false
 
-[mediaTypes."text/plain"]
-  suffixes = ["txt"]
 [outputFormats.Humans]
   name = "Humans"
   mediaType = "text/plain"
   baseName = "humans"
+  isPlainText = true
+  rel = "alternate"
+  isHTML = false
+  noUgly = true
+  permalinkable = false
+
+[outputFormats.JSONLD]
+  name = "JSONLD"
+  mediaType = "application/ld+json"
+  baseName = "jsonld"
   isPlainText = true
   rel = "alternate"
   isHTML = false
