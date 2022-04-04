@@ -14,7 +14,7 @@ tags:
 - git
 ---
 
-Both [Vim](https://www.vim.org/) and [Neovim](https://neovim.io/) have a built-in plugin mechanism that loads plugins from `~/.vim/pack/*/start/{name}` (Vim) or `~/.local/share/nvim/site/pack/*/start` (Neovim). All you have to do in order to install new plugins, is to `git clone` their repository into those directories. In order to automatically update those clones, I'm using the following script:
+Both [Vim](https://www.vim.org/) and [Neovim](https://neovim.io/) have a [built-in](https://vimhelp.org/repeat.txt.html#packages) [plugin mechanism](https://neovim.io/doc/user/usr_05.html#plugin) that loads plugins from `~/.vim/pack/*/start/{name}` (Vim) or `~/.local/share/nvim/site/pack/*/start/{name}` (Neovim). All you have to do in order to install new plugins, is to `git clone` their repository into those directories. In order to automatically update those clones, I'm using the following script:
 
 ```shell
 #!/usr/bin/env zsh
