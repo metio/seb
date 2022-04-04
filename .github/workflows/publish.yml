@@ -3,12 +3,12 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron:  '0 2 * * MON'
+    - cron:  0 2 * * MON
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           # Hugo: Fetch all history for .GitInfo and .Lastmod
           fetch-depth: 0
@@ -17,7 +17,7 @@ jobs:
         with:
           hugo-version: latest
       - name: Build Website
-        run: hugo --minify --i18n-warnings --path-warnings
+        run: hugo --minify --printI18nWarnings --printPathWarnings --printUnusedTemplates
       - name: Deploy Website
         uses: peaceiris/actions-gh-pages@v3
         with:
