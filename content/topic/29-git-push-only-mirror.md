@@ -30,7 +30,7 @@ mirrors git@gitlab.com:org/repo.git (push)
 mirrors git@bitbucket.org:org/repo.git (push)
 ```
 
-Calling `git push mirrors master:master` will push the local `master` branch into all defined mirrors.
+Calling `git push mirrors main:main` will push the local `main` branch into all defined mirrors.
 
 ## Links
 
