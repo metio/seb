@@ -14,7 +14,7 @@ tags:
 - git
 ---
 
-Both [Vim](https://www.vim.org/) and [Neovim](https://neovim.io/) have a [built-in](https://vimhelp.org/repeat.txt.html#packages) [plugin mechanism](https://neovim.io/doc/user/usr_05.html#plugin) that loads plugins from `~/.vim/pack/*/start/{name}` (Vim) or `~/.local/share/nvim/site/pack/*/start/{name}` (Neovim). All you have to do in order to install new plugins, is to `git clone` their repository into those directories. In order to automatically update those clones, I'm using the following script:
+Both [Vim](https://www.vim.org/) and [Neovim](https://neovim.io/) have a [built-in](https://vimhelp.org/repeat.txt.html#packages) [plugin mechanism](https://neovim.io/doc/user/usr_05.html#plugin) that loads plugins from `~/.vim/pack/*/{start,opt}/*` (Vim) or `~/.local/share/nvim/site/pack/*/{start,opt}/*` (Neovim). All you have to do in order to install new plugins, is to `git clone` their repository into those directories. In order to automatically update those clones, create the following script:
 
 ```shell
 #!/usr/bin/env zsh
@@ -45,7 +45,7 @@ for directory in "${PLUGIN_DIR}"/*/{start,opt}/*; do
 done
 ```
 
-In case you are using Vim, adjust the `PLUGIN_DIR` variable to point to your Vim plugin directory instead. Since all good developers must be lazy, I've added the following [systemd service](https://www.freedesktop.org/software/systemd/man/systemd.service.html) to execute the above script automatically:
+In case you are using Vim, adjust the `PLUGIN_DIR` variable to point to your Vim plugin directory instead and save the resulting shell script as a file called `update-nvim-plugins.sh` in some folder of your choice. Do not forget to set the executable bit with `chmod +x /path/to/your/folder/update-nvim-plugins.sh`. Since all good developers must be lazy, write the following [systemd service](https://www.freedesktop.org/software/systemd/man/systemd.service.html) to execute the above script automatically:
 
 ```service
 [Unit]
@@ -55,7 +55,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/var/home/seb/.local/bin/update-nvim-plugins.sh
+ExecStart=/path/to/your/folder/update-nvim-plugins.sh
 RemainAfterExit=false
 ```
 
@@ -80,7 +80,7 @@ Adjust how often you want to update the plugins you are using in the `OnCalendar
 $ systemctl --user enable nvim-plugins-update
 ```
 
-Finally, I've added the following shell aliases to make it easier to interact with the created systemd units:
+Finally, add the following shell aliases to make it easier to interact with the created systemd units:
 
 ```shell
 # trigger an update manually
@@ -90,3 +90,5 @@ alias update-nvim-plugins-status='systemctl --user status nvim-plugins-update'
 # see logs of past auto-updates
 alias update-nvim-plugins-logs='journalctl --user --unit nvim-plugins-update'
 ```
+
+With this setup in place, all your plugins will be automatically updated once per week or however often you have configured in the timer.
