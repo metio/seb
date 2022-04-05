@@ -32,6 +32,8 @@ Both [Vim](https://www.vim.org/) and [Neovim](https://neovim.io/) have a [built-
 # folder that contains all nvim plugins
 PLUGIN_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/pack"
 
+### Script logic
+
 echo "updating all plugins in ${PLUGIN_DIR}"
 # iterate through all directories and git pull em
 for directory in "${PLUGIN_DIR}"/*/{start,opt}/*; do
@@ -45,7 +47,7 @@ done
 
 In case you are using Vim, adjust the `PLUGIN_DIR` variable to point to your Vim plugin directory instead. Since all good developers must be lazy, I've added the following [systemd service](https://www.freedesktop.org/software/systemd/man/systemd.service.html) to execute the above script automatically:
 
-```unit file (systemd)
+```service
 [Unit]
 Description=cron job that triggers an update of all nvim plugins
 Wants=network-online.target
@@ -59,7 +61,7 @@ RemainAfterExit=false
 
 Adjust the `ExecStart` line to match the location where you saved the above script and place that service definition in a file called `nvim-plugins-update.service` into your local `~/.config/systemd/user` directory. Add another file called `nvim-plugins-update.timer` next to it that defines a [systemd timer](https://www.freedesktop.org/software/systemd/man/systemd.timer.html) with the following content:
 
-```unit file (systemd)
+```timer
 [Unit]
 Description=Update nvim plugins every week
 
@@ -74,7 +76,7 @@ WantedBy=timers.target
 
 Adjust how often you want to update the plugins you are using in the `OnCalendar` line. Enable this service/timer with:
 
-```shell
+```console
 $ systemctl --user enable nvim-plugins-update
 ```
 

@@ -9,7 +9,7 @@ enableRobotsTXT = true
 DefaultContentLanguage = "en"
 
 [outputs]
-  home = [ "HTML", "RSS", "ATOM", "HUMANS", "FOAF", "JSONLD"]
+  home = [ "HTML", "RSS", "ATOM", "HUMANS", "FOAF"]
   section = ["HTML", "RSS", "ATOM"]
   term = ["HTML", "RSS", "ATOM"]
   page = ["HTML", "JSONLD"]
