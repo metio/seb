@@ -15,3 +15,8 @@
 #content pre {
     max-width: calc(90vw - 250px);
 }
+
+.highlight {
+    width: 80ch;
+    margin: auto;
+}
