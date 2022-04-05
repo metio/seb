@@ -9,13 +9,11 @@ tags:
 - screenlock
 ---
 
-[SwayWM](https://swaywm.org/) uses can use a mixture of [swaylock](https://github.com/swaywm/swaylock) to lock their screen. Place the following key binding in your Sway config:
+[SwayWM](https://swaywm.org/) users can use [swaylock](https://github.com/swaywm/swaylock) to lock their screen. Place the following key binding in your Sway config:
 
-```shell script
-#
-# Screen lock
-#
-bindsym $mod+Ctrl+l exec swaylock -c 000000
+```shell
+# lock your screen
+bindsym $mod+Ctrl+l exec swaylock --color 000000
 ```
 
-`$mod+Ctrl+l` will lock your screen and turn it to black.
+`$mod+Ctrl+l` will lock your screen and turn it to black. The `--color` flag allows any color in the form of `rrggbb[aa]`.
