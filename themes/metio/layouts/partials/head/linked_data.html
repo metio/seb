@@ -1,18 +1,44 @@
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "{{ .Site.Title }}",
     "url": "{{ .Site.BaseURL }}",
     "description": "{{ .Site.Params.description }}",
-    "license": "{{ .Site.Params.copyright }}"
+    "license": "{{ .Site.Params.copyright }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ .Site.Params.author }}",
+      "url": "{{ .Site.BaseURL }}"
+    },
+    "creator" : {
+      "@type": "Person",
+      "name": "{{ .Site.Params.author }}",
+      "url": "{{ .Site.BaseURL }}"
+    },
+    "accountablePerson": {
+      "@type": "Person",
+      "name": "{{ .Site.Params.author }}",
+      "url": "{{ .Site.BaseURL }}"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "{{ .Site.Params.author }}",
+      "url": "{{ .Site.BaseURL }}"
+    },
+    "copyrightHolder": {
+      "@type": "Person",
+      "name": "{{ .Site.Params.author }}",
+      "url": "{{ .Site.BaseURL }}"
+    }
   }
 </script>
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org/",
+    "@context": "https://schema.org/",
     "@type": "Person",
     "name": "{{ .Site.Params.author }}",
+    "email": "{{ .Site.Params.email }}",
     "url": "{{ .Site.BaseURL }}"
   }
 </script>
