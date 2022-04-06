@@ -77,10 +77,10 @@ const SomeActualComponent = () => (
     <div>
       <h1>common headline</h1>
       <ForMobileDevicesOnly>
-        <span>for mobile users only</span>
+        <span>only visible on mobile devices</span>
       </ForMobileDevicesOnly>
       <ForDesktopDevicesOnly>
-        <span>for desktop users only</span>
+        <span>only visible on desktop devices</span>
       </ForDesktopDevicesOnly>
     </div>
 )
