@@ -29,22 +29,23 @@ In order to quickly log into and switch between AWS accounts in a terminal, I wr
 ###############################################################################
 
 # prompt user to select one AWS profile
-selected_profile=$(aws configure list-profiles | fzf --cycle --layout=reverse --tiebreak=index)
+profile=$(aws configure list-profiles | \
+  fzf --cycle --layout=reverse --tiebreak=index)
 
 # user can cancel switching profiles by pressing ESC
-if [ -n "${selected_profile}" ]; then
-    # check is access token exists and is valid for selected profile
-    if ! aws --profile "${selected_profile}" sts get-caller-identity >/dev/null 2>&1; then
-        # perform login into profile in case access token is invalid
-        if ! aws-azure-login --no-prompt --profile "${selected_profile}"; then
-          # short circuit in case login failed
-          return
-        fi
+if [ -n "${profile}" ]; then
+  # check is access token exists and is valid for selected profile
+  if ! aws --profile "${profile}" sts get-caller-identity >/dev/null 2>&1; then
+    # perform login into profile in case access token is invalid
+    if ! aws-azure-login --no-prompt --profile "${profile}"; then
+      # short circuit in case login failed
+      return
     fi
-    # AWS_PROFILE is used by many AWS-related tools
-    echo "Setting AWS_PROFILE to [${selected_profile}]"
-    export AWS_PROFILE="${selected_profile}"
-    # do not expose internal variables
-    unset selected_profile
+  fi
+  # AWS_PROFILE is used by many AWS-related tools
+  echo "Setting AWS_PROFILE to [${profile}]"
+  export AWS_PROFILE="${profile}"
+  # do not expose internal variables
+  unset profile
 fi
 ```
