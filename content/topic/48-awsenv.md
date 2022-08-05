@@ -10,7 +10,7 @@ tags:
 - fzf
 ---
 
-In order to quickly log into and switch between AWS accounts in a terminal, I wrote the following script. It sets the `AWS_PROFILE` environment variable which is used by many tools that interact with the AWS API, like `awscli` or `terraform`. My current environment uses AzureAD as a single-sign-on provider, thus this script uses `aws-azure-login` to perform an MFA login into Azure and from there into AWS. The AWS profiles must be set up in such a way that `aws configure list-profiles` can detect them, e.g. specify them in `${AWS_CONFIG_FILE:-$HOME/.aws/config}`. 
+In order to quickly log into and switch between AWS accounts in a terminal, I wrote the following script. It sets the `AWS_PROFILE` environment variable which is used by many tools that interact with the AWS API, like `awscli` or `terraform`. My current environment uses AzureAD as a single-sign-on provider, thus this script uses `aws sso login` to perform an MFA login into AWS. The AWS profiles must be set up in such a way that `aws configure list-profiles` can detect them, e.g. specify them in `${AWS_CONFIG_FILE:-$HOME/.aws/config}`. 
 
 ```shell
 #!/usr/bin/env sh
