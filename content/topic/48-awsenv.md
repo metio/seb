@@ -24,7 +24,6 @@ In order to quickly log into and switch between AWS accounts in a terminal, I wr
 #
 # Required software that is not in GNU coreutils:
 #   - 'aws' to list profiles & get current caller identity
-#   - 'aws-azure-login' to login via AzureAD
 #   - 'fzf' to list all available AWS profiles
 ###############################################################################
 
@@ -37,7 +36,7 @@ if [ -n "${profile}" ]; then
   # check is access token exists and is valid for selected profile
   if ! aws --profile "${profile}" sts get-caller-identity >/dev/null 2>&1; then
     # perform login into profile in case access token is invalid
-    if ! aws-azure-login --no-prompt --profile "${profile}"; then
+    if ! aws sso login --profile "${profile}"; then
       # short circuit in case login failed
       return
     fi
