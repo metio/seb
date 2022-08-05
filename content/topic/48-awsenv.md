@@ -16,7 +16,7 @@ In order to quickly log into and switch between AWS accounts in a terminal, I wr
 #!/usr/bin/env sh
 
 ###############################################################################
-# This script performs an aws-azure-login for the user-selected AWS profile
+# This script performs an AWS SSO login for the user-selected AWS profile
 # and sets the AWS_PROFILE environment variable afterwards. In order to use
 # this, create an alias that sources this script like this:
 #
