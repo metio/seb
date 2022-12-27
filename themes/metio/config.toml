@@ -6,8 +6,6 @@
   [mediaTypes.'application/ld+json']
     suffixes = ['json']
 
-
-
 [outputFormats.Atom]
   name = "Atom"
   mediaType = "application/atom+xml"

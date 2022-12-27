@@ -1,4 +1,4 @@
-baseURL = "https://seb.people.metio.wtf/"
+baseURL = "https://seb.xn--ho-hia.de/"
 languageCode = "en"
 theme = "metio"
 title = "Sebastian Hoß"
@@ -17,11 +17,11 @@ DefaultContentLanguage = "en"
 [params]
   mainSections = ["topic"]
   author = "Sebastian Hoß"
-  email = "seb@hoß.de"
+  email = "seb@xn--ho-hia.de"
   matrix = "@sebhoss:matrix.org"
   github = "sebhoss"
-  mastodon = "https://mastodon.technology/@sebhoss"
-  work = "seb.people.metio.wtf"
+  mastodon = "https://mastodon.online/@sebhoss"
+  work = "seb.xn--ho-hia.de"
   description = "articles about software engineering"
   copyright = "Creative Commons Zero v1.0 Universal"
 
