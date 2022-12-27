@@ -24,6 +24,8 @@ In case of the first scenario, tools like [copybara](https://github.com/google/c
 
 The second scenario can be solved manually with tools like [gitomatic](https://github.com/muesli/gitomatic) or automatically with [GitLab](https://gitlab.com)'s [mirror feature](https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html) quite easy. GitLab allows to create a single pull-mirror and multiple push-mirrors. Thus, it can be used to pull from your central server and push into all mirrors.
 
+**NOTE**: This feature was previously available in the free tier but has now moved to GitLab Ultimate.
+
 ```
                +----------------+               
                |     GitHub     |               
@@ -52,10 +54,3 @@ In order to create such a setup, follow these steps:
    ![Code Flow](/images/gitlab-push-mirror.png)
 
 In case you prefer SSH keys over HTTP access tokens, just select `SSH public key` as authentication method and make sure your key is both saved in GitLab and all mirrors.
-
-## Examples Projects
-
-The following projects are using the above approach to synchronize multiple git repositories:
-
-- [krei](https://github.com/metio/krei)
-- [ilo](https://github.com/metio/ilo)
