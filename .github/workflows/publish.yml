@@ -30,4 +30,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           force_orphan: true
-          cname: seb.people.metio.wtf
+          cname: seb.xn--ho-hia.de
