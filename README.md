@@ -1,6 +1,6 @@
-# seb.people.metio.wtf
+# seb.hoß.de
 
-[hugo](https://gohugo.io/) powered blog/wiki/zettelkasten of Sebastian Hoß published at https://seb.people.metio.wtf/.
+[hugo](https://gohugo.io/) powered blog/wiki/zettelkasten of Sebastian Hoß published at https://seb.xn--ho-hia.de/.
 
 ## License
 
