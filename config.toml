@@ -27,3 +27,8 @@ DefaultContentLanguage = "en"
 
 [permalinks]
   topic = "/topic/:title/"
+
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
