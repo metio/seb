@@ -36,6 +36,16 @@
   noUgly = true
   permalinkable = false
 
+[outputFormats.Security]
+  name = "Security"
+  mediaType = "text/plain"
+  baseName = ".well-known/security"
+  isPlainText = true
+  rel = "alternate"
+  isHTML = false
+  noUgly = true
+  permalinkable = false
+
 [outputFormats.JSONLD]
   name = "JSONLD"
   mediaType = "application/ld+json"
