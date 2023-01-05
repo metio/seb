@@ -4,7 +4,7 @@
     <foaf:primaryTopic rdf:resource="{{ .Site.Title }}" />
   </foaf:PersonalProfileDocument>
 
-  <foaf:Project rdf:ID="{{ .Site.Title }}">
+  <foaf:Project rdf:ID="{{ .Site.BaseURL }}">
     <foaf:name>{{ .Site.Title }}</foaf:name>
     <foaf:homepage rdf:resource="{{ .Site.BaseURL }}" />
   </foaf:Project>
@@ -13,6 +13,7 @@
   <foaf:Person rdf:ID="{{ .id }}">
     <foaf:name>{{ .first_name }} {{ .last_name }}</foaf:name>
     <foaf:title>{{ .title }}</foaf:title>
+    <foaf:nick>{{ .id }}</foaf:nick>
     <foaf:givenname>{{ .first_name }}</foaf:givenname>
     <foaf:family_name>{{ .last_name }}</foaf:family_name>
     <foaf:mbox rdf:resource="mailto:{{ .email }}" />
