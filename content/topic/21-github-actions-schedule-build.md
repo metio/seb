@@ -32,5 +32,5 @@ jobs:
 
 - `<PIPELINE>`: The name of your pipeline.
 - `<RUN_ON>`: The runner to use, see GitHub's own [documentation](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on) for possible values.
-- `<CRON>`: Cron expression - use https://crontab.guru/.
+- `<CRON>`: cron expression - use https://crontab.guru/.
 - `<DATE>`: Git date expression that matches `<CRON>`.

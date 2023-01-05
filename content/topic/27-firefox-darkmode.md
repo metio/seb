@@ -18,4 +18,4 @@ Nowadays websites can detect the preferred color scheme of an user with somethin
 }
 ```
 
-In order to tell Firefox to usw dark mode for all webpages on linux, go to `about:config` and add/change ` ui.systemUsesDarkTheme` to `1` and `browser.in-content.dark-mode` to `true`.
+In order to tell Firefox to use dark mode for all web pages on Linux, go to `about:config` and add/change ` ui.systemUsesDarkTheme` to `1` and `browser.in-content.dark-mode` to `true`.

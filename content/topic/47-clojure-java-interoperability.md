@@ -10,7 +10,7 @@ tags:
 - interoperability
 ---
 
-Clojure has several [forms and macros](http://clojure.org/java_interop) to call Java code. However, calling Clojure code from Java is not always so straight forward. The following post shows the different options currently available.
+Clojure has several [forms and macros](http://clojure.org/java_interop) to call Java code. However, calling Clojure code from Java is not always so straightforward. The following post shows the different options currently available.
 
 ## Using `gen-class`
 
