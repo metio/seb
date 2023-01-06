@@ -9,11 +9,11 @@ tags:
 - interoperability
 ---
 
-Clojure has several [forms and macros](http://clojure.org/java_interop) to call Java code. However, calling Clojure code from Java is not always so straightforward. The following post shows the different options currently available.
+Clojure has several [forms and macros](https://clojure.org/java_interop) to call Java code. However, calling Clojure code from Java is not always so straightforward. The following post shows the different options currently available.
 
 ## Using `gen-class`
 
-Clojure code can be [compiled](http://clojure.org/compilation) to standard JVM bytecode using [gen-class](http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/gen-class).
+Clojure code can be [compiled](https://clojure.org/compilation) to standard JVM bytecode using [gen-class](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/gen-class).
 
 ### Adding static modifiers
 
@@ -126,7 +126,7 @@ The macro `defn*` replaces `defn` and automatically creates a second function wi
 
 ## Using the Clojure Runtime
 
-Using `gen-class` imposes certain limitations on calling Clojure code from Java. One of those are functions which make use of Clojure [parameter destructuring](http://clojure.org/reference/special_forms#binding-forms). To invoke those functions you have to use the Clojure runtime.
+Using `gen-class` imposes certain limitations on calling Clojure code from Java. One of those are functions which make use of Clojure [parameter destructuring](https://clojure.org/reference/special_forms#binding-forms). To invoke those functions you have to use the Clojure runtime.
 
 ```java
 // The Clojure 'require' function from the 'clojure.core' namespace.

@@ -21,5 +21,5 @@ Note that the first call to `set-url` will overwrite an existing remote creating
 
 ## Links
 
-- [push only mirrors](../push-only-mirrors-for-git-repositories)
-- [gitlab-distributor](../gitlab-the-git-distributor)
+- [push only mirrors](../git-push-only-mirror)
+- [gitlab-distributor](../gitlab-distributor)
