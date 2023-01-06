@@ -3,7 +3,7 @@ languageCode = "en"
 theme = "metio"
 title = "Sebastian Hoß"
 
-pygmentsUseClasses=true
+pygmentsUseClasses = true
 sectionPagesMenu = "main"
 enableRobotsTXT = true
 DefaultContentLanguage = "en"
@@ -24,9 +24,6 @@ DefaultContentLanguage = "en"
   work = "seb.xn--ho-hia.de"
   description = "articles about software engineering"
   copyright = "Creative Commons Zero v1.0 Universal"
-
-[permalinks]
-  topic = "/topic/:title/"
 
 [sitemap]
   changefreq = "monthly"
