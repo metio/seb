@@ -8,7 +8,7 @@ tags:
 - config
 ---
 
-In order to split yet re-use as much configuration for Git as possible, you can create one root configuration that looks similar to this:
+To split yet re-use as much configuration for Git as possible, you can create one root configuration that looks similar to this:
 
 ```ini
 [user]
@@ -34,4 +34,4 @@ and the work related config like this using a different email address:
   email = first.last@work.example
 ```
 
-Additional settings that are different for personal/work accounts can be split the same way, e.g. in order to use a different signing key for work.
+Additional settings that are different for personal/work accounts can be split the same way, e.g. to use a different signing key for work.

@@ -9,7 +9,7 @@ tags:
 - atom
 ---
 
-In order to publish Atom feeds for your [Hugo](https://gohugo.io/) site, configure a [media type](https://en.wikipedia.org/wiki/Media_type) in your `config.toml`:
+To publish Atom feeds for your [Hugo](https://gohugo.io/) site, configure a [media type](https://en.wikipedia.org/wiki/Media_type) in your `config.toml`:
 
 ```toml
 [mediaTypes."application/atom+xml"]

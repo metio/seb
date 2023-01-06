@@ -31,7 +31,7 @@ HELP_FUN = \
     print "\n"; }
 ```
 
-In order to use `HELP_FUN`, add the following `help` target to the same `Makefile`:
+To use `HELP_FUN`, add the following `help` target to the same `Makefile`:
 
 ```makefile
 .DEFAULT_GOAL := help

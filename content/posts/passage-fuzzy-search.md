@@ -11,7 +11,7 @@ tags:
 - clipboard
 ---
 
-In order to fuzzy search through passwords managed with [passage](https://github.com/FiloSottile/passage), I've written the following script that is inspired by the upstream version which is using `fzf`.
+To fuzzy search through passwords managed with [passage](https://github.com/FiloSottile/passage), I've written the following script that is inspired by the upstream version which is using `fzf`.
 
 ```shell
 fd --type=file --base-directory="${PASSAGE_DIR:-${HOME}/.passage/store}" .age --exec echo '{.}' | \
@@ -24,10 +24,10 @@ This version requires [fd](https://github.com/sharkdp/fd/), [skim](https://githu
 
 1. Use `fd` to find all files within `${PASSAGE_DIR}` that end in `.age`. Each password in passage is inside that folder and has such a file extensions, thus we are selecting every password we have.
 2. Using both `--base-directory` and `--exec echo '{.}'` ensures that passwords are returned in such form that they can be passed back into `passage` again. The placeholder `'{.}'` is a feature provided by `fd` which strips the file extension from each returned value.
-3. All passwords are then passed into `sk` in order to allow to fuzzy search across them all. Setting `--no-multi` ensures that only a single password can be selected.
+3. All passwords are then passed into `sk` to allow to fuzzy search across them all. Setting `--no-multi` ensures that only a single password can be selected.
 4. Finally, `xargs` calls `passage` and replaces the curly braces with the selected password. Thanks to `--clip=1`, the first line in the selected password entry will be copied to the clipboard and automatically cleared after 45 seconds.
 
-In order to call that script, I've saved it as `passage-fuzzy-search.sh` in my `.local/bin` folder and added some checks into it to make sure that every required software is actually installed.
+To call that script, I've saved it as `passage-fuzzy-search.sh` in my `.local/bin` folder and added some checks into it to make sure that every required software is actually installed.
 
 ```shell
 #!/usr/bin/env zsh

@@ -10,7 +10,7 @@ tags:
 - manifest
 ---
 
-In order to publish a [web app manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) document with your [Hugo](https://gohugo.io/) site, configure a [media type](https://en.wikipedia.org/wiki/Media_type) in your `config.toml`:
+To publish a [web app manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) document with your [Hugo](https://gohugo.io/) site, configure a [media type](https://en.wikipedia.org/wiki/Media_type) in your `config.toml`:
 
 ```toml
 [mediaTypes."application/manifest+json"]

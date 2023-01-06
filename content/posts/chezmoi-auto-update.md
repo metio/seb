@@ -9,7 +9,7 @@ tags:
 - automation
 ---
 
-In order to automatically synchronize dotfiles across my computers, I've written the following `systemd` unit:
+To automatically synchronize dotfiles across my computers, I've written the following `systemd` unit:
 
 ```systemd
 [Unit]

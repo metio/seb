@@ -9,7 +9,7 @@ tags:
 - chsh
 ---
 
-In order to use [tmux](https://github.com/tmux/tmux) as your login shell, use `chsh`:
+To use [tmux](https://github.com/tmux/tmux) as your login shell, use `chsh`:
 
 ```shell script
 # list all available shells

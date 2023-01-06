@@ -8,7 +8,7 @@ tags:
 - tmuxp
 ---
 
-In order to manage [tmux](https://github.com/tmux/tmux) sessions, I like to use [tmuxp](https://github.com/tmux-python/tmuxp). It works by having pre-defined sessions in `~/.config/tmuxp` which looks like this:
+To manage [tmux](https://github.com/tmux/tmux) sessions, I like to use [tmuxp](https://github.com/tmux-python/tmuxp). It works by having pre-defined sessions in `~/.config/tmuxp` which looks like this:
 
 ```yaml
 session_name: cool-app

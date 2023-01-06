@@ -32,4 +32,4 @@ export npm_config_cache="$XDG_CACHE_HOME/npm"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 ```
 
-In order to make your own software XDG-aware, consider using the [dirs-dev](https://github.com/dirs-dev) or [configdir](https://github.com/shibukawa/configdir) libraries.
+To make your own software XDG-aware, consider using the [dirs-dev](https://github.com/dirs-dev) or [configdir](https://github.com/shibukawa/configdir) libraries.

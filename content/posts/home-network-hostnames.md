@@ -8,7 +8,7 @@ tags:
 - rfc
 ---
 
-Thanks to [RFC 8375](https://www.rfc-editor.org/rfc/rfc8375.html), we now have a proper domain to use for all our local devices. Simply move everything underneath `.home.arpa` in order to join the fun. In case you have `hostnamectl` available on your system run the following command to change the hostname of a device:
+Thanks to [RFC 8375](https://www.rfc-editor.org/rfc/rfc8375.html), we now have a proper domain to use for all our local devices. Simply move everything underneath `.home.arpa` to join the fun. In case you have `hostnamectl` available on your system run the following command to change the hostname of a device:
 
 ```console
 # set hostname

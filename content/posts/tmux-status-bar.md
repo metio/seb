@@ -9,7 +9,7 @@ tags:
 ---
 
 
-In order to see the currently active [tmux](https://github.com/tmux/tmux) status bar configuration, call:
+To see the currently active [tmux](https://github.com/tmux/tmux) status bar configuration, call:
 
 ```shell script
 $ tmux show-options -g | grep status

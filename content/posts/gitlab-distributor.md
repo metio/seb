@@ -17,7 +17,7 @@ tags:
 While the central server approach is easy to use, it might not work in all scenarios:
 
 1. An enterprise wants to share internal code as part of an open source project. All development is happening internally, and the public mirror gets an occasional update once in a while.
-2. In order to protect against outages of the central server, mirrors should be created and be kept up-to-date.
+2. To protect against outages of the central server, mirrors should be created and be kept up-to-date.
 
 In case of the first scenario, tools like [copybara](https://github.com/google/copybara), [repoSpanner](https://github.com/repoSpanner/repoSpanner), or [distributed-git-forks](https://github.com/google/distributed-git-forks) offer a wide range of features to cover most details.
 
@@ -43,7 +43,7 @@ The second scenario can be solved manually with tools like [gitomatic](https://g
 +----------------+            +----------------+
 ```
 
-In order to create such a setup, follow these steps:
+To create such a setup, follow these steps:
 
 1. Go to `Settings > Repository` and expand `Mirroring repositories`
    ![Code Flow](/images/gitlab-mirror-settings.png)

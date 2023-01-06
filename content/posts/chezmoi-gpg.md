@@ -9,7 +9,7 @@ tags:
 - gpg
 ---
 
-[chezmoi](https://www.chezmoi.io/) can use various external tools to [keep data private](https://www.chezmoi.io/docs/how-to/#keep-data-private). I prefer to use [gpg](https://www.gnupg.org/) since that is already installed/configured on my system anyway. In order to configure it, just set yourself as the recipient like this:
+[chezmoi](https://www.chezmoi.io/) can use various external tools to [keep data private](https://www.chezmoi.io/docs/how-to/#keep-data-private). I prefer to use [gpg](https://www.gnupg.org/) since that is already installed/configured on my system anyway. To configure it, just set yourself as the recipient like this:
 
 ```toml
 [gpg]

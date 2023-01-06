@@ -9,7 +9,7 @@ tags:
 - service worker
 ---
 
-In order to use a [serviceworker](https://serviceworke.rs/) to cache a [Hugo](https://gohugo.io/) site, configure a [media type](https://en.wikipedia.org/wiki/Media_type) in your `config.toml`:
+To use a [serviceworker](https://serviceworke.rs/) to cache a [Hugo](https://gohugo.io/) site, configure a [media type](https://en.wikipedia.org/wiki/Media_type) in your `config.toml`:
 
 ```toml
 [mediaTypes."application/javascript"]

@@ -9,7 +9,7 @@ tags:
 - reproducible
 ---
 
-In order to create [reproducible builds](https://reproducible-builds.org/) with [Maven](https://maven.apache.org/) projects, it's enough to specify the `project.build.outputTimestamp` property like this:
+To create [reproducible builds](https://reproducible-builds.org/) with [Maven](https://maven.apache.org/) projects, it's enough to specify the `project.build.outputTimestamp` property like this:
 
 ```xml
 <properties>

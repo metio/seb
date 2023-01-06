@@ -29,7 +29,7 @@ const MightRenderSomething = () => {
 }
 ```
 
-This component encapsulates the `if-then-else` logic of conditionally rendering a hello world message. Instead of cluttering your entire app with the same logic, you can now simply re-use that same component that contains this `if` condition. In order to see the full power of this technique, consider the following example. At first, we are going to define a hook that reads the current window width, then define components that conditionally render based on the current window width, and finally use those components in an example application.
+This component encapsulates the `if-then-else` logic of conditionally rendering a hello world message. Instead of cluttering your entire app with the same logic, you can now simply re-use that same component that contains this `if` condition. To see the full power of this technique, consider the following example. At first, we are going to define a hook that reads the current window width, then define components that conditionally render based on the current window width, and finally use those components in an example application.
 
 ```jsx
 const useWindowWidth = () => {
@@ -49,7 +49,7 @@ const useWindowWidth = () => {
 }
 ```
 
-The following components use that hook in order to implement UI breakpoints for small (mobile) and large (desktop) screens. Note that the value `768` is just an example - replace it with whatever your design system tells you to.
+The following components use that hook to implement UI breakpoints for small (mobile) and large (desktop) screens. Note that the value `768` is just an example - replace it with whatever your design system tells you to.
 
 ```jsx
 const ForMobileDevicesOnly = (props) => {

@@ -11,7 +11,7 @@ tags:
 - github actions
 ---
 
-In order to analyse [Maven](https://maven.apache.org/) projects with [SonarCloud](https://sonarcloud.io) using [GitHub Actions](https://github.com/features/actions), first create the following `settings.xml` file:
+To analyse [Maven](https://maven.apache.org/) projects with [SonarCloud](https://sonarcloud.io) using [GitHub Actions](https://github.com/features/actions), first create the following `settings.xml` file:
 
 ```xml
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"

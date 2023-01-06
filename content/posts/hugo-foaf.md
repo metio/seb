@@ -9,7 +9,7 @@ tags:
 - foaf
 ---
 
-In order to publish a [FOAF](http://www.foaf-project.org/) document with your [Hugo](https://gohugo.io/) site, configure a [media type](https://en.wikipedia.org/wiki/Media_type) in your `config.toml`:
+To publish a [FOAF](http://www.foaf-project.org/) document with your [Hugo](https://gohugo.io/) site, configure a [media type](https://en.wikipedia.org/wiki/Media_type) in your `config.toml`:
 
 ```toml
 [mediaTypes."application/rdf+xml"]

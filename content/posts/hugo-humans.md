@@ -9,7 +9,7 @@ tags:
 - 'humans.txt'
 ---
 
-In order to publish a [humans.txt](http://humanstxt.org/) document with your [Hugo](https://gohugo.io/) site, configure a [media type](https://en.wikipedia.org/wiki/Media_type) in your `config.toml`:
+To publish a [humans.txt](http://humanstxt.org/) document with your [Hugo](https://gohugo.io/) site, configure a [media type](https://en.wikipedia.org/wiki/Media_type) in your `config.toml`:
 
 ```toml
 [mediaTypes."text/plain"]

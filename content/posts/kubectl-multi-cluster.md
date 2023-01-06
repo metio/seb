@@ -8,7 +8,7 @@ tags:
 - kubernetes
 ---
 
-In order to connect to multiple [Kubernetes](https://kubernetes.io/) clusters with [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), I like to define aliases like this:
+To connect to multiple [Kubernetes](https://kubernetes.io/) clusters with [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), I like to define aliases like this:
 
 ```shell script
 alias rancher="kubectl --kubeconfig ~/.kube/rancher.config"

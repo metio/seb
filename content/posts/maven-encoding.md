@@ -12,7 +12,7 @@ tags:
 - mac
 ---
 
-In order to create [Maven](https://maven.apache.org/) projects which can be build on platforms like Linux/Mac/Windows, make sure to specify the encoding of your source code and resource files like this:
+To create [Maven](https://maven.apache.org/) projects which can be build on platforms like Linux/Mac/Windows, make sure to specify the encoding of your source code and resource files like this:
 
 ```xml
 <properties>

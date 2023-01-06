@@ -8,7 +8,7 @@ tags:
 - chezmoi
 ---
 
-In order to make my life easier managing lots of dotfiles with [chezmoi](https://www.chezmoi.io/), I've defined the following shell function:
+To make my life easier managing lots of dotfiles with [chezmoi](https://www.chezmoi.io/), I've defined the following shell function:
 
 ```shell script
 function m-dotfiles-ok {

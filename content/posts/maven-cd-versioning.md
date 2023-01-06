@@ -9,7 +9,7 @@ tags:
 - versioning
 ---
 
-In order to automatically version [Maven](https://maven.apache.org/) projects, I like to use the [m-versions-p](https://www.mojohaus.org/versions-maven-plugin/) like this:
+To automatically version [Maven](https://maven.apache.org/) projects, I like to use the [m-versions-p](https://www.mojohaus.org/versions-maven-plugin/) like this:
 
 ```shell script
 $ mvn versions:set -DnewVersion=my.new.version -DgenerateBackupPoms=false
