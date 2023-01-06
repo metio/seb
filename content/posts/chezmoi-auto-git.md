@@ -9,7 +9,7 @@ tags:
 - git
 ---
 
-[chezmoi](https://www.chezmoi.io/) can automatically commit and push changes to your [dotfiles](https://en.wikipedia.org/wiki/dotfile) into a (remote) [git](https://git-scm.com/) repository. Enable it with the following snippet in your `chezmoi.toml`
+[chezmoi](https://www.chezmoi.io/) can automatically commit and push changes to your [dotfiles](https://en.wikipedia.org/wiki/dotfile) into a (remote) [Git](https://git-scm.com/) repository. Enable it with the following snippet in your `chezmoi.toml`
 
 ```toml
 [sourceVCS]

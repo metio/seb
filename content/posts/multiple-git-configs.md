@@ -20,7 +20,7 @@ To split yet re-use as much configuration for Git as possible, you can create on
   path = ~/.config/git/work
 ```
 
-The [includeIf](https://git-scm.com/docs/git-config#_includes) directive supports multiple matchers. In my case, work and personal projects have a different root directory, therefore I can filter based on the location using `gitdir`. The personal Git config simply looks like this:
+The [includeIf](https://git-scm.com/docs/git-config#_includes) directive supports multiple keywords. In my case, work and personal projects have a different root directory, therefore I can filter based on the location using `gitdir`. The personal Git configuration simply looks like this:
 
 ```ini
 [user]

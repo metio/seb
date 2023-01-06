@@ -41,5 +41,5 @@ jobs:
 
 - `<PIPELINE>`: The name of your pipeline.
 - `<RUN_ON>`: The runner to use, see GitHub's own [documentation](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on) for possible values.
-- `<TAG>`: The git tag to create.
+- `<TAG>`: The Git tag to create.
 - `<RELEASE>`: The release name to use.

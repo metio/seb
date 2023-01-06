@@ -19,8 +19,7 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/chezmoi git -- pull --rebase
-ExecStart=/usr/bin/chezmoi apply --no-tty --force
+ExecStart=/usr/bin/chezmoi update --no-tty --force
 RemainAfterExit=false
 
 [Install]
