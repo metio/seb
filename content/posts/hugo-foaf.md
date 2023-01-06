@@ -25,7 +25,7 @@ To publish a [FOAF](http://www.foaf-project.org/) document with your [Hugo](http
   permalinkable = false
 ```
 
-Create a new layout, e.g. in `_default/home.foaf.rdf` with the following content:
+Create a new layout in `_default/home.foaf.rdf` with the following content:
 
 ```gotemplate
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/">

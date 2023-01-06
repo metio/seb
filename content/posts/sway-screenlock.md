@@ -8,7 +8,7 @@ tags:
 - screenlock
 ---
 
-[SwayWM](https://swaywm.org/) users can use [swaylock](https://github.com/swaywm/swaylock) to lock their screen. Place the following key binding in your Sway config:
+[SwayWM](https://swaywm.org/) users can use [swaylock](https://github.com/swaywm/swaylock) to lock their screen. Place the following key binding in your Sway configuration:
 
 ```shell
 # lock your screen

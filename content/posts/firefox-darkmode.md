@@ -9,7 +9,7 @@ tags:
 - dark mode
 ---
 
-Nowadays websites can detect the preferred color scheme of an user with something like:
+Nowadays websites can detect the preferred color scheme of a user with something like:
 
 ```css
 @media (prefers-color-scheme: dark) {
@@ -17,4 +17,4 @@ Nowadays websites can detect the preferred color scheme of an user with somethin
 }
 ```
 
-To tell Firefox to use dark mode for all web pages on Linux, go to `about:config` and add/change ` ui.systemUsesDarkTheme` to `1` and `browser.in-content.dark-mode` to `true`.
+To tell Mozilla Firefox to use dark mode for all web pages on Linux, go to `about:config` and add/change ` ui.systemUsesDarkTheme` to `1` and `browser.in-content.dark-mode` to `true`.

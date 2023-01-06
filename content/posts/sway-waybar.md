@@ -8,7 +8,7 @@ tags:
 - waybar
 ---
 
-[Waybar](https://github.com/Alexays/Waybar/) can be used as a status bar for [SwayWM](https://swaywm.org/). You tell Sway to use it with the following snippet in your Sway configuration (e.g. `.config/sway/config`):
+[Waybar](https://github.com/Alexays/Waybar/) can be used as a status bar for [SwayWM](https://swaywm.org/). You tell Sway to use it with the following snippet in your Sway configuration:
 
 ```
 bar {

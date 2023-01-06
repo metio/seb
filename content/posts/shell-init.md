@@ -10,7 +10,7 @@ tags:
 - performance
 ---
 
-Many CLI applications offer initialization scripts to integrate into a shell, e.g. `starship init zsh` or `zoxide init zsh`. The documentation of these tools usually tell you to put something like `eval "$(starship init zsh)"` into your shell RC file. While this approach works fine, it does decrease startup speed of your shell because it needs to run the `init` command every time you open a new shell. Given that you open shells much more often than new versions of these tools are released and installed, you can cache the output of these commands to get a bit of speed back.
+Many CLI applications offer initialization scripts to integrate into a shell, for example `starship init zsh` or `zoxide init zsh`. The documentation of these tools usually tell you to put something like `eval "$(starship init zsh)"` into your shell RC file. While this approach works fine, it does decrease startup speed of your shell because it needs to run the `init` command every time you open a new shell. Given that you open shells much more often than new versions of these tools are released and installed, you can cache the output of these commands to get a bit of speed back.
 
 [chezmoi](https://chezmoi.io/) provides a template function called [output](https://www.chezmoi.io/reference/templates/functions/output/) which replaces itself with the output of the command you specified. You can use that function this to integrate various tools into your shell as the following example shows while using `zsh`:
 

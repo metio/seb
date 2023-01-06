@@ -8,7 +8,7 @@ tags:
 - systemd
 ---
 
-I like to use [emacs](https://www.gnu.org/software/emacs/) to edit files in a terminal. It tends to start a little slow, thus I've created a [systemd](https://www.freedesktop.org/wiki/Software/systemd/) unit to automatically start the emacs daemon and use aliases to connect to the running daemon. The unit looks like this:
+I like to use [emacs](https://www.gnu.org/software/emacs/) to edit files in a terminal. It tends to start a little slow, therefore I've created a [systemd](https://www.freedesktop.org/wiki/Software/systemd/) unit to automatically start the emacs daemon and use aliases to connect to the running daemon. The unit looks like this:
 
 ```ini
 [Unit]

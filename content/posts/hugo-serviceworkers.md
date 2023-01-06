@@ -25,7 +25,7 @@ To use a [serviceworker](https://serviceworke.rs/) to cache a [Hugo](https://goh
   permalinkable = false
 ```
 
-Create a new layout, e.g. in `_default/home.serviceworker.js` with the following content:
+Create a new layout in `_default/home.serviceworker.js` with the following content:
 
 ```gotemplate
 const CACHE = 'cache-and-update';

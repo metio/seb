@@ -20,18 +20,18 @@ To split yet re-use as much configuration for Git as possible, you can create on
   path = ~/.config/git/work
 ```
 
-The [includeIf](https://git-scm.com/docs/git-config#_includes) directive supports multiple matchers. In my case, work and personal projects have a different root directory, thus I can filter based on the location using `gitdir`. The personal Git config simply looks like this:
+The [includeIf](https://git-scm.com/docs/git-config#_includes) directive supports multiple matchers. In my case, work and personal projects have a different root directory, therefore I can filter based on the location using `gitdir`. The personal Git config simply looks like this:
 
 ```ini
 [user]
   email = personal.email@example.com
 ```
 
-and the work related config like this using a different email address:
+and the work related configuration like this using a different email address:
 
 ```ini
 [user]
   email = first.last@work.example
 ```
 
-Additional settings that are different for personal/work accounts can be split the same way, e.g. to use a different signing key for work.
+Additional settings that are different for personal/work accounts can be split the same way, for example to use a different signing key for work.

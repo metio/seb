@@ -10,7 +10,7 @@ tags:
 - grim
 ---
 
-[SwayWM](https://swaywm.org/) uses can use a mixture of [grim](https://github.com/emersion/grim) and [slurp](https://github.com/emersion/slurp) to take screenshots of their desktop. Place the following key binding in your Sway config:
+[SwayWM](https://swaywm.org/) uses can use a mixture of [grim](https://github.com/emersion/grim) and [slurp](https://github.com/emersion/slurp) to take screenshots of their desktop. Place the following key binding in your Sway configuration:
 
 ```shell script
 # take screenshot of currently focused screen

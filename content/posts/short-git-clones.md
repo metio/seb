@@ -9,7 +9,7 @@ tags:
 - ssh
 ---
 
-In case you don't want to write `git clone git@github.com:orga/repo.git` all the time, consider using a custom SSH config (`~/.ssh/config`) like this:
+In case you don't want to write `git clone git@github.com:orga/repo.git` all the time, consider using a custom SSH configuration (`~/.ssh/config`) like this:
 
 ```
 Host github
@@ -42,7 +42,7 @@ $ git clone bitbucket:orga/repo
 $ git clone codeberg:orga/repo
 ```
 
-In case you are working with lots of repositories inside a single organization, consider adding the following git configuration (`$XDG_CONFIG_HOME/git/config` or `~/.gitconfig`):
+In case you are working with lots of repositories inside a single organization, consider adding the following Git configuration (`$XDG_CONFIG_HOME/git/config` or `~/.gitconfig`):
 
 ```
 [url "github:orga/"]
@@ -64,4 +64,4 @@ $ git clone orgb:repo
 $ git clone orgc:repo
 ``` 
  
-Git will substitute the `insteadOf` values like `orga:` with the configured `url` (e.g. `github:orga/`). The actual clone URL is `github:orga/repo` at this point, which can be used by Git together with the SSH config mentioned above to clone repositories.
+Git will substitute the `insteadOf` values like `orga:` with the configured `url` (for example `github:orga/`). The actual clone URL is `github:orga/repo` at this point, which can be used by Git together with the SSH configuration mentioned above to clone repositories.

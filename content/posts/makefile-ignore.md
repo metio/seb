@@ -9,7 +9,7 @@ tags:
 - exit code
 ---
 
-In case you are using a `Makefile` to define a complex build step - e.g. start database, run tests, stop database - consider using the `-` qualifier in front of your actual build step like this:
+In case you are using a `Makefile` to define a complex build step - for example start database, run tests, stop database - consider using the `-` qualifier in front of your actual build step like this:
 
 ```makefile
 .PHONY: build
@@ -19,7 +19,7 @@ build:
 	stop-database
 ```
 
-Thanks to `-`, the database will be stopped even if building your software fails, thus making sure to clean up after ourselves once the build finishes.
+Thanks to `-`, the database will be stopped even if building your software fails, therefore making sure to clean up after ourselves once the build finishes.
 
 ## Links
 

@@ -10,7 +10,7 @@ tags:
 - teamwork
 ---
 
-`README` file typically contain information about the project itself, e.g. how it can be installed/used/build. Most of the time these files contains command line instructions that users/contributors copy and paste into their terminal. Instead of doing that, consider placing a `Makefile` in the root of your project which contains the exact same instructions. Thanks to `make`, all your contributors can now use TAB-completion to run any of the pre-defined `make` targets.
+`README` file typically contain information about the project itself, for example how it can be installed/used/build. Most of the time these files contains command line instructions that users/contributors copy and paste into their terminal. Instead of doing that, consider placing a `Makefile` in the root of your project which contains the exact same instructions. Thanks to `make`, all your contributors can now use TAB-completion to run any of the pre-defined `make` targets.
 
 The following example is part of one of my projects, and I certainly don't want to type (or even copy) that all the time:
 

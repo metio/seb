@@ -25,7 +25,7 @@ To publish Atom feeds for your [Hugo](https://gohugo.io/) site, configure a [med
   permalinkable = false
 ```
 
-Create a new layout, e.g. in `_default/list.atom.xml` with the following content:
+Create a new layout in `_default/list.atom.xml` with the following content:
 
 ```gotemplate
 {{ printf `<?xml version="1.0" encoding="utf-8"?>` | safeHTML }}

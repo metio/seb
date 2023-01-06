@@ -25,7 +25,7 @@ To publish a [humans.txt](http://humanstxt.org/) document with your [Hugo](https
   permalinkable = false
 ```
 
-Create a new layout, e.g. in `_default/home.humans.txt` with the following content:
+Create a new layout in `_default/home.humans.txt` with the following content:
 
 ```gotemplate
 /* TEAM */

@@ -19,7 +19,7 @@ $ git remote set-url --add --push mirrors git@gitlab.com:org/repo.git
 $ git remote set-url --add --push mirrors git@bitbucket.org:org/repo.git
 ```
 
-The above will create a new remote called `mirrors` which has no `fetch` URL and thus can only be pushed:
+The above will create a new remote called `mirrors` which has no `fetch` URL and therefore can only be pushed:
 
 ```shell script
 $ git remote -v

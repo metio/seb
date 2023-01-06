@@ -36,7 +36,7 @@ Clojure imposes the notion of immutability. As such Clojure functions are/should
   (increment-range max))
 ```
 
-The Java wrapper has to follow the [standard rules](https://docs.oracle.com/javase/specs/jls/se17/html/jls-3.html#jls-3.8) for method names. Thus `increment-range` has to be renamed to `incrementRange` (or some similar name without the "-" in it). The "-" prefix for the Java wrapper can be configured inside the `:gen-class` form and will be removed once `gen-class` runs. The usage from Java looks like this:
+The Java wrapper has to follow the [standard rules](https://docs.oracle.com/javase/specs/jls/se17/html/jls-3.html#jls-3.8) for method names. Therefore `increment-range` has to be renamed to `incrementRange` (or some similar name without the "-" in it). The "-" prefix for the Java wrapper can be configured inside the `:gen-class` form and will be removed once `gen-class` runs. The usage from Java looks like this:
 
 ```java
 package com.example
@@ -100,7 +100,7 @@ public class ClojureJavaInteropGenerics {
 
 Couple of notes for this as well: First the generated class still only returns the raw type (`List` instead of  `List<Integer>`). So instead of using the class, use the interface for the variable declaration (`RangeIncrementer incrementer = ..` instead of `Computation comp = ..`). The interface will return the non-raw `List`. Second the function definition for `-incrementRange` is now slightly different. It needs an additional parameter (`this`) which exposes the current instance to the generated class/method.
 
-Returning an array of something is also possible with the following construct `"[Ljava.lang.Object;"`. Need a 2-dim array? Just use `"[[Ljava.lang.Object;"` (notice the extra `[`) and so on. However, be aware that the method return types have to match, e.g. you can't specify a return type of array if your Clojure function does not return an array. In the example above the call to `map` returns `LazySeq` which itself is a `java.util.List`. Therefore, the method declaration is valid, and you won't get any `ClassCastException` when calling `incrementRange` from Java.
+Returning an array of something is also possible with the following construct `"[Ljava.lang.Object;"`. Need a 2-dim array? Just use `"[[Ljava.lang.Object;"` (notice the extra `[`) and so on. However, be aware that the method return types have to match, for example you can't specify a return type of array if your Clojure function does not return an array. In the example above the call to `map` returns `LazySeq` which itself is a `java.util.List`. Therefore, the method declaration is valid, and you won't get any `ClassCastException` when calling `incrementRange` from Java.
 
 ### Make your life easier with macros
 

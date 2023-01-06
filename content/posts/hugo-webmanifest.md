@@ -26,7 +26,7 @@ To publish a [web app manifest](https://developer.mozilla.org/en-US/docs/Web/Man
   permalinkable = false
 ```
 
-Create a new layout, e.g. in `_default/home.manifest.json` with the following content:
+Create a new layout in `_default/home.manifest.json` with the following content:
 
 ```gotemplate
 {
