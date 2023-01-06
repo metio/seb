@@ -1,7 +1,6 @@
 ---
 title: awsenv
 date: 2022-02-14
-menu: topic
 categories:
 - snippet
 tags:

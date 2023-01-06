@@ -1,7 +1,6 @@
 ---
 title: Automatically update plugins for vim/nvim
 date: 2022-01-01
-menu: topic
 categories:
 - snippet
 tags:

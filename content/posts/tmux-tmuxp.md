@@ -1,7 +1,6 @@
 ---
 title: Manage tmux sessions with tmuxp
 date: 2021-12-20
-menu: topic
 categories:
 - snippet
 tags:

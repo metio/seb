@@ -1,7 +1,6 @@
 ---
 title: Cache Maven artifacts with GitHub Actions
 date: 2020-09-07
-menu: topic
 categories:
 - devops
 - snippet

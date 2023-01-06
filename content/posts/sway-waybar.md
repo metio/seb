@@ -1,7 +1,6 @@
 ---
 title: Waybar on SwayWM
 date: 2021-08-23
-menu: topic
 categories:
 - snippet
 tags:

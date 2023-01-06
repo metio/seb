@@ -1,7 +1,6 @@
 ---
 title: Maintaining dotfiles with chezmoi
 date: 2021-10-11
-menu: topic
 categories:
 - snippet
 tags:

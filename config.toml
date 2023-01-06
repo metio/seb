@@ -15,7 +15,7 @@ DefaultContentLanguage = "en"
   page = ["HTML", "JSONLD"]
 
 [params]
-  mainSections = ["topic"]
+  mainSections = ["posts"]
   author = "Sebastian Hoß"
   email = "seb@xn--ho-hia.de"
   matrix = "@sebhoss:matrix.org"

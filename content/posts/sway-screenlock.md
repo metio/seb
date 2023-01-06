@@ -1,7 +1,6 @@
 ---
 title: Lock your screen on SwayWM
 date: 2021-04-05
-menu: topic
 categories:
 - snippet
 tags:

@@ -1,7 +1,6 @@
 ---
 title: Proper hostnames in your local network
 date: 2022-01-08
-menu: topic
 categories:
 - network
 tags:

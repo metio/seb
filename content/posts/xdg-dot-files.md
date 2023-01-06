@@ -1,7 +1,6 @@
 ---
 title: XDG Base Directory Specification
 date: 2020-07-27
-menu: topic
 categories:
 - snippet
 tags:

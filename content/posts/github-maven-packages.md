@@ -1,7 +1,6 @@
 ---
 title: GitHub Packages with Maven
 date: 2021-11-22
-menu: topic
 categories:
 - snippet
 tags:

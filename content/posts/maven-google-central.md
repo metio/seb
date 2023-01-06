@@ -1,7 +1,6 @@
 ---
 title: Google Central
 date: 2021-11-08
-menu: topic
 categories:
 - snippet
 tags:

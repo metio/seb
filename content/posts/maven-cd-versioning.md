@@ -1,7 +1,6 @@
 ---
 title: Continuous Versioning with Maven
 date: 2021-12-06
-menu: topic
 categories:
 - snippet
 - cd

@@ -1,7 +1,6 @@
 ---
 title: FOAF with Hugo
 date: 2020-11-30
-menu: topic
 categories:
 - snippet
 - website

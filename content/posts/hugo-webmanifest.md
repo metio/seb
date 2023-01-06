@@ -1,7 +1,6 @@
 ---
 title: Web app manifests with Hugo
 date: 2021-01-11
-menu: topic
 categories:
 - snippet
 - website

@@ -1,7 +1,6 @@
 ---
 title: Use a specific Hugo version with GitHub Actions
 date: 2020-08-24
-menu: topic
 categories:
 - devops
 - snippet

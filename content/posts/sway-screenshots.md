@@ -1,7 +1,6 @@
 ---
 title: Taken screenshots on SwayWM
 date: 2021-03-22
-menu: topic
 categories:
 - snippet
 tags:

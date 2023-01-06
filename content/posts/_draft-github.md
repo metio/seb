@@ -1,7 +1,6 @@
 ---
 title: GitHub
 draft: true
-menu: topic
 categories:
 - snippet
 tags:

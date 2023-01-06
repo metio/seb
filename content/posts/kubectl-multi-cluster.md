@@ -1,7 +1,6 @@
 ---
 title: Using multiple clusters with kubectl
 date: 2021-06-14
-menu: topic
 categories:
 - snippet
 tags:

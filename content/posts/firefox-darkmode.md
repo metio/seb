@@ -1,7 +1,6 @@
 ---
 title: Firefox with dark mode
 draft: true
-menu: topic
 categories:
 - snippet
 tags:

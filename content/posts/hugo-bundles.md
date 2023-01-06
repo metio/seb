@@ -1,7 +1,6 @@
 ---
 title: Bundling with Hugo
 date: 2020-12-28
-menu: topic
 categories:
 - snippet
 - website

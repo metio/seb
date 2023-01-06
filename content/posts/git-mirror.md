@@ -1,7 +1,6 @@
 ---
 title: Mirror Git Repositories
 date: 2021-06-28
-menu: topic
 categories:
 - snippet
 - decentralized

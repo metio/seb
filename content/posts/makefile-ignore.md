@@ -1,7 +1,6 @@
 ---
 title: Ignore Exit Codes
 date: 2021-02-08
-menu: topic
 categories:
 - snippet
 tags:

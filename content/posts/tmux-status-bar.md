@@ -1,7 +1,6 @@
 ---
 title: tmux Status Bar
 date: 2021-08-09
-menu: topic
 categories:
 - snippet
 tags:

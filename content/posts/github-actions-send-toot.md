@@ -1,7 +1,6 @@
 ---
 title: Send toots with GitHub Actions
 date: 2020-11-16
-menu: topic
 categories:
 - devops
 - snippet

@@ -1,7 +1,6 @@
 ---
 title: Clojure Java Interoperability
 date: 2022-01-29
-menu: topic
 categories:
 - snippet
 tags:

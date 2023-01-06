@@ -1,7 +1,6 @@
 ---
 title: Specify encoding for Maven projects
 date: 2021-05-31
-menu: topic
 categories:
 - devops
 - snippet

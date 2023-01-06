@@ -1,7 +1,6 @@
 ---
 title: Encrypt dotfiles with chezmoi
 date: 2021-09-20
-menu: topic
 categories:
 - snippet
 tags:

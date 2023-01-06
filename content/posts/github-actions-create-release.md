@@ -1,7 +1,6 @@
 ---
 title: Create GitHub releases with GitHub Actions
 date: 2020-10-05
-menu: topic
 categories:
 - devops
 - snippet

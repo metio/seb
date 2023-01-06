@@ -1,7 +1,6 @@
 ---
 title: Peeking with tmux
 date: 2021-04-05
-menu: topic
 categories:
 - snippet
 tags:

@@ -1,7 +1,6 @@
 ---
 title: Publish Hugo site with GitHub Actions
 date: 2020-09-21
-menu: topic
 categories:
 - devops
 - snippet

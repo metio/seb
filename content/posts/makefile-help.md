@@ -1,7 +1,6 @@
 ---
 title: Makefile Help
 date: 2020-06-29
-menu: topic
 categories:
 - snippet
 tags:

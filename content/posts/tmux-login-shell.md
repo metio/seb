@@ -1,7 +1,6 @@
 ---
 title: Use tmux as your login shell
 date: 2021-04-19
-menu: topic
 categories:
 - snippet
 tags:

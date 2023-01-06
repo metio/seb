@@ -1,7 +1,6 @@
 ---
 title: Push-only mirrors for Git Repositories
 date: 2021-07-12
-menu: topic
 categories:
 - snippet
 - decentralized

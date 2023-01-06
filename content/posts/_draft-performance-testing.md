@@ -1,7 +1,6 @@
 ---
 title: Performance Testing
 draft: true
-menu: topic
 categories:
 - snippet
 tags:

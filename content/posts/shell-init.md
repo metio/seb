@@ -1,7 +1,6 @@
 ---
 title: chezmoi & shell init scripts
 date: 2022-12-12
-menu: topic
 categories:
 - snippet
 tags:

@@ -1,7 +1,6 @@
 ---
 title: Use a specific Java version with GitHub Actions
 date: 2020-08-10
-menu: topic
 categories:
 - devops
 - snippet

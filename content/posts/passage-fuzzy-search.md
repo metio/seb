@@ -1,7 +1,6 @@
 ---
 title: passage fuzzy search
 date: 2022-12-27
-menu: topic
 categories:
 - snippet
 tags:

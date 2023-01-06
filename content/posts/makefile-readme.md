@@ -1,7 +1,6 @@
 ---
 title: Executable READMEs
 date: 2021-03-08
-menu: topic
 categories:
 - snippet
 tags:

@@ -1,7 +1,6 @@
 ---
 title: Backups with emacs
 date: 2021-10-25
-menu: topic
 categories:
 - snippet
 tags:

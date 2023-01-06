@@ -1,7 +1,6 @@
 ---
 title: Manage dotfiles with chezmoi and git
 date: 2021-09-06
-menu: topic
 categories:
 - snippet
 tags:

@@ -1,7 +1,6 @@
 ---
 title: Declarative conditional rendering in React
 date: 2022-01-15
-menu: topic
 categories:
 - snippet
 - frontend

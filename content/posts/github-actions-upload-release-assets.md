@@ -1,7 +1,6 @@
 ---
 title: Upload release assets with GitHub Actions
 date: 2020-10-19
-menu: topic
 categories:
 - devops
 - snippet

@@ -1,7 +1,6 @@
 ---
 title: Multiple Git Configurations
 date: 2023-01-05
-menu: topic
 categories:
 - snippet
 tags:

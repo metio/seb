@@ -1,7 +1,6 @@
 ---
 title: Delay GitHub Actions builds
 date: 2021-02-22
-menu: topic
 categories:
 - devops
 - snippet

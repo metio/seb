@@ -1,7 +1,6 @@
 ---
 title: Send emails with GitHub Actions
 date: 2020-11-02
-menu: topic
 categories:
 - devops
 - snippet

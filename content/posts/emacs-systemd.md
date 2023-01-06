@@ -1,7 +1,6 @@
 ---
 title: emacs and systemd
 date: 2021-07-26
-menu: topic
 categories:
 - snippet
 tags:

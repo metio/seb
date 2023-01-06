@@ -12,9 +12,9 @@
     <li class="mobileonly"><a href="{{ "/atom.xml" | absURL }}">Subscribe to the Atom feed</a></li>
     <hr class="mobileonly menudivider" />
     <h3 class="mobile-and-tablet menutitle">Navigation</h3>
-    {{ range first 15 (sort .Site.Menus.topic "Page.Date" "desc") }}
-        <li>
-            <a href="{{ .URL }}" class="{{ if $currentPage.IsMenuCurrent "topic" . }}active{{ end }}">{{ .Pre }}{{ .Name }}</a>
-        </li>
+    {{ range first 15 (where site.RegularPages "Type" "in" site.Params.mainSections) }}
+    <li>
+        <a href="{{ .Permalink }}" class="{{ if eq $currentPage.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>
+    </li>
     {{ end }}
 </ul>

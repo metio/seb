@@ -1,7 +1,6 @@
 ---
 title: Apache Maven
 draft: true
-menu: topic
 categories:
 - snippet
 tags:

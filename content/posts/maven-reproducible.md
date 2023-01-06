@@ -1,7 +1,6 @@
 ---
 title: Creating reproducible artifacts with Maven
 date: 2021-05-17
-menu: topic
 categories:
 - devops
 - snippet

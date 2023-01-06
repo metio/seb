@@ -1,7 +1,6 @@
 ---
 title: Service workers with Hugo
 date: 2021-01-25
-menu: topic
 categories:
 - snippet
 - website
