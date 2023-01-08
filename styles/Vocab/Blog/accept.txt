@@ -27,3 +27,5 @@ zsh
 includeIf
 hostname
 tty
+dereference
+jspecify
