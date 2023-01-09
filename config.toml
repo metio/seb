@@ -6,6 +6,7 @@ title = "Sebastian Hoß"
 pygmentsUseClasses = true
 sectionPagesMenu = "main"
 enableRobotsTXT = true
+enableGitInfo = true
 DefaultContentLanguage = "en"
 
 [outputs]
