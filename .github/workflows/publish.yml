@@ -31,13 +31,3 @@ jobs:
           publish_dir: ./public
           force_orphan: true
           cname: seb.xn--ho-hia.de
-      - name: IndexNow
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: https://api.indexnow.org/indexnow?url=https://seb.xn--ho-hia.de&key=6da084089795b6f5935480863e2ed4c92d7538f5797f03bf
-          method: GET
-      - name: Google
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: https://www.google.com/ping?sitemap=https://seb.xn--ho-hia.de/sitemap.xml
-          method: GET
