@@ -45,3 +45,5 @@ module your.module.here {
 
 }
 ```
+
+The tooling support is not quiet clear yet, however if you are developing a library there is [no harm](https://github.com/jspecify/jspecify/wiki/adoption#should-my-library-adopt-these-annotations-now) in adding these annotations now and let your users enjoy their null-free life once tools have caught up.
