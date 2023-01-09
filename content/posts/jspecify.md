@@ -5,7 +5,7 @@ categories:
 - snippet
 tags:
 - java
-- null
+- nullness
 - jspecify
 ---
 
