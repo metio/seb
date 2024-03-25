@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://seb.xn--ho-hia.de/sitemap.xml
