@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.128.0">Hugo</generator><title type="html">Configuration on Sebastian Hoß</title><link href="https://seb.xn--ho-hia.de/categories/configuration/" rel="alternate" type="text/html" title="html"/><link href="https://seb.xn--ho-hia.de/categories/configuration/index.xml" rel="alternate" type="application/rss+xml" title="rss"/><link href="https://seb.xn--ho-hia.de/categories/configuration/atom.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2024-07-01T02:33:53+00:00</updated><id>https://seb.xn--ho-hia.de/categories/configuration/</id><entry><title type="html">GitLab the Git Distributor</title><link href="https://seb.xn--ho-hia.de/posts/gitlab-distributor/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/short-git-clones/?utm_source=atom_feed" rel="related" type="text/html" title="Short Git Clones"/><link href="https://seb.xn--ho-hia.de/posts/github-actions-create-timestamp/?utm_source=atom_feed" rel="related" type="text/html" title="Create Timestamp with GitHub Actions"/><id>https://seb.xn--ho-hia.de/posts/gitlab-distributor/</id><published>2020-07-13T00:00:00+00:00</published><updated>2023-01-06T17:32:06+01:00</updated><content type="html"><![CDATA[<p><a href="https://git-scm.com/">Git</a> at its core is a decentralized version control system. Yet many people are relying on a single central server (github.com at the time of this writing) to share their work with others. <a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows">Pro Git</a> rightfully mentions it at first position in its chapter about distributed workflows because using a central server is usually the simplest approach to sharing code.</p>
+<p>While the central server approach is easy to use, it might not work in all scenarios:</p>
+<ol>
+<li>An enterprise wants to share internal code as part of an open source project. All development is happening internally, and the public mirror gets an occasional update once in a while.</li>
+<li>To protect against outages of the central server, mirrors should be created and be kept up-to-date.</li>
+</ol>
+<p>In case of the first scenario, tools like <a href="https://github.com/google/copybara">copybara</a>, <a href="https://github.com/repoSpanner/repoSpanner">repoSpanner</a>, or <a href="https://github.com/google/distributed-git-forks">distributed-Git-forks</a> offer a wide range of features to cover most details.</p>
+<p>The second scenario can be solved manually with tools like <a href="https://github.com/muesli/gitomatic">gitomatic</a> or automatically with <a href="https://gitlab.com">GitLab</a>&rsquo;s <a href="https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html">mirror feature</a> quite easy. GitLab allows to create a single pull-mirror and multiple push-mirrors. Therefore, it can be used to pull from your central server and push into all mirrors.</p>
+<p><strong>NOTE</strong>: This feature was previously available in the free tier but has now moved to GitLab Ultimate.</p>
+<pre tabindex="0"><code>               +----------------+               
+               |     GitHub     |               
+               +----------------+               
+                        ^                       
+                        |                       
+                        |                       
+               +----------------+               
+         +-----|     GitLab     |------+        
+         |     +----------------+      |        
+         |                             |        
+         |                             |        
+         v                             v        
++----------------+            +----------------+
+|    Codeberg    |            |    BitBucket   |
++----------------+            +----------------+
+</code></pre><p>To create such a setup, follow these steps:</p>
+<ol>
+<li>Go to <code>Settings &gt; Repository</code> and expand <code>Mirroring repositories</code>
+<img src="/images/gitlab-mirror-settings.png" alt="Code Flow"></li>
+<li>Enter the URL of your central Git repository as the pull source, for example <code>https://github.com/metio/ilo.git</code>
+<img src="/images/gitlab-pull-mirror.png" alt="Code Flow"></li>
+<li>Enter one push target for each mirror. Since pushing usually requires authentication, verify that the URL of the mirror contains a username, for example <code>https://YOUR_USER@codeberg.org/metio.wtf/ilo.git</code>. Add an access token for each mirror and select <code>password</code> as authentication method.
+<img src="/images/gitlab-push-mirror.png" alt="Code Flow"></li>
+</ol>
+<p>In case you prefer SSH keys over HTTP access tokens, just select <code>SSH public key</code> as authentication method and verify that your key is both saved in GitLab and all mirrors.</p>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/configuration" term="configuration" label="configuration"/><category scheme="https://seb.xn--ho-hia.de/tags/git" term="git" label="git"/><category scheme="https://seb.xn--ho-hia.de/tags/gitlab" term="gitlab" label="gitlab"/><category scheme="https://seb.xn--ho-hia.de/tags/github" term="github" label="github"/><category scheme="https://seb.xn--ho-hia.de/tags/codeberg" term="codeberg" label="codeberg"/><category scheme="https://seb.xn--ho-hia.de/tags/bitbucket" term="bitbucket" label="bitbucket"/><category scheme="https://seb.xn--ho-hia.de/tags/repo.or.cz" term="repo.or.cz" label="repo.or.cz"/></entry></feed>

@@ -1,0 +1,152 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=author content="Sebastian Hoß"><meta name=subject content="Sebastian Hoß"><meta name=description content="articles about software engineering"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:url" content="https://seb.xn--ho-hia.de/posts/hugo-atom/"><meta property="og:site_name" content="Sebastian Hoß"><meta property="og:title" content="Atom Feed with Hugo"><meta property="og:description" content='To publish Atom feeds for your Hugo site, configure a media type in your config.toml:
+[mediaTypes."application/atom+xml"] suffixes = ["xml"] [outputFormats.Atom] name = "Atom" mediaType = "application/atom+xml" baseName = "atom" isPlainText = false rel = "alternate" isHTML = false noUgly = true permalinkable = false Create a new layout in _default/list.atom.xml with the following content:
+{{ printf `<?xml version="1.0" encoding="utf-8"?>` | safeHTML }} <feed xmlns="http://www.w3.org/2005/Atom"{{ with site.LanguageCode }} xml:lang="{{ . }}"{{ end }}> <generator uri="https://gohugo.'><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-11-16T00:00:00+00:00"><meta property="article:modified_time" content="2023-01-06T16:40:24+01:00"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="Atom"><meta name=twitter:card content="summary"><meta name=twitter:title content="Atom Feed with Hugo"><meta name=twitter:description content='To publish Atom feeds for your Hugo site, configure a media type in your config.toml:
+[mediaTypes."application/atom+xml"] suffixes = ["xml"] [outputFormats.Atom] name = "Atom" mediaType = "application/atom+xml" baseName = "atom" isPlainText = false rel = "alternate" isHTML = false noUgly = true permalinkable = false Create a new layout in _default/list.atom.xml with the following content:
+{{ printf `<?xml version="1.0" encoding="utf-8"?>` | safeHTML }} <feed xmlns="http://www.w3.org/2005/Atom"{{ with site.LanguageCode }} xml:lang="{{ . }}"{{ end }}> <generator uri="https://gohugo.'><meta itemprop=name content="Atom Feed with Hugo"><meta itemprop=description content='To publish Atom feeds for your Hugo site, configure a media type in your config.toml:
+[mediaTypes."application/atom+xml"] suffixes = ["xml"] [outputFormats.Atom] name = "Atom" mediaType = "application/atom+xml" baseName = "atom" isPlainText = false rel = "alternate" isHTML = false noUgly = true permalinkable = false Create a new layout in _default/list.atom.xml with the following content:
+{{ printf `<?xml version="1.0" encoding="utf-8"?>` | safeHTML }} <feed xmlns="http://www.w3.org/2005/Atom"{{ with site.LanguageCode }} xml:lang="{{ . }}"{{ end }}> <generator uri="https://gohugo.'><meta itemprop=datePublished content="2020-11-16T00:00:00+00:00"><meta itemprop=dateModified content="2023-01-06T16:40:24+01:00"><meta itemprop=wordCount content="775"><meta itemprop=keywords content="Hugo,Atom"><link rel="shortcut icon" href=/favicon.ico><link rel=icon type=image/png href=/favicon-128.png sizes=128x128><link rel=apple-touch-icon type=image/png href=/favicon-128.png sizes=128x128><link rel=canonical href=https://seb.xn--ho-hia.de/posts/hugo-atom/><link rel=alternate type=application/atom+xml href=https://seb.xn--ho-hia.de/atom.xml title="Sebastian Hoß Atom"><link rel=alternate type=application/rss+xml href=https://seb.xn--ho-hia.de/index.xml title="Sebastian Hoß RSS"><link rel=sitemap type=application/xml href=https://seb.xn--ho-hia.de/sitemap.xml title="Sebastian Hoß Sitemap"><link rel=author type=text/plain href=https://seb.xn--ho-hia.de/humans.txt><link rel=alternate type=application/rdf+xml href=https://seb.xn--ho-hia.de/foaf.rdf title=FOAF><link rel=license href=https://creativecommons.org/publicdomain/zero/1.0/><link href=https://seb.xn--ho-hia.de/css/mobile.min.e14dc54fd7b9d2dea52a0580221a956079e9f0dbb1583eb2c3f19ab416911abcc496c1a81fe403d98380b4105b9a64ccddc0f3182b6174274a173e9dcd5c7c83.css integrity="sha512-4U3FT9e50t6lKgWAIhqVYHnp8NuxWD6yw/GatBaRGrzElsGoH+QD2YOAtBBbmmTM3cDzGCthdCdKFz6dzVx8gw==" media="screen and (max-width: 800px)" rel=stylesheet><link href=https://seb.xn--ho-hia.de/css/tablet.min.8aba29eb35692e2677e7c26e41408d9ed27ed94e71fe6634ad016f9e91a712f9e1c53317bdaf09aff9d1acc503c9dca0b3c3dc5d3a5f4c287d7ebd48eef1640a.css integrity="sha512-irop6zVpLiZ358JuQUCNntJ+2U5x/mY0rQFvnpGnEvnhxTMXva8Jr/nRrMUDydygs8PcXTpfTCh9fr1I7vFkCg==" media="screen and (min-width: 801px) and (max-width: 1199px)" rel=stylesheet><link href=https://seb.xn--ho-hia.de/css/desktop.min.5d7960c466db691c7fe9df667675aa312241bb90e879e462f75e2502350908820cf7477e12664f246157a8a37449baa5b2923035845e419b20b1cfdb177a0de8.css integrity="sha512-XXlgxGbbaRx/6d9mdnWqMSJBu5DoeeRi914lAjUJCIIM90d+EmZPJGFXqKN0SbqlspIwNYReQZsgsc/bF3oN6A==" media="screen and (min-width: 1200px)" rel=stylesheet><link href=https://seb.xn--ho-hia.de/css/darkmode.min.2a5ba1ebf79d23ac725522a486af2ffebf831a4a634fc1471a4b0007daa25afb4417f20dc4cf0e2c1eeb8eb704183160ff9aaf84e060180993fe1e010ac6907f.css integrity="sha512-Kluh6/edI6xyVSKkhq8v/r+DGkpjT8FHGksAB9qiWvtEF/INxM8OLB7rjrcEGDFg/5qvhOBgGAmT/h4BCsaQfw==" media="screen and (prefers-color-scheme: dark)" rel=stylesheet><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebSite","name":"Sebastian Hoß","url":"https:\/\/seb.xn--ho-hia.de\/","description":"articles about software engineering","license":"Creative Commons Zero v1.0 Universal","author":{"@type":"Person","name":"Sebastian Hoß","url":"https:\/\/seb.xn--ho-hia.de\/"},"creator":{"@type":"Person","name":"Sebastian Hoß","url":"https:\/\/seb.xn--ho-hia.de\/"},"accountablePerson":{"@type":"Person","name":"Sebastian Hoß","url":"https:\/\/seb.xn--ho-hia.de\/"},"publisher":{"@type":"Person","name":"Sebastian Hoß","url":"https:\/\/seb.xn--ho-hia.de\/"},"copyrightHolder":{"@type":"Person","name":"Sebastian Hoß","url":"https:\/\/seb.xn--ho-hia.de\/"}}</script><script type=application/ld+json>{"@context":"https://schema.org/","@type":"Person","name":"Sebastian Hoß","email":"seb@xn--ho-hia.de","url":"https:\/\/seb.xn--ho-hia.de\/"}</script><title>Sebastian Hoß &ndash; Atom Feed with Hugo</title></head><body id=site><header id=header><h1 id=projectname><a id=rootlink href=https://seb.xn--ho-hia.de/>Sebastian Hoß</a>
+<a href=https://seb.xn--ho-hia.de/sitemap/ title="show me all pages" id=sitemaplink><img class=svgimg src=https://seb.xn--ho-hia.de/images/sitemap.svg alt=sitemap width=30 height=30></a></h1><span id=actions><a href=https://matrix.to/#/%40sebhoss%3amatrix.org id=matrix title="lets talk"><img class=svgimg src=https://seb.xn--ho-hia.de/images/matrix.svg alt=matrix width=32 height=32>
+</a><a href=mailto:seb@xn--ho-hia.de id=email title="i want to write you an email"><img class=svgimg src=https://seb.xn--ho-hia.de/images/email.svg alt=email width=32 height=32>
+</a><a rel=me href=https://mastodon.online/@sebhoss id=mastodon title="toot toot toot"><img class=svgimg src=https://seb.xn--ho-hia.de/images/mastodon.svg alt=mastodon width=32 height=32>
+</a><a href=https://github.com/sebhoss id=github title="want some code?"><img class=svgimg src=https://seb.xn--ho-hia.de/images/github.svg alt=github width=32 height=32>
+</a><a href=https://seb.xn--ho-hia.de/atom.xml id=newsfeed title="get notified about updates"><img class=svgimg src=https://seb.xn--ho-hia.de/images/rss.svg alt=newsfeed width=32 height=32></a></span></header><nav id=navigation><ul><h3 class="mobileonly menutitle">Links</h3><li class=mobileonly><a href=https://seb.xn--ho-hia.de/>Home</a></li><li class=mobileonly><a href=https://matrix.to/#/%40sebhoss%3amatrix.org>Let's talk on Matrix</a></li><li class=mobileonly><a href=mailto:seb@xn--ho-hia.de>Send me an email</a></li><li class=mobileonly><a href=https://mastodon.online/@sebhoss>Get in touch on Mastodon</a></li><li class=mobileonly><a href=https://github.com/sebhoss>See some code at GitHub</a></li><li class=mobileonly><a href=https://seb.xn--ho-hia.de/sitemap/>See all pages at the sitemap</a></li><li class=mobileonly><a href=https://seb.xn--ho-hia.de/atom.xml>Subscribe to the Atom feed</a></li><hr class="mobileonly menudivider"><h3 class="mobile-and-tablet menutitle">Navigation</h3><li><a href=https://seb.xn--ho-hia.de/posts/jspecify/>jspecify</a></li><li><a href=https://seb.xn--ho-hia.de/posts/chezmoi-age/>Using chezmoi with age</a></li><li><a href=https://seb.xn--ho-hia.de/posts/multiple-git-configs/>Multiple Git Configurations</a></li><li><a href=https://seb.xn--ho-hia.de/posts/passage-fuzzy-search/>passage fuzzy search</a></li><li><a href=https://seb.xn--ho-hia.de/posts/chezmoi-auto-update/>chezmoi auto-update</a></li><li><a href=https://seb.xn--ho-hia.de/posts/shell-init/>chezmoi & shell init scripts</a></li><li><a href=https://seb.xn--ho-hia.de/posts/awsenv/>awsenv</a></li><li><a href=https://seb.xn--ho-hia.de/posts/clojure-java-interoperability/>Clojure Java Interoperability</a></li><li><a href=https://seb.xn--ho-hia.de/posts/declarative-conditional-rendering-in-react/>Declarative conditional rendering in React</a></li><li><a href=https://seb.xn--ho-hia.de/posts/home-network-hostnames/>Proper hostnames in your local network</a></li><li><a href=https://seb.xn--ho-hia.de/posts/nvim-plugin-auto-updates/>Automatically update plugins for vim/nvim</a></li><li><a href=https://seb.xn--ho-hia.de/posts/tmux-tmuxp/>Manage tmux sessions with tmuxp</a></li><li><a href=https://seb.xn--ho-hia.de/posts/maven-cd-versioning/>Continuous Versioning with Maven</a></li><li><a href=https://seb.xn--ho-hia.de/posts/github-maven-packages/>GitHub Packages with Maven</a></li><li><a href=https://seb.xn--ho-hia.de/posts/maven-google-central/>Google Central</a></li></ul></nav><main id=content><h1 class=post-titel><a href=https://seb.xn--ho-hia.de/posts/hugo-atom/>Atom Feed with Hugo
+</a><a href=https://github.com/metio/seb/commits/main/content/hugo-atom title="View article history"><img src=https://seb.xn--ho-hia.de/images/history.svg alt="View article history" height=16 width=14 class="icon svgimg">
+</a><a href=https://github.com/metio/seb/edit/main/content/hugo-atom title="Edit article"><img src=https://seb.xn--ho-hia.de/images/pencil.svg alt="Edit article" height=16 width=14 class="icon svgimg"></a></h1><div class=subtitle>Published: <time datetime=2020-11-16>November 16, 2020</time>
+, Updated: <time datetime=2020-11-16>January 6, 2023</time></div><div class=subtitle>Talks about:
+&lt;a class="post-tag post-tag-atom" href="/tags/atom">atom&lt;/a>, and &lt;a class="post-tag post-tag-hugo" href="/tags/hugo">hugo&lt;/a></div><div id=post-content><p>To publish Atom feeds for your <a href=https://gohugo.io/>Hugo</a> site, configure a <a href=https://en.wikipedia.org/wiki/Media_type>media type</a> in your <code>config.toml</code>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=line><span class=cl><span class=p>[</span><span class=nx>mediaTypes</span><span class=p>.</span><span class=s2>&#34;application/atom+xml&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=nx>suffixes</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;xml&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>outputFormats</span><span class=p>.</span><span class=nx>Atom</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=nx>name</span> <span class=p>=</span> <span class=s2>&#34;Atom&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>mediaType</span> <span class=p>=</span> <span class=s2>&#34;application/atom+xml&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>baseName</span> <span class=p>=</span> <span class=s2>&#34;atom&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>isPlainText</span> <span class=p>=</span> <span class=kc>false</span>
+</span></span><span class=line><span class=cl>  <span class=nx>rel</span> <span class=p>=</span> <span class=s2>&#34;alternate&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>isHTML</span> <span class=p>=</span> <span class=kc>false</span>
+</span></span><span class=line><span class=cl>  <span class=nx>noUgly</span> <span class=p>=</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>  <span class=nx>permalinkable</span> <span class=p>=</span> <span class=kc>false</span>
+</span></span></code></pre></div><p>Create a new layout in <code>_default/list.atom.xml</code> with the following content:</p><pre tabindex=0><code class=language-gotemplate data-lang=gotemplate>{{ printf `&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;` | safeHTML }}
+&lt;feed xmlns=&#34;http://www.w3.org/2005/Atom&#34;{{ with site.LanguageCode }} xml:lang=&#34;{{ . }}&#34;{{ end }}&gt;
+    &lt;generator uri=&#34;https://gohugo.io/&#34; version=&#34;{{ hugo.Version }}&#34;&gt;Hugo&lt;/generator&gt;
+    {{- $title := site.Title -}}
+    {{- with .Title -}}
+        {{- if (not (eq . site.Title)) -}}
+            {{- $title = printf `%s %s %s` . (i18n &#34;feed_title_on&#34; | default &#34;on&#34;) site.Title -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if .IsTranslated -}}
+        {{ $title = printf &#34;%s (%s)&#34; $title (index site.Data.i18n.languages .Lang) }}
+    {{- end -}}
+    {{ printf `&lt;title type=&#34;html&#34;&gt;&lt;![CDATA[%s]]&gt;&lt;/title&gt;` $title | safeHTML }}
+    {{ with (or (.Param &#34;subtitle&#34;) (.Param &#34;tagline&#34;)) }}
+        {{ printf `&lt;subtitle type=&#34;html&#34;&gt;&lt;![CDATA[%s]]&gt;&lt;/subtitle&gt;` . | safeHTML }}
+    {{ end }}
+    {{ $output_formats := .OutputFormats }}
+    {{ range $output_formats -}}
+        {{- $rel := (or (and (eq &#34;atom&#34; (.Name | lower)) &#34;self&#34;) &#34;alternate&#34;) -}}
+        {{ with $output_formats.Get .Name }}
+            {{ printf `&lt;link href=%q rel=%q type=%q title=%q /&gt;` .Permalink $rel .MediaType.Type .Name | safeHTML }}
+        {{- end -}}
+    {{- end }}
+    {{- range .Translations }}
+        {{ $output_formats := .OutputFormats }}
+        {{- $lang := .Lang }}
+        {{- $langstr := index site.Data.i18n.languages .Lang }}
+        {{ range $output_formats -}}
+            {{ with $output_formats.Get .Name }}
+                {{ printf `&lt;link href=%q rel=&#34;alternate&#34; type=%q hreflang=%q title=&#34;[%s] %s&#34; /&gt;` .Permalink .MediaType.Type $lang $langstr .Name | safeHTML }}
+            {{- end -}}
+        {{- end }}
+    {{- end }}
+    &lt;updated&gt;{{ now.Format &#34;2006-01-02T15:04:05-07:00&#34; | safeHTML }}&lt;/updated&gt;
+    {{ with site.Copyright }}
+        {{- $copyright := replace . &#34;{year}&#34; now.Year -}} {{/* In case the site.copyright uses a special string &#34;{year}&#34; */}}
+        {{- $copyright = replace $copyright &#34;&amp;copy;&#34; &#34;©&#34; -}}
+        &lt;rights&gt;{{ $copyright | plainify }}&lt;/rights&gt;
+    {{- end }}
+    {{ with .Param &#34;feed&#34; }}
+        {{/* For this to work, the $icon file should be present in the assets/ directory */}}
+        {{- $icon := .icon | default &#34;icon.svg&#34; -}}
+        {{- with resources.Get $icon -}}
+            &lt;icon&gt;{{ (. | fingerprint).Permalink }}&lt;/icon&gt;
+        {{- end }}
+
+        {{/* For this to work, the $logo file should be present in the assets/ directory */}}
+        {{- $logo := .logo | default &#34;logo.svg&#34; -}}
+        {{- with resources.Get $logo -}}
+            &lt;logo&gt;{{ (. | fingerprint).Permalink }}&lt;/logo&gt;
+        {{- end }}
+    {{ end }}
+    {{ with site.Author.name -}}
+        &lt;author&gt;
+            &lt;name&gt;{{ . }}&lt;/name&gt;
+            {{ with site.Author.email }}
+                &lt;email&gt;{{ . }}&lt;/email&gt;
+            {{ end -}}
+        &lt;/author&gt;
+    {{- end }}
+    {{ with site.Params.id }}
+        &lt;id&gt;{{ . | plainify }}&lt;/id&gt;
+    {{ else }}
+        &lt;id&gt;{{ .Permalink }}&lt;/id&gt;
+    {{ end }}
+    {{- $limit := (cond (le site.Config.Services.RSS.Limit 0) 65536 site.Config.Services.RSS.Limit) }}
+    {{- $feed_sections := site.Params.feedSections | default site.Params.mainSections -}}
+    {{/* Range through only the pages with a Type in $feed_sections. */}}
+    {{- $pages := where .RegularPages &#34;Type&#34; &#34;in&#34; $feed_sections -}}
+    {{- if (eq .Kind &#34;home&#34;) -}}
+        {{- $pages = where site.RegularPages &#34;Type&#34; &#34;in&#34; $feed_sections -}}
+    {{- end -}}
+    {{/* Remove the pages that have the disable_feed parameter set to true. */}}
+    {{- $pages = where $pages &#34;.Params.disable_feed&#34; &#34;!=&#34; true -}}
+    {{- range first $limit $pages }}
+        {{ $page := . }}
+        &lt;entry&gt;
+            {{ printf `&lt;title type=&#34;html&#34;&gt;&lt;![CDATA[%s]]&gt;&lt;/title&gt;` .Title | safeHTML }}
+            &lt;link href=&#34;{{ .Permalink }}?utm_source=atom_feed&#34; rel=&#34;alternate&#34; type=&#34;text/html&#34; /&gt;
+            {{- range .Translations }}
+                {{- $link := printf &#34;%s?utm_source=atom_feed&#34; .Permalink | safeHTML }}
+                {{- printf `&lt;link href=%q rel=&#34;alternate&#34; type=&#34;text/html&#34; hreflang=%q /&gt;` $link .Lang | safeHTML }}
+            {{- end }}
+            {{/* rel=related: See https://validator.w3.org/feed/docs/atom.html#link */}}
+            {{- range first 5 (site.RegularPages.Related .) }}
+                &lt;link href=&#34;{{ .Permalink }}?utm_source=atom_feed&#34; rel=&#34;related&#34; type=&#34;text/html&#34; title=&#34;{{ .Title }}&#34; /&gt;
+            {{- end }}
+            {{ with .Params.id }}
+                &lt;id&gt;{{ . | plainify }}&lt;/id&gt;
+            {{ else }}
+                &lt;id&gt;{{ .Permalink }}&lt;/id&gt;
+            {{ end }}
+            {{ with .Params.author -}}
+                {{- range . -}} &lt;!-- Assuming the author front-matter to be a list --&gt;
+                    &lt;author&gt;
+                        &lt;name&gt;{{ . }}&lt;/name&gt;
+                    &lt;/author&gt;
+                {{- end -}}
+            {{- end }}
+            &lt;published&gt;{{ .Date.Format &#34;2006-01-02T15:04:05-07:00&#34; | safeHTML }}&lt;/published&gt;
+            &lt;updated&gt;{{ .Lastmod.Format &#34;2006-01-02T15:04:05-07:00&#34; | safeHTML }}&lt;/updated&gt;
+            {{ $description1 := .Description | default &#34;&#34; }}
+            {{ $description := (cond (eq &#34;&#34; $description1) &#34;&#34; (printf &#34;&lt;blockquote&gt;%s&lt;/blockquote&gt;&#34; ($description1 | markdownify))) }}
+            {{ printf `&lt;content type=&#34;html&#34;&gt;&lt;![CDATA[%s%s]]&gt;&lt;/content&gt;` $description .Content | safeHTML }}
+            {{ with site.Taxonomies }}
+                {{ range $taxo,$_ := . }} &lt;!-- Defaults taxos: &#34;tags&#34;, &#34;categories&#34; --&gt;
+                    {{ with $page.Param $taxo }}
+                        {{ $taxo_list := . }} &lt;!-- $taxo_list will be the tags/categories list --&gt;
+                        {{ with site.GetPage (printf &#34;/%s&#34; $taxo) }}
+                            {{ $taxonomy_page := . }}
+                            {{ range $taxo_list }} &lt;!-- Below, assuming pretty URLs --&gt;
+                                &lt;category scheme=&#34;{{ printf &#34;%s%s&#34; $taxonomy_page.Permalink (. | urlize) }}&#34; term=&#34;{{ (. | urlize) }}&#34; label=&#34;{{ . }}&#34; /&gt;
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        &lt;/entry&gt;
+    {{ end }}
+&lt;/feed&gt;
+</code></pre></div><script type=application/ld+json src=jsonld.json></script></main><footer id=footer><p xmlns:dct=http://purl.org/dc/terms/ xmlns:vcard=http://www.w3.org/2001/vcard-rdf/3.0#><a rel=license href=https://creativecommons.org/publicdomain/zero/1.0/><img src=https://seb.xn--ho-hia.de/images/cc0.png style=border-style:none alt=CC0 width=88px height=31px></a><br>To the extent possible under law,
+<a rel=dct:publisher href=https://seb.xn--ho-hia.de/><span property="dct:title">Sebastian Hoß</span>
+</a>has waived all copyright and related or neighboring rights to
+<span property="dct:title">seb.xn--ho-hia.de</span>.
+This work is published from:
+<span property="vcard:Country" datatype="dct:ISO3166" content="EN" about="https://seb.xn--ho-hia.de/">Germany</span></p></footer></body></html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.128.0">Hugo</generator><title type="html">Assets on Sebastian Hoß</title><link href="https://seb.xn--ho-hia.de/tags/assets/" rel="alternate" type="text/html" title="html"/><link href="https://seb.xn--ho-hia.de/tags/assets/index.xml" rel="alternate" type="application/rss+xml" title="rss"/><link href="https://seb.xn--ho-hia.de/tags/assets/atom.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2024-07-01T02:33:53+00:00</updated><id>https://seb.xn--ho-hia.de/tags/assets/</id><entry><title type="html">Bundling with Hugo</title><link href="https://seb.xn--ho-hia.de/posts/hugo-bundles/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/hugo-humans/?utm_source=atom_feed" rel="related" type="text/html" title="humans.txt with Hugo"/><link href="https://seb.xn--ho-hia.de/posts/hugo-foaf/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.xn--ho-hia.de/posts/hugo-atom/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.xn--ho-hia.de/posts/github-actions-publish-hugo-site/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><link href="https://seb.xn--ho-hia.de/posts/github-actions-specify-hugo-version/?utm_source=atom_feed" rel="related" type="text/html" title="Use a specific Hugo version with GitHub Actions"/><id>https://seb.xn--ho-hia.de/posts/hugo-bundles/</id><published>2020-12-28T00:00:00+00:00</published><updated>2023-01-06T15:27:21+01:00</updated><content type="html"><![CDATA[<p><a href="https://gohugo.io/">Hugo</a> allows <a href="https://gohugo.io/hugo-pipes/bundling/">bundling</a> of assets with several built-in functions:</p>
+<pre tabindex="0"><code class="language-gotemplate" data-lang="gotemplate">{{ $normalize := resources.Get &#34;/css/normalize.css&#34; }}
+{{ $font := resources.Get &#34;/css/font.css&#34; }}
+{{ $header := resources.Get &#34;/css/header.css&#34; }}
+{{ $footer := resources.Get &#34;/css/footer.css&#34; }}
+{{ $navigation := resources.Get &#34;/css/navigation.css&#34; }}
+{{ $navigation_mobile := resources.Get &#34;/css/navigation-mobile.css&#34; }}
+{{ $layout := resources.Get &#34;/css/layout.css&#34; }}
+{{ $layout_mobile := resources.Get &#34;/css/layout-mobile.css&#34; }}
+{{ $syntax := resources.Get &#34;/css/syntax.css&#34; }}
+{{ $darkmode := resources.Get &#34;/css/darkmode.css&#34; | resources.Minify | resources.Fingerprint &#34;sha512&#34; }}
+
+{{ $base := slice $normalize $font $header $footer $navigation $layout $syntax | resources.Concat &#34;css/base.css&#34; | resources.Minify | resources.Fingerprint &#34;sha512&#34; }}
+{{ $mobile := slice $navigation_mobile $layout_mobile | resources.Concat &#34;css/mobile.css&#34; | resources.Minify | resources.Fingerprint &#34;sha512&#34; }}
+
+&lt;link href=&#34;{{ $base.Permalink }}&#34; integrity=&#34;{{ $base.Data.Integrity }}&#34; media=&#34;screen&#34; rel=&#34;stylesheet&#34;&gt;
+&lt;link href=&#34;{{ $mobile.Permalink }}&#34; integrity=&#34;{{ $mobile.Data.Integrity }}&#34; media=&#34;screen and (max-width: 800px)&#34; rel=&#34;stylesheet&#34;&gt;
+
+&lt;link href=&#34;{{ $darkmode.Permalink }}&#34; integrity=&#34;{{ $darkmode.Data.Integrity }}&#34; media=&#34;screen and (prefers-color-scheme: dark)&#34; rel=&#34;stylesheet&#34;&gt;
+</code></pre>]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/categories/website" term="website" label="website"/><category scheme="https://seb.xn--ho-hia.de/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.xn--ho-hia.de/tags/bundle" term="bundle" label="bundle"/><category scheme="https://seb.xn--ho-hia.de/tags/assets" term="assets" label="assets"/></entry></feed>

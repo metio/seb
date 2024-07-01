@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.128.0">Hugo</generator><title type="html">Service Worker on Sebastian Hoß</title><link href="https://seb.xn--ho-hia.de/tags/service-worker/" rel="alternate" type="text/html" title="html"/><link href="https://seb.xn--ho-hia.de/tags/service-worker/index.xml" rel="alternate" type="application/rss+xml" title="rss"/><link href="https://seb.xn--ho-hia.de/tags/service-worker/atom.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2024-07-01T02:33:53+00:00</updated><id>https://seb.xn--ho-hia.de/tags/service-worker/</id><entry><title type="html">Service workers with Hugo</title><link href="https://seb.xn--ho-hia.de/posts/hugo-serviceworkers/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/hugo-webmanifest/?utm_source=atom_feed" rel="related" type="text/html" title="Web app manifests with Hugo"/><link href="https://seb.xn--ho-hia.de/posts/hugo-bundles/?utm_source=atom_feed" rel="related" type="text/html" title="Bundling with Hugo"/><link href="https://seb.xn--ho-hia.de/posts/hugo-humans/?utm_source=atom_feed" rel="related" type="text/html" title="humans.txt with Hugo"/><link href="https://seb.xn--ho-hia.de/posts/hugo-foaf/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.xn--ho-hia.de/posts/hugo-atom/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><id>https://seb.xn--ho-hia.de/posts/hugo-serviceworkers/</id><published>2021-01-25T00:00:00+00:00</published><updated>2023-01-06T16:40:24+01:00</updated><content type="html"><![CDATA[<p>To use a <a href="https://serviceworke.rs/">serviceworker</a> to cache a <a href="https://gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/javascript&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;js&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">ServiceWorker</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;ServiceWorker&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/javascript&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;serviceworker&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span></code></pre></div><p>Create a new layout in <code>_default/home.serviceworker.js</code> with the following content:</p>
+<pre tabindex="0"><code class="language-gotemplate" data-lang="gotemplate">const CACHE = &#39;cache-and-update&#39;;
+
+self.addEventListener(&#39;install&#39;, (event) =&gt; {
+  event.waitUntil(precache());
+});
+
+self.addEventListener(&#39;fetch&#39;, (event) =&gt; {
+  event.respondWith(fromCache(event.request));
+  event.waitUntil(update(event.request));
+});
+
+const precache = async () =&gt; {
+    const cache = await caches.open(CACHE);
+    return await cache.addAll([
+        {{ range $i, $e := .Site.RegularPages }}
+        &#39;{{ $.RelPermalink }}&#39;{{ if $i }}, {{ end }}
+        {{ end }}
+    ]);
+}
+
+const fromCache = async (request) =&gt; {
+    const cache = await caches.open(CACHE);
+    const match = await cache.match(request);
+    return match || Promise.reject(&#39;no-match&#39;);
+}
+
+const update = async (request) =&gt; {
+    const cache = await caches.open(CACHE);
+    const response = await fetch(request);
+    return await cache.put(request, response);
+}
+</code></pre><h2 id="links">Links</h2>
+<ul>
+<li><a href="https://github.com/gohugoio/hugo/issues/5495">https://github.com/gohugoio/hugo/issues/5495</a></li>
+<li><a href="https://github.com/wildhaber/offline-first-sw">https://github.com/wildhaber/offline-first-sw</a></li>
+<li><a href="https://gohugohq.com/howto/go-offline-with-service-worker/">https://gohugohq.com/howto/go-offline-with-service-worker/</a></li>
+</ul>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/categories/website" term="website" label="website"/><category scheme="https://seb.xn--ho-hia.de/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.xn--ho-hia.de/tags/service-worker" term="service-worker" label="service worker"/></entry></feed>

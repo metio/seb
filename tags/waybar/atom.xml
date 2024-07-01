@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.128.0">Hugo</generator><title type="html">Waybar on Sebastian Hoß</title><link href="https://seb.xn--ho-hia.de/tags/waybar/" rel="alternate" type="text/html" title="html"/><link href="https://seb.xn--ho-hia.de/tags/waybar/index.xml" rel="alternate" type="application/rss+xml" title="rss"/><link href="https://seb.xn--ho-hia.de/tags/waybar/atom.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2024-07-01T02:33:53+00:00</updated><id>https://seb.xn--ho-hia.de/tags/waybar/</id><entry><title type="html">Waybar on SwayWM</title><link href="https://seb.xn--ho-hia.de/posts/sway-waybar/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/sway-screenlock/?utm_source=atom_feed" rel="related" type="text/html" title="Lock your screen on SwayWM"/><link href="https://seb.xn--ho-hia.de/posts/sway-screenshots/?utm_source=atom_feed" rel="related" type="text/html" title="Taken screenshots on SwayWM"/><id>https://seb.xn--ho-hia.de/posts/sway-waybar/</id><published>2021-08-23T00:00:00+00:00</published><updated>2023-01-06T16:40:24+01:00</updated><content type="html"><![CDATA[<p><a href="https://github.com/Alexays/Waybar/">Waybar</a> can be used as a status bar for <a href="https://swaywm.org/">SwayWM</a>. You tell Sway to use it with the following snippet in your Sway configuration:</p>
+<pre tabindex="0"><code>bar {
+    swaybar_command waybar
+}
+</code></pre><p>Configure Waybar itself in <code>~/.config/waybar/config</code>:</p>
+<pre tabindex="0"><code>{
+    &#34;layer&#34;: &#34;top&#34;,
+    &#34;modules-left&#34;: [&#34;sway/workspaces&#34;, &#34;sway/mode&#34;],
+    &#34;modules-center&#34;: [&#34;sway/window&#34;],
+    &#34;modules-right&#34;: [&#34;clock&#34;],
+    &#34;sway/window&#34;: {
+        &#34;max-length&#34;: 50
+    },
+    &#34;clock&#34;: {
+        &#34;format-alt&#34;: &#34;{:%a, %d. %b  %H:%M}&#34;
+    }
+}
+</code></pre>]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/tags/swaywm" term="swaywm" label="swaywm"/><category scheme="https://seb.xn--ho-hia.de/tags/waybar" term="waybar" label="waybar"/></entry></feed>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.128.0">Hugo</generator><title type="html">Github Packages on Sebastian Hoß</title><link href="https://seb.xn--ho-hia.de/tags/github-packages/" rel="alternate" type="text/html" title="html"/><link href="https://seb.xn--ho-hia.de/tags/github-packages/index.xml" rel="alternate" type="application/rss+xml" title="rss"/><link href="https://seb.xn--ho-hia.de/tags/github-packages/atom.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2024-07-01T02:33:53+00:00</updated><id>https://seb.xn--ho-hia.de/tags/github-packages/</id><entry><title type="html">GitHub Packages with Maven</title><link href="https://seb.xn--ho-hia.de/posts/github-maven-packages/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/maven-github-sonarcloud/?utm_source=atom_feed" rel="related" type="text/html" title="Analyze Maven projects with SonarCloud using GitHub Actions"/><link href="https://seb.xn--ho-hia.de/posts/github-actions-cache-maven-artifacts/?utm_source=atom_feed" rel="related" type="text/html" title="Cache Maven artifacts with GitHub Actions"/><link href="https://seb.xn--ho-hia.de/posts/maven-google-central/?utm_source=atom_feed" rel="related" type="text/html" title="Google Central"/><link href="https://seb.xn--ho-hia.de/posts/maven-encoding/?utm_source=atom_feed" rel="related" type="text/html" title="Specify encoding for Maven projects"/><link href="https://seb.xn--ho-hia.de/posts/maven-reproducible/?utm_source=atom_feed" rel="related" type="text/html" title="Creating reproducible artifacts with Maven"/><id>https://seb.xn--ho-hia.de/posts/github-maven-packages/</id><published>2021-11-22T00:00:00+00:00</published><updated>2023-01-06T15:27:21+01:00</updated><content type="html"><![CDATA[<p><a href="https://github.com/features/packages">GitHub Packages</a> can be used to host <a href="https://maven.apache.org/">Maven</a> packages with the following configuration in your <code>~/.m2/settings.xml</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;settings&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;profiles&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;profile&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;id&gt;</span>github<span class="nt">&lt;/id&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;repositories&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;repository&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;id&gt;</span>maven-build-process<span class="nt">&lt;/id&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;name&gt;</span>GitHub maven-build-process Apache Maven Packages<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;url&gt;</span>https://maven.pkg.github.com/metio/maven-build-process<span class="nt">&lt;/url&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;releases&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;/releases&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;snapshots&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;/snapshots&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/repository&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;repository&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;id&gt;</span>hcf4j<span class="nt">&lt;/id&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;name&gt;</span>GitHub hcf4j Apache Maven Packages<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;url&gt;</span>https://maven.pkg.github.com/metio/hcf4j<span class="nt">&lt;/url&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;releases&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;/releases&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;snapshots&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&lt;/snapshots&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/repository&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;/repositories&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/profile&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/profiles&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;servers&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;server&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;id&gt;</span>maven-build-process<span class="nt">&lt;/id&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;username&gt;</span>USERNAME<span class="nt">&lt;/username&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;password&gt;</span>GITHUB_TOKEN<span class="nt">&lt;/password&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/server&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;server&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;id&gt;</span>hcf4j<span class="nt">&lt;/id&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;username&gt;</span>USERNAME<span class="nt">&lt;/username&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;password&gt;</span>GITHUB_TOKEN<span class="nt">&lt;/password&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/server&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/servers&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/settings&gt;</span>
+</span></span></code></pre></div><p>You will have to add another repository/server for each project you are fetching from GitHub.</p>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/tags/maven" term="maven" label="maven"/><category scheme="https://seb.xn--ho-hia.de/tags/github" term="github" label="github"/><category scheme="https://seb.xn--ho-hia.de/tags/github-packages" term="github-packages" label="github packages"/></entry></feed>

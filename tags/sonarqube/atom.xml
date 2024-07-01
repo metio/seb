@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.128.0">Hugo</generator><title type="html">Sonarqube on Sebastian Hoß</title><link href="https://seb.xn--ho-hia.de/tags/sonarqube/" rel="alternate" type="text/html" title="html"/><link href="https://seb.xn--ho-hia.de/tags/sonarqube/index.xml" rel="alternate" type="application/rss+xml" title="rss"/><link href="https://seb.xn--ho-hia.de/tags/sonarqube/atom.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2024-07-01T02:33:53+00:00</updated><id>https://seb.xn--ho-hia.de/tags/sonarqube/</id><entry><title type="html">Analyze Maven projects with SonarCloud using GitHub Actions</title><link href="https://seb.xn--ho-hia.de/posts/maven-github-sonarcloud/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/github-actions-cache-maven-artifacts/?utm_source=atom_feed" rel="related" type="text/html" title="Cache Maven artifacts with GitHub Actions"/><link href="https://seb.xn--ho-hia.de/posts/github-actions-schedule-build/?utm_source=atom_feed" rel="related" type="text/html" title="Delay GitHub Actions builds"/><link href="https://seb.xn--ho-hia.de/posts/github-actions-send-toot/?utm_source=atom_feed" rel="related" type="text/html" title="Send toots with GitHub Actions"/><link href="https://seb.xn--ho-hia.de/posts/github-actions-send-email/?utm_source=atom_feed" rel="related" type="text/html" title="Send emails with GitHub Actions"/><link href="https://seb.xn--ho-hia.de/posts/github-actions-upload-release-assets/?utm_source=atom_feed" rel="related" type="text/html" title="Upload release assets with GitHub Actions"/><id>https://seb.xn--ho-hia.de/posts/maven-github-sonarcloud/</id><published>2021-05-03T00:00:00+00:00</published><updated>2023-01-06T17:32:06+01:00</updated><content type="html"><![CDATA[<p>To analyze <a href="https://maven.apache.org/">Maven</a> projects with <a href="https://sonarcloud.io">SonarCloud</a> using <a href="https://github.com/features/actions">GitHub Actions</a>, first create the following <code>settings.xml</code> file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">&#34;http://maven.apache.org/SETTINGS/1.0.0&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://maven.apache.org/SETTINGS/1.0.0
+</span></span></span><span class="line"><span class="cl"><span class="s">                      http://maven.apache.org/xsd/settings-1.0.0.xsd&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;pluginGroups&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;pluginGroup&gt;</span>org.sonarsource.scanner.maven<span class="nt">&lt;/pluginGroup&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/pluginGroups&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;activeProfiles&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;activeProfile&gt;</span>sonar<span class="nt">&lt;/activeProfile&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/activeProfiles&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;profiles&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;profile&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;id&gt;</span>sonar<span class="nt">&lt;/id&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;properties&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;sonar.host.url&gt;</span>https://sonarcloud.io<span class="nt">&lt;/sonar.host.url&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;sonar.organization&gt;</span>YOUR_ORG<span class="nt">&lt;/sonar.organization&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;sonar.projectKey&gt;</span>YOUR_PROJECT<span class="nt">&lt;/sonar.projectKey&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;sonar.login&gt;</span>${env.SONAR_TOKEN}<span class="nt">&lt;/sonar.login&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/properties&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/profile&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/profiles&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/settings&gt;</span>
+</span></span></code></pre></div><p>Finally, add a step to your workflow:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Verify Project</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">mvn --settings $GITHUB_WORKSPACE/settings.xml verify sonar:sonar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">SONAR_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.SONAR_TOKEN }}</span><span class="w">
+</span></span></span></code></pre></div><h2 id="links">Links</h2>
+<ul>
+<li><a href="https://maven.apache.org/settings.html">https://maven.apache.org/settings.html</a></li>
+<li><a href="https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven/">https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven/</a></li>
+</ul>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/devops" term="devops" label="devops"/><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/tags/maven" term="maven" label="maven"/><category scheme="https://seb.xn--ho-hia.de/tags/github" term="github" label="github"/><category scheme="https://seb.xn--ho-hia.de/tags/sonarqube" term="sonarqube" label="sonarqube"/><category scheme="https://seb.xn--ho-hia.de/tags/github-actions" term="github-actions" label="github actions"/></entry></feed>

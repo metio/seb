@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.128.0">Hugo</generator><title type="html">Chsh on Sebastian Hoß</title><link href="https://seb.xn--ho-hia.de/tags/chsh/" rel="alternate" type="text/html" title="html"/><link href="https://seb.xn--ho-hia.de/tags/chsh/index.xml" rel="alternate" type="application/rss+xml" title="rss"/><link href="https://seb.xn--ho-hia.de/tags/chsh/atom.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2024-07-01T02:33:53+00:00</updated><id>https://seb.xn--ho-hia.de/tags/chsh/</id><entry><title type="html">Use tmux as your login shell</title><link href="https://seb.xn--ho-hia.de/posts/tmux-login-shell/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/tmux-peek/?utm_source=atom_feed" rel="related" type="text/html" title="Peeking with tmux"/><id>https://seb.xn--ho-hia.de/posts/tmux-login-shell/</id><published>2021-04-19T00:00:00+00:00</published><updated>2023-01-06T16:22:24+01:00</updated><content type="html"><![CDATA[<p>To use <a href="https://github.com/tmux/tmux">tmux</a> as your login shell, use <code>chsh</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># list all available shells</span>
+</span></span><span class="line"><span class="cl">$ chsh --list-shells
+</span></span><span class="line"><span class="cl">/bin/sh
+</span></span><span class="line"><span class="cl">/bin/bash
+</span></span><span class="line"><span class="cl">/sbin/nologin
+</span></span><span class="line"><span class="cl">/usr/bin/sh
+</span></span><span class="line"><span class="cl">/usr/bin/bash
+</span></span><span class="line"><span class="cl">/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">/usr/bin/zsh
+</span></span><span class="line"><span class="cl">/bin/zsh
+</span></span><span class="line"><span class="cl">/usr/bin/tmux
+</span></span><span class="line"><span class="cl">/bin/tmux
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># select login shell</span>
+</span></span><span class="line"><span class="cl">$ chsh --shell /usr/bin/tmux
+</span></span></code></pre></div>]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/tags/tmux" term="tmux" label="tmux"/><category scheme="https://seb.xn--ho-hia.de/tags/login-shell" term="login-shell" label="login shell"/><category scheme="https://seb.xn--ho-hia.de/tags/chsh" term="chsh" label="chsh"/></entry></feed>

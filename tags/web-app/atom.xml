@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.128.0">Hugo</generator><title type="html">Web App on Sebastian Hoß</title><link href="https://seb.xn--ho-hia.de/tags/web-app/" rel="alternate" type="text/html" title="html"/><link href="https://seb.xn--ho-hia.de/tags/web-app/index.xml" rel="alternate" type="application/rss+xml" title="rss"/><link href="https://seb.xn--ho-hia.de/tags/web-app/atom.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2024-07-01T02:33:53+00:00</updated><id>https://seb.xn--ho-hia.de/tags/web-app/</id><entry><title type="html">Web app manifests with Hugo</title><link href="https://seb.xn--ho-hia.de/posts/hugo-webmanifest/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/hugo-bundles/?utm_source=atom_feed" rel="related" type="text/html" title="Bundling with Hugo"/><link href="https://seb.xn--ho-hia.de/posts/hugo-humans/?utm_source=atom_feed" rel="related" type="text/html" title="humans.txt with Hugo"/><link href="https://seb.xn--ho-hia.de/posts/hugo-foaf/?utm_source=atom_feed" rel="related" type="text/html" title="FOAF with Hugo"/><link href="https://seb.xn--ho-hia.de/posts/hugo-atom/?utm_source=atom_feed" rel="related" type="text/html" title="Atom Feed with Hugo"/><link href="https://seb.xn--ho-hia.de/posts/github-actions-publish-hugo-site/?utm_source=atom_feed" rel="related" type="text/html" title="Publish Hugo site with GitHub Actions"/><id>https://seb.xn--ho-hia.de/posts/hugo-webmanifest/</id><published>2021-01-11T00:00:00+00:00</published><updated>2023-01-06T16:40:24+01:00</updated><content type="html"><![CDATA[<p>To publish a <a href="https://developer.mozilla.org/en-US/docs/Web/Manifest">web app manifest</a> document with your <a href="https://gohugo.io/">Hugo</a> site, configure a <a href="https://en.wikipedia.org/wiki/Media_type">media type</a> in your <code>config.toml</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">mediaTypes</span><span class="p">.</span><span class="s2">&#34;application/manifest+json&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">suffixes</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;webmanifest&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">Webmanifest</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Web App Manifest&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/manifest+json&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">baseName</span> <span class="p">=</span> <span class="s2">&#34;manifest&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">isPlainText</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">isHTML</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">noUgly</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">permalinkable</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span></code></pre></div><p>Create a new layout in <code>_default/home.manifest.json</code> with the following content:</p>
+<pre tabindex="0"><code class="language-gotemplate" data-lang="gotemplate">{
+  &#34;name&#34;: &#34;{{ .Site.Title }}&#34;,
+  &#34;short_name&#34;: &#34;{{ .Site.Title }}&#34;,
+  &#34;start_url&#34;: &#34;.&#34;,
+  &#34;display&#34;: &#34;minimal-ui&#34;,
+  &#34;background_color&#34;: &#34;#fff&#34;,
+  &#34;description&#34;: &#34;{{ .Site.Params.description }}&#34;
+}
+</code></pre><h2 id="links">Links</h2>
+<ul>
+<li><a href="https://web.dev/add-manifest/">https://web.dev/add-manifest/</a></li>
+</ul>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/categories/website" term="website" label="website"/><category scheme="https://seb.xn--ho-hia.de/tags/hugo" term="hugo" label="hugo"/><category scheme="https://seb.xn--ho-hia.de/tags/web-app" term="web-app" label="web app"/><category scheme="https://seb.xn--ho-hia.de/tags/manifest" term="manifest" label="manifest"/></entry></feed>

@@ -1,0 +1,6 @@
+
+Contact: mailto:security@shoss.de
+Contact: mailto:security@xn--ho-hia.de
+Expires: 2024-08-01T02:33:53Z
+Preferred-Languages: en
+Canonical: https://seb.xn--ho-hia.de/.well-known/security.txt

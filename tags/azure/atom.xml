@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.128.0">Hugo</generator><title type="html">Azure on Sebastian Hoß</title><link href="https://seb.xn--ho-hia.de/tags/azure/" rel="alternate" type="text/html" title="html"/><link href="https://seb.xn--ho-hia.de/tags/azure/index.xml" rel="alternate" type="application/rss+xml" title="rss"/><link href="https://seb.xn--ho-hia.de/tags/azure/atom.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2024-07-01T02:33:53+00:00</updated><id>https://seb.xn--ho-hia.de/tags/azure/</id><entry><title type="html">awsenv</title><link href="https://seb.xn--ho-hia.de/posts/awsenv/?utm_source=atom_feed" rel="alternate" type="text/html"/><id>https://seb.xn--ho-hia.de/posts/awsenv/</id><published>2022-02-14T00:00:00+00:00</published><updated>2023-01-06T16:40:24+01:00</updated><content type="html"><![CDATA[<p>To quickly log into and switch between AWS accounts in a terminal, I wrote the following script. It sets the <code>AWS_PROFILE</code> environment variable which is used by many tools that interact with the AWS API, like <code>awscli</code> or <code>terraform</code>. My current environment uses AzureAD as a single-sign-on provider, therefore this script uses <code>aws sso login</code> to perform an MFA login into AWS. The AWS profiles must be set up in such a way that <code>aws configure list-profiles</code> can detect them, which is typically done by adding them in <code>${AWS_CONFIG_FILE:-$HOME/.aws/config}</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/usr/bin/env sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">###############################################################################</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># This script performs an AWS SSO login for the user-selected AWS profile</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># and sets the AWS_PROFILE environment variable afterwards. To use</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># this, create an alias that sources this script like this:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#     alias awsenv=&#39;source path/to/this/script.sh&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Required software that is not in GNU coreutils:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   - &#39;aws&#39; to list profiles &amp; get current caller identity</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   - &#39;fzf&#39; to list all available AWS profiles</span>
+</span></span><span class="line"><span class="cl"><span class="c1">###############################################################################</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># prompt user to select one AWS profile</span>
+</span></span><span class="line"><span class="cl"><span class="nv">profile</span><span class="o">=</span><span class="k">$(</span>aws configure list-profiles <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  fzf --cycle --layout<span class="o">=</span>reverse --tiebreak<span class="o">=</span>index<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># user can cancel switching profiles by pressing ESC</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">profile</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># check is access token exists and is valid for selected profile</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> ! aws --profile <span class="s2">&#34;</span><span class="si">${</span><span class="nv">profile</span><span class="si">}</span><span class="s2">&#34;</span> sts get-caller-identity &gt;/dev/null 2&gt;<span class="p">&amp;</span>1<span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># perform login into profile in case access token is invalid</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> ! aws sso login --profile <span class="s2">&#34;</span><span class="si">${</span><span class="nv">profile</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># short circuit in case login failed</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">  <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># AWS_PROFILE is used by many AWS-related tools</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;Setting AWS_PROFILE to [</span><span class="si">${</span><span class="nv">profile</span><span class="si">}</span><span class="s2">]&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">export</span> <span class="nv">AWS_PROFILE</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">profile</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># do not expose internal variables</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">unset</span> profile
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></div>]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/tags/aws" term="aws" label="aws"/><category scheme="https://seb.xn--ho-hia.de/tags/azure" term="azure" label="azure"/><category scheme="https://seb.xn--ho-hia.de/tags/fzf" term="fzf" label="fzf"/></entry></feed>

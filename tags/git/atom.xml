@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.128.0">Hugo</generator><title type="html">Git on Sebastian Hoß</title><link href="https://seb.xn--ho-hia.de/tags/git/" rel="alternate" type="text/html" title="html"/><link href="https://seb.xn--ho-hia.de/tags/git/index.xml" rel="alternate" type="application/rss+xml" title="rss"/><link href="https://seb.xn--ho-hia.de/tags/git/atom.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2024-07-01T02:33:53+00:00</updated><id>https://seb.xn--ho-hia.de/tags/git/</id><entry><title type="html">Multiple Git Configurations</title><link href="https://seb.xn--ho-hia.de/posts/multiple-git-configs/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/nvim-plugin-auto-updates/?utm_source=atom_feed" rel="related" type="text/html" title="Automatically update plugins for vim/nvim"/><link href="https://seb.xn--ho-hia.de/posts/chezmoi-auto-git/?utm_source=atom_feed" rel="related" type="text/html" title="Manage dotfiles with chezmoi and git"/><link href="https://seb.xn--ho-hia.de/posts/git-push-only-mirror/?utm_source=atom_feed" rel="related" type="text/html" title="Push-only mirrors for Git Repositories"/><link href="https://seb.xn--ho-hia.de/posts/git-mirror/?utm_source=atom_feed" rel="related" type="text/html" title="Mirror Git Repositories"/><link href="https://seb.xn--ho-hia.de/posts/gitlab-distributor/?utm_source=atom_feed" rel="related" type="text/html" title="GitLab the Git Distributor"/><id>https://seb.xn--ho-hia.de/posts/multiple-git-configs/</id><published>2023-01-05T00:00:00+00:00</published><updated>2023-01-06T17:32:06+01:00</updated><content type="html"><![CDATA[<p>To split yet re-use as much configuration for Git as possible, you can create one root configuration that looks similar to this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[user]</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span> <span class="o">=</span> <span class="s">Your Name Here</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[includeIf &#34;gitdir:~/git/personal/&#34;]</span>
+</span></span><span class="line"><span class="cl">  <span class="na">path</span> <span class="o">=</span> <span class="s">~/.config/git/personal</span>
+</span></span><span class="line"><span class="cl"><span class="k">[includeIf &#34;gitdir:~/git/work/&#34;]</span>
+</span></span><span class="line"><span class="cl">  <span class="na">path</span> <span class="o">=</span> <span class="s">~/.config/git/work</span>
+</span></span></code></pre></div><p>The <a href="https://git-scm.com/docs/git-config#_includes">includeIf</a> directive supports multiple keywords. In my case, work and personal projects have a different root directory, therefore I can filter based on the location using <code>gitdir</code>. The personal Git configuration simply looks like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[user]</span>
+</span></span><span class="line"><span class="cl">  <span class="na">email</span> <span class="o">=</span> <span class="s">personal.email@example.com</span>
+</span></span></code></pre></div><p>and the work related configuration like this using a different email address:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[user]</span>
+</span></span><span class="line"><span class="cl">  <span class="na">email</span> <span class="o">=</span> <span class="s">first.last@work.example</span>
+</span></span></code></pre></div><p>Additional settings that are different for personal/work accounts can be split the same way, for example to use a different signing key for work.</p>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/tags/git" term="git" label="git"/><category scheme="https://seb.xn--ho-hia.de/tags/config" term="config" label="config"/></entry><entry><title type="html">Automatically update plugins for vim/nvim</title><link href="https://seb.xn--ho-hia.de/posts/nvim-plugin-auto-updates/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/chezmoi-auto-git/?utm_source=atom_feed" rel="related" type="text/html" title="Manage dotfiles with chezmoi and git"/><link href="https://seb.xn--ho-hia.de/posts/emacs-systemd/?utm_source=atom_feed" rel="related" type="text/html" title="emacs and systemd"/><link href="https://seb.xn--ho-hia.de/posts/git-push-only-mirror/?utm_source=atom_feed" rel="related" type="text/html" title="Push-only mirrors for Git Repositories"/><link href="https://seb.xn--ho-hia.de/posts/git-mirror/?utm_source=atom_feed" rel="related" type="text/html" title="Mirror Git Repositories"/><link href="https://seb.xn--ho-hia.de/posts/gitlab-distributor/?utm_source=atom_feed" rel="related" type="text/html" title="GitLab the Git Distributor"/><id>https://seb.xn--ho-hia.de/posts/nvim-plugin-auto-updates/</id><published>2022-01-01T00:00:00+00:00</published><updated>2023-01-06T16:22:24+01:00</updated><content type="html"><![CDATA[<p>Both <a href="https://www.vim.org/">Vim</a> and <a href="https://neovim.io/">Neovim</a> have a <a href="https://vimhelp.org/repeat.txt.html#packages">built-in</a> <a href="https://neovim.io/doc/user/usr_05.html#plugin">plugin mechanism</a> that loads plugins from <code>~/.vim/pack/*/{start,opt}/*</code> (Vim) or <code>~/.local/share/nvim/site/pack/*/{start,opt}/*</code> (Neovim). All you have to do to install new plugins, is to <code>git clone</code> their repository into those directories. To automatically update those clones, create the following script:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/usr/bin/env zsh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">###############################################################################</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># This script git-pulls all installed nvim plugins which are using the built-in</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># nvim plugin manager. Those plugins are located in .local/share/nvim/site/pack</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Required software that is not in GNU coreutils:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   - &#39;git&#39; to fetch plugin updates from upstream</span>
+</span></span><span class="line"><span class="cl"><span class="c1">###############################################################################</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### User specific variables, adjust to your own needs</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># folder that contains all nvim plugins</span>
+</span></span><span class="line"><span class="cl"><span class="nv">PLUGIN_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">XDG_DATA_HOME</span><span class="k">:-</span><span class="nv">$HOME</span><span class="p">/.local/share</span><span class="si">}</span><span class="s2">/nvim/site/pack&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### Script logic</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;updating all plugins in </span><span class="si">${</span><span class="nv">PLUGIN_DIR</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># iterate through all directories and git pull em</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> directory in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">PLUGIN_DIR</span><span class="si">}</span><span class="s2">&#34;</span>/*/<span class="o">{</span>start,opt<span class="o">}</span>/*<span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> -d <span class="s2">&#34;</span><span class="si">${</span><span class="nv">directory</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">plugin</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">&#34;</span><span class="si">${</span><span class="nv">directory</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;updating </span><span class="si">${</span><span class="nv">plugin</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        git -C <span class="s2">&#34;</span><span class="si">${</span><span class="nv">directory</span><span class="si">}</span><span class="s2">&#34;</span> pull --quiet
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><p>In case you are using Vim, adjust the <code>PLUGIN_DIR</code> variable to point to your Vim plugin directory instead and save the resulting shell script as a file called <code>update-nvim-plugins.sh</code> in some folder of your choice. Do not forget to set the executable bit with <code>chmod +x /path/to/your/folder/update-nvim-plugins.sh</code>. Since all good developers must be lazy, write the following <a href="https://www.freedesktop.org/software/systemd/man/systemd.service.html">systemd service</a> to execute the above script automatically:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-service" data-lang="service"><span class="line"><span class="cl"><span class="k">[Unit]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Description</span><span class="o">=</span><span class="s">cron job that triggers an update of all nvim plugins</span>
+</span></span><span class="line"><span class="cl"><span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+</span></span><span class="line"><span class="cl"><span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Service]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/path/to/your/folder/update-nvim-plugins.sh</span>
+</span></span><span class="line"><span class="cl"><span class="na">RemainAfterExit</span><span class="o">=</span><span class="s">false</span>
+</span></span></code></pre></div><p>Adjust the <code>ExecStart</code> line to match the location where you saved the above script and place that service definition in a file called <code>nvim-plugins-update.service</code> into your local <code>~/.config/systemd/user</code> directory. Add another file called <code>nvim-plugins-update.timer</code> next to it that defines a <a href="https://www.freedesktop.org/software/systemd/man/systemd.timer.html">systemd timer</a> with the following content:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-timer" data-lang="timer"><span class="line"><span class="cl"><span class="k">[Unit]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Description</span><span class="o">=</span><span class="s">Update nvim plugins every week</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Timer]</span>
+</span></span><span class="line"><span class="cl"><span class="na">OnCalendar</span><span class="o">=</span><span class="s">weekly</span>
+</span></span><span class="line"><span class="cl"><span class="na">Persistent</span><span class="o">=</span><span class="s">true</span>
+</span></span><span class="line"><span class="cl"><span class="na">RandomizedDelaySec</span><span class="o">=</span><span class="s">5hours</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Install]</span>
+</span></span><span class="line"><span class="cl"><span class="na">WantedBy</span><span class="o">=</span><span class="s">timers.target</span>
+</span></span></code></pre></div><p>Adjust how often you want to update the plugins you are using in the <code>OnCalendar</code> line. Enable this service/timer with:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="gp">$</span> systemctl --user <span class="nb">enable</span> nvim-plugins-update
+</span></span></code></pre></div><p>Finally, add the following shell aliases to make it easier to interact with the created systemd units:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># trigger an update manually</span>
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span> update-nvim-plugins<span class="o">=</span><span class="s1">&#39;systemctl --user start nvim-plugins-update&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># see status of last auto-update</span>
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span> update-nvim-plugins-status<span class="o">=</span><span class="s1">&#39;systemctl --user status nvim-plugins-update&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># see logs of past auto-updates</span>
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span> update-nvim-plugins-logs<span class="o">=</span><span class="s1">&#39;journalctl --user --unit nvim-plugins-update&#39;</span>
+</span></span></code></pre></div><p>With this setup in place, all your plugins will be automatically updated once per week or however often you have configured in the timer.</p>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/tags/vim" term="vim" label="vim"/><category scheme="https://seb.xn--ho-hia.de/tags/neovim" term="neovim" label="neovim"/><category scheme="https://seb.xn--ho-hia.de/tags/plugins" term="plugins" label="plugins"/><category scheme="https://seb.xn--ho-hia.de/tags/updates" term="updates" label="updates"/><category scheme="https://seb.xn--ho-hia.de/tags/systemd" term="systemd" label="systemd"/><category scheme="https://seb.xn--ho-hia.de/tags/shell" term="shell" label="shell"/><category scheme="https://seb.xn--ho-hia.de/tags/git" term="git" label="git"/></entry><entry><title type="html">Manage dotfiles with chezmoi and git</title><link href="https://seb.xn--ho-hia.de/posts/chezmoi-auto-git/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/git-push-only-mirror/?utm_source=atom_feed" rel="related" type="text/html" title="Push-only mirrors for Git Repositories"/><link href="https://seb.xn--ho-hia.de/posts/git-mirror/?utm_source=atom_feed" rel="related" type="text/html" title="Mirror Git Repositories"/><link href="https://seb.xn--ho-hia.de/posts/xdg-dot-files/?utm_source=atom_feed" rel="related" type="text/html" title="XDG Base Directory Specification"/><link href="https://seb.xn--ho-hia.de/posts/gitlab-distributor/?utm_source=atom_feed" rel="related" type="text/html" title="GitLab the Git Distributor"/><link href="https://seb.xn--ho-hia.de/posts/short-git-clones/?utm_source=atom_feed" rel="related" type="text/html" title="Short Git Clones"/><id>https://seb.xn--ho-hia.de/posts/chezmoi-auto-git/</id><published>2021-09-06T00:00:00+00:00</published><updated>2023-01-06T17:32:06+01:00</updated><content type="html"><![CDATA[<p><a href="https://www.chezmoi.io/">chezmoi</a> can automatically commit and push changes to your <a href="https://en.wikipedia.org/wiki/dotfile">dotfiles</a> into a (remote) <a href="https://git-scm.com/">Git</a> repository. Enable it with the following snippet in your <code>chezmoi.toml</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">sourceVCS</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">autoCommit</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">autoPush</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span></code></pre></div><p>Every time you call <code>chezmoi add /path/to/file</code> will now create a new commit in your local chezmoi repository and push those changes into your configured remote repository.</p>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/tags/dotfiles" term="dotfiles" label="dotfiles"/><category scheme="https://seb.xn--ho-hia.de/tags/chezmoi" term="chezmoi" label="chezmoi"/><category scheme="https://seb.xn--ho-hia.de/tags/git" term="git" label="git"/></entry><entry><title type="html">Push-only mirrors for Git Repositories</title><link href="https://seb.xn--ho-hia.de/posts/git-push-only-mirror/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/git-mirror/?utm_source=atom_feed" rel="related" type="text/html" title="Mirror Git Repositories"/><link href="https://seb.xn--ho-hia.de/posts/gitlab-distributor/?utm_source=atom_feed" rel="related" type="text/html" title="GitLab the Git Distributor"/><link href="https://seb.xn--ho-hia.de/posts/short-git-clones/?utm_source=atom_feed" rel="related" type="text/html" title="Short Git Clones"/><id>https://seb.xn--ho-hia.de/posts/git-push-only-mirror/</id><published>2021-07-12T00:00:00+00:00</published><updated>2023-01-06T17:32:06+01:00</updated><content type="html"><![CDATA[<p>In case you want to have push-only mirrors for your <a href="https://git-scm.com/">Git</a> repository, consider adding a special mirror remote like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git remote add mirrors DISABLED
+</span></span><span class="line"><span class="cl">$ git remote set-url --add --push mirrors git@codeberg.org:org/repo.git
+</span></span><span class="line"><span class="cl">$ git remote set-url --add --push mirrors git@gitlab.com:org/repo.git
+</span></span><span class="line"><span class="cl">$ git remote set-url --add --push mirrors git@bitbucket.org:org/repo.git
+</span></span></code></pre></div><p>The above will create a new remote called <code>mirrors</code> which has no <code>fetch</code> URL and therefore can only be pushed:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git remote -v
+</span></span><span class="line"><span class="cl">mirrors DISABLED <span class="o">(</span>fetch<span class="o">)</span>
+</span></span><span class="line"><span class="cl">mirrors git@codeberg.org:org/repo.git <span class="o">(</span>push<span class="o">)</span>
+</span></span><span class="line"><span class="cl">mirrors git@gitlab.com:org/repo.git <span class="o">(</span>push<span class="o">)</span>
+</span></span><span class="line"><span class="cl">mirrors git@bitbucket.org:org/repo.git <span class="o">(</span>push<span class="o">)</span>
+</span></span></code></pre></div><p>Calling <code>git push mirrors main:main</code> will push the local <code>main</code> branch into all defined mirrors.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="../git-mirror">Git mirror</a></li>
+<li><a href="../gitlab-distributor">gitlab-distributor</a></li>
+</ul>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/categories/decentralized" term="decentralized" label="decentralized"/><category scheme="https://seb.xn--ho-hia.de/tags/git" term="git" label="git"/><category scheme="https://seb.xn--ho-hia.de/tags/push" term="push" label="push"/><category scheme="https://seb.xn--ho-hia.de/tags/mirror" term="mirror" label="mirror"/></entry><entry><title type="html">Mirror Git Repositories</title><link href="https://seb.xn--ho-hia.de/posts/git-mirror/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/gitlab-distributor/?utm_source=atom_feed" rel="related" type="text/html" title="GitLab the Git Distributor"/><link href="https://seb.xn--ho-hia.de/posts/short-git-clones/?utm_source=atom_feed" rel="related" type="text/html" title="Short Git Clones"/><id>https://seb.xn--ho-hia.de/posts/git-mirror/</id><published>2021-06-28T00:00:00+00:00</published><updated>2023-01-06T16:46:32+01:00</updated><content type="html"><![CDATA[<p>In case you want to make use of the decentralized nature of <a href="https://git-scm.com/">Git</a>, consider using multiple push targets like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git remote set-url origin --push --add git@example.com/project.git
+</span></span><span class="line"><span class="cl">$ git remote set-url origin --push --add git@another.com/project.git
+</span></span></code></pre></div><p>Note that the first call to <code>set-url</code> will overwrite an existing remote creating with <code>git clone</code>. Any additional call will actually recognize the <code>--add</code> option and add the new target to an existing remote.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="../git-push-only-mirror">push only mirrors</a></li>
+<li><a href="../gitlab-distributor">gitlab-distributor</a></li>
+</ul>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/categories/decentralized" term="decentralized" label="decentralized"/><category scheme="https://seb.xn--ho-hia.de/tags/git" term="git" label="git"/><category scheme="https://seb.xn--ho-hia.de/tags/push" term="push" label="push"/><category scheme="https://seb.xn--ho-hia.de/tags/mirror" term="mirror" label="mirror"/></entry><entry><title type="html">GitLab the Git Distributor</title><link href="https://seb.xn--ho-hia.de/posts/gitlab-distributor/?utm_source=atom_feed" rel="alternate" type="text/html"/><link href="https://seb.xn--ho-hia.de/posts/short-git-clones/?utm_source=atom_feed" rel="related" type="text/html" title="Short Git Clones"/><link href="https://seb.xn--ho-hia.de/posts/github-actions-create-timestamp/?utm_source=atom_feed" rel="related" type="text/html" title="Create Timestamp with GitHub Actions"/><id>https://seb.xn--ho-hia.de/posts/gitlab-distributor/</id><published>2020-07-13T00:00:00+00:00</published><updated>2023-01-06T17:32:06+01:00</updated><content type="html"><![CDATA[<p><a href="https://git-scm.com/">Git</a> at its core is a decentralized version control system. Yet many people are relying on a single central server (github.com at the time of this writing) to share their work with others. <a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows">Pro Git</a> rightfully mentions it at first position in its chapter about distributed workflows because using a central server is usually the simplest approach to sharing code.</p>
+<p>While the central server approach is easy to use, it might not work in all scenarios:</p>
+<ol>
+<li>An enterprise wants to share internal code as part of an open source project. All development is happening internally, and the public mirror gets an occasional update once in a while.</li>
+<li>To protect against outages of the central server, mirrors should be created and be kept up-to-date.</li>
+</ol>
+<p>In case of the first scenario, tools like <a href="https://github.com/google/copybara">copybara</a>, <a href="https://github.com/repoSpanner/repoSpanner">repoSpanner</a>, or <a href="https://github.com/google/distributed-git-forks">distributed-Git-forks</a> offer a wide range of features to cover most details.</p>
+<p>The second scenario can be solved manually with tools like <a href="https://github.com/muesli/gitomatic">gitomatic</a> or automatically with <a href="https://gitlab.com">GitLab</a>&rsquo;s <a href="https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html">mirror feature</a> quite easy. GitLab allows to create a single pull-mirror and multiple push-mirrors. Therefore, it can be used to pull from your central server and push into all mirrors.</p>
+<p><strong>NOTE</strong>: This feature was previously available in the free tier but has now moved to GitLab Ultimate.</p>
+<pre tabindex="0"><code>               +----------------+               
+               |     GitHub     |               
+               +----------------+               
+                        ^                       
+                        |                       
+                        |                       
+               +----------------+               
+         +-----|     GitLab     |------+        
+         |     +----------------+      |        
+         |                             |        
+         |                             |        
+         v                             v        
++----------------+            +----------------+
+|    Codeberg    |            |    BitBucket   |
++----------------+            +----------------+
+</code></pre><p>To create such a setup, follow these steps:</p>
+<ol>
+<li>Go to <code>Settings &gt; Repository</code> and expand <code>Mirroring repositories</code>
+<img src="/images/gitlab-mirror-settings.png" alt="Code Flow"></li>
+<li>Enter the URL of your central Git repository as the pull source, for example <code>https://github.com/metio/ilo.git</code>
+<img src="/images/gitlab-pull-mirror.png" alt="Code Flow"></li>
+<li>Enter one push target for each mirror. Since pushing usually requires authentication, verify that the URL of the mirror contains a username, for example <code>https://YOUR_USER@codeberg.org/metio.wtf/ilo.git</code>. Add an access token for each mirror and select <code>password</code> as authentication method.
+<img src="/images/gitlab-push-mirror.png" alt="Code Flow"></li>
+</ol>
+<p>In case you prefer SSH keys over HTTP access tokens, just select <code>SSH public key</code> as authentication method and verify that your key is both saved in GitLab and all mirrors.</p>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/configuration" term="configuration" label="configuration"/><category scheme="https://seb.xn--ho-hia.de/tags/git" term="git" label="git"/><category scheme="https://seb.xn--ho-hia.de/tags/gitlab" term="gitlab" label="gitlab"/><category scheme="https://seb.xn--ho-hia.de/tags/github" term="github" label="github"/><category scheme="https://seb.xn--ho-hia.de/tags/codeberg" term="codeberg" label="codeberg"/><category scheme="https://seb.xn--ho-hia.de/tags/bitbucket" term="bitbucket" label="bitbucket"/><category scheme="https://seb.xn--ho-hia.de/tags/repo.or.cz" term="repo.or.cz" label="repo.or.cz"/></entry><entry><title type="html">Short Git Clones</title><link href="https://seb.xn--ho-hia.de/posts/short-git-clones/?utm_source=atom_feed" rel="alternate" type="text/html"/><id>https://seb.xn--ho-hia.de/posts/short-git-clones/</id><published>2020-06-15T00:00:00+00:00</published><updated>2023-01-06T17:32:06+01:00</updated><content type="html"><![CDATA[<p>In case you don&rsquo;t want to write <code>git clone git@github.com:orga/repo.git</code> all the time, consider using a custom SSH configuration (<code>~/.ssh/config</code>) like this:</p>
+<pre tabindex="0"><code>Host github
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-GITHUB&gt;
+
+Host gitlab
+    HostName gitlab.com
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-GITLAB&gt;
+
+Host bitbucket
+    HostName bitbucket.org
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-BITBUCKET&gt;
+
+Host codeberg
+    HostName codeberg.org
+    User git
+    IdentityFile ~/.ssh/&lt;KEY-FOR-CODEBERG&gt;
+</code></pre><p>Once configured, you can now write:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git clone github:orga/repo
+</span></span><span class="line"><span class="cl">$ git clone gitlab:orga/repo
+</span></span><span class="line"><span class="cl">$ git clone bitbucket:orga/repo
+</span></span><span class="line"><span class="cl">$ git clone codeberg:orga/repo
+</span></span></code></pre></div><p>In case you are working with many repositories inside a single organization, consider adding the following Git configuration (<code>$XDG_CONFIG_HOME/git/config</code> or <code>~/.gitconfig</code>):</p>
+<pre tabindex="0"><code>[url &#34;github:orga/&#34;]
+  insteadOf = orga:
+[url &#34;gitlab:orga/&#34;]
+  insteadOf = orgl:
+[url &#34;bitbucket:orga/&#34;]
+  insteadOf = orgb:
+[url &#34;codeberg:orga/&#34;]
+  insteadOf = orgc:
+</code></pre><p>Which allows you to just write:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git clone orga:repo
+</span></span><span class="line"><span class="cl">$ git clone orgl:repo
+</span></span><span class="line"><span class="cl">$ git clone orgb:repo
+</span></span><span class="line"><span class="cl">$ git clone orgc:repo
+</span></span></code></pre></div><p>Git will substitute the <code>insteadOf</code> values like <code>orga:</code> with the configured <code>url</code> (for example <code>github:orga/</code>). The actual clone URL is <code>github:orga/repo</code> at this point, which can be used by Git together with the SSH configuration mentioned above to clone repositories.</p>
+]]></content><category scheme="https://seb.xn--ho-hia.de/categories/snippet" term="snippet" label="snippet"/><category scheme="https://seb.xn--ho-hia.de/tags/git" term="git" label="git"/><category scheme="https://seb.xn--ho-hia.de/tags/clone" term="clone" label="clone"/><category scheme="https://seb.xn--ho-hia.de/tags/ssh" term="ssh" label="ssh"/></entry></feed>
