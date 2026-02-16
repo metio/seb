@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Service Worker on Sebastian Hoß</title><link>https://seb.xn--ho-hia.de/tags/service-worker/</link><description>Recent content in Service Worker on Sebastian Hoß</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 06 Jan 2023 16:40:24 +0100</lastBuildDate><atom:link href="https://seb.xn--ho-hia.de/tags/service-worker/index.xml" rel="self" type="application/rss+xml"/><item><title>Service workers with Hugo</title><link>https://seb.xn--ho-hia.de/posts/hugo-serviceworkers/</link><pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/hugo-serviceworkers/</guid><description>&lt;p&gt;To use a &lt;a href="https://serviceworke.rs/"&gt;serviceworker&lt;/a&gt; to cache a &lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; site, configure a &lt;a href="https://en.wikipedia.org/wiki/Media_type"&gt;media type&lt;/a&gt; in your &lt;code&gt;config.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;mediaTypes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;application/javascript&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;suffixes&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;js&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;outputFormats&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ServiceWorker&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;name&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;ServiceWorker&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;mediaType&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;application/javascript&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;baseName&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;serviceworker&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isPlainText&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;rel&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;alternate&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isHTML&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;noUgly&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;permalinkable&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Create a new layout in &lt;code&gt;_default/home.serviceworker.js&lt;/code&gt; with the following content:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-gotemplate" data-lang="gotemplate"&gt;const CACHE = &amp;#39;cache-and-update&amp;#39;;
+
+self.addEventListener(&amp;#39;install&amp;#39;, (event) =&amp;gt; {
+ event.waitUntil(precache());
+});
+
+self.addEventListener(&amp;#39;fetch&amp;#39;, (event) =&amp;gt; {
+ event.respondWith(fromCache(event.request));
+ event.waitUntil(update(event.request));
+});
+
+const precache = async () =&amp;gt; {
+ const cache = await caches.open(CACHE);
+ return await cache.addAll([
+ {{ range $i, $e := .Site.RegularPages }}
+ &amp;#39;{{ $.RelPermalink }}&amp;#39;{{ if $i }}, {{ end }}
+ {{ end }}
+ ]);
+}
+
+const fromCache = async (request) =&amp;gt; {
+ const cache = await caches.open(CACHE);
+ const match = await cache.match(request);
+ return match || Promise.reject(&amp;#39;no-match&amp;#39;);
+}
+
+const update = async (request) =&amp;gt; {
+ const cache = await caches.open(CACHE);
+ const response = await fetch(request);
+ return await cache.put(request, response);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="links"&gt;Links&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/gohugoio/hugo/issues/5495"&gt;https://github.com/gohugoio/hugo/issues/5495&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/wildhaber/offline-first-sw"&gt;https://github.com/wildhaber/offline-first-sw&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gohugohq.com/howto/go-offline-with-service-worker/"&gt;https://gohugohq.com/howto/go-offline-with-service-worker/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

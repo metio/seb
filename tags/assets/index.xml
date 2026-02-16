@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Assets on Sebastian Hoß</title><link>https://seb.xn--ho-hia.de/tags/assets/</link><description>Recent content in Assets on Sebastian Hoß</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 06 Jan 2023 15:27:21 +0100</lastBuildDate><atom:link href="https://seb.xn--ho-hia.de/tags/assets/index.xml" rel="self" type="application/rss+xml"/><item><title>Bundling with Hugo</title><link>https://seb.xn--ho-hia.de/posts/hugo-bundles/</link><pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/hugo-bundles/</guid><description>&lt;p&gt;&lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; allows &lt;a href="https://gohugo.io/hugo-pipes/bundling/"&gt;bundling&lt;/a&gt; of assets with several built-in functions:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-gotemplate" data-lang="gotemplate"&gt;{{ $normalize := resources.Get &amp;#34;/css/normalize.css&amp;#34; }}
+{{ $font := resources.Get &amp;#34;/css/font.css&amp;#34; }}
+{{ $header := resources.Get &amp;#34;/css/header.css&amp;#34; }}
+{{ $footer := resources.Get &amp;#34;/css/footer.css&amp;#34; }}
+{{ $navigation := resources.Get &amp;#34;/css/navigation.css&amp;#34; }}
+{{ $navigation_mobile := resources.Get &amp;#34;/css/navigation-mobile.css&amp;#34; }}
+{{ $layout := resources.Get &amp;#34;/css/layout.css&amp;#34; }}
+{{ $layout_mobile := resources.Get &amp;#34;/css/layout-mobile.css&amp;#34; }}
+{{ $syntax := resources.Get &amp;#34;/css/syntax.css&amp;#34; }}
+{{ $darkmode := resources.Get &amp;#34;/css/darkmode.css&amp;#34; | resources.Minify | resources.Fingerprint &amp;#34;sha512&amp;#34; }}
+
+{{ $base := slice $normalize $font $header $footer $navigation $layout $syntax | resources.Concat &amp;#34;css/base.css&amp;#34; | resources.Minify | resources.Fingerprint &amp;#34;sha512&amp;#34; }}
+{{ $mobile := slice $navigation_mobile $layout_mobile | resources.Concat &amp;#34;css/mobile.css&amp;#34; | resources.Minify | resources.Fingerprint &amp;#34;sha512&amp;#34; }}
+
+&amp;lt;link href=&amp;#34;{{ $base.Permalink }}&amp;#34; integrity=&amp;#34;{{ $base.Data.Integrity }}&amp;#34; media=&amp;#34;screen&amp;#34; rel=&amp;#34;stylesheet&amp;#34;&amp;gt;
+&amp;lt;link href=&amp;#34;{{ $mobile.Permalink }}&amp;#34; integrity=&amp;#34;{{ $mobile.Data.Integrity }}&amp;#34; media=&amp;#34;screen and (max-width: 800px)&amp;#34; rel=&amp;#34;stylesheet&amp;#34;&amp;gt;
+
+&amp;lt;link href=&amp;#34;{{ $darkmode.Permalink }}&amp;#34; integrity=&amp;#34;{{ $darkmode.Data.Integrity }}&amp;#34; media=&amp;#34;screen and (prefers-color-scheme: dark)&amp;#34; rel=&amp;#34;stylesheet&amp;#34;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>

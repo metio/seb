@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Foaf on Sebastian Hoß</title><link>https://seb.xn--ho-hia.de/tags/foaf/</link><description>Recent content in Foaf on Sebastian Hoß</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 06 Jan 2023 16:40:24 +0100</lastBuildDate><atom:link href="https://seb.xn--ho-hia.de/tags/foaf/index.xml" rel="self" type="application/rss+xml"/><item><title>FOAF with Hugo</title><link>https://seb.xn--ho-hia.de/posts/hugo-foaf/</link><pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/hugo-foaf/</guid><description>&lt;p&gt;To publish a &lt;a href="http://www.foaf-project.org/"&gt;FOAF&lt;/a&gt; document with your &lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; site, configure a &lt;a href="https://en.wikipedia.org/wiki/Media_type"&gt;media type&lt;/a&gt; in your &lt;code&gt;config.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;mediaTypes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;application/rdf+xml&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;suffixes&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;rdf&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;outputFormats&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Foaf&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;name&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;FOAF&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;mediaType&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;application/rdf+xml&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;baseName&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;foaf&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isPlainText&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;rel&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;alternate&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isHTML&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;noUgly&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;permalinkable&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Create a new layout in &lt;code&gt;_default/home.foaf.rdf&lt;/code&gt; with the following content:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-gotemplate" data-lang="gotemplate"&gt;&amp;lt;rdf:RDF xmlns:rdf=&amp;#34;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;#34; xmlns:rdfs=&amp;#34;http://www.w3.org/2000/01/rdf-schema#&amp;#34; xmlns:foaf=&amp;#34;http://xmlns.com/foaf/0.1/&amp;#34;&amp;gt;
+ &amp;lt;foaf:PersonalProfileDocument rdf:about=&amp;#34;&amp;#34;&amp;gt;
+ &amp;lt;foaf:maker rdf:resource=&amp;#34;#me&amp;#34; /&amp;gt;
+ &amp;lt;foaf:primaryTopic rdf:resource=&amp;#34;{{ .Site.Title }}&amp;#34; /&amp;gt;
+ &amp;lt;/foaf:PersonalProfileDocument&amp;gt;
+
+ &amp;lt;foaf:Project rdf:ID=&amp;#34;{{ .Site.Title }}&amp;#34;&amp;gt;
+ &amp;lt;foaf:name&amp;gt;{{ .Site.Title }}&amp;lt;/foaf:name&amp;gt;
+ &amp;lt;foaf:homepage rdf:resource=&amp;#34;{{ .Site.BaseURL }}&amp;#34; /&amp;gt;
+ &amp;lt;/foaf:Project&amp;gt;
+
+ {{ range $.Site.Data.contributors }}
+ &amp;lt;foaf:Person rdf:ID=&amp;#34;{{ .id }}&amp;#34;&amp;gt;
+ &amp;lt;foaf:name&amp;gt;{{ .first_name }} {{ .last_name }}&amp;lt;/foaf:name&amp;gt;
+ &amp;lt;foaf:title&amp;gt;{{ .title }}&amp;lt;/foaf:title&amp;gt;
+ &amp;lt;foaf:givenname&amp;gt;{{ .first_name }}&amp;lt;/foaf:givenname&amp;gt;
+ &amp;lt;foaf:family_name&amp;gt;{{ .last_name }}&amp;lt;/foaf:family_name&amp;gt;
+ &amp;lt;foaf:mbox rdf:resource=&amp;#34;mailto:{{ .email }}&amp;#34; /&amp;gt;
+ &amp;lt;foaf:homepage rdf:resource=&amp;#34;{{ .website }}&amp;#34; /&amp;gt;
+ &amp;lt;/foaf:Person&amp;gt;
+ {{ end }}
+&amp;lt;/rdf:RDF&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on Sebastian Hoß</title><link>https://seb.xn--ho-hia.de/tags/hugo/</link><description>Recent content in Hugo on Sebastian Hoß</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 06 Jan 2023 16:40:24 +0100</lastBuildDate><atom:link href="https://seb.xn--ho-hia.de/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Service workers with Hugo</title><link>https://seb.xn--ho-hia.de/posts/hugo-serviceworkers/</link><pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/hugo-serviceworkers/</guid><description>&lt;p&gt;To use a &lt;a href="https://serviceworke.rs/"&gt;serviceworker&lt;/a&gt; to cache a &lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; site, configure a &lt;a href="https://en.wikipedia.org/wiki/Media_type"&gt;media type&lt;/a&gt; in your &lt;code&gt;config.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;mediaTypes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;application/javascript&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;suffixes&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;js&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;outputFormats&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ServiceWorker&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;name&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;ServiceWorker&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;mediaType&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;application/javascript&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;baseName&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;serviceworker&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isPlainText&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;rel&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;alternate&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isHTML&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;noUgly&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;permalinkable&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Create a new layout in &lt;code&gt;_default/home.serviceworker.js&lt;/code&gt; with the following content:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-gotemplate" data-lang="gotemplate"&gt;const CACHE = &amp;#39;cache-and-update&amp;#39;;
+
+self.addEventListener(&amp;#39;install&amp;#39;, (event) =&amp;gt; {
+ event.waitUntil(precache());
+});
+
+self.addEventListener(&amp;#39;fetch&amp;#39;, (event) =&amp;gt; {
+ event.respondWith(fromCache(event.request));
+ event.waitUntil(update(event.request));
+});
+
+const precache = async () =&amp;gt; {
+ const cache = await caches.open(CACHE);
+ return await cache.addAll([
+ {{ range $i, $e := .Site.RegularPages }}
+ &amp;#39;{{ $.RelPermalink }}&amp;#39;{{ if $i }}, {{ end }}
+ {{ end }}
+ ]);
+}
+
+const fromCache = async (request) =&amp;gt; {
+ const cache = await caches.open(CACHE);
+ const match = await cache.match(request);
+ return match || Promise.reject(&amp;#39;no-match&amp;#39;);
+}
+
+const update = async (request) =&amp;gt; {
+ const cache = await caches.open(CACHE);
+ const response = await fetch(request);
+ return await cache.put(request, response);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="links"&gt;Links&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/gohugoio/hugo/issues/5495"&gt;https://github.com/gohugoio/hugo/issues/5495&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/wildhaber/offline-first-sw"&gt;https://github.com/wildhaber/offline-first-sw&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gohugohq.com/howto/go-offline-with-service-worker/"&gt;https://gohugohq.com/howto/go-offline-with-service-worker/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Web app manifests with Hugo</title><link>https://seb.xn--ho-hia.de/posts/hugo-webmanifest/</link><pubDate>Mon, 11 Jan 2021 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/hugo-webmanifest/</guid><description>&lt;p&gt;To publish a &lt;a href="https://developer.mozilla.org/en-US/docs/Web/Manifest"&gt;web app manifest&lt;/a&gt; document with your &lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; site, configure a &lt;a href="https://en.wikipedia.org/wiki/Media_type"&gt;media type&lt;/a&gt; in your &lt;code&gt;config.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;mediaTypes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;application/manifest+json&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;suffixes&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;webmanifest&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;outputFormats&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Webmanifest&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;name&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Web App Manifest&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;mediaType&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;application/manifest+json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;baseName&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;manifest&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isPlainText&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;rel&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;alternate&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isHTML&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;noUgly&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;permalinkable&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Create a new layout in &lt;code&gt;_default/home.manifest.json&lt;/code&gt; with the following content:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-gotemplate" data-lang="gotemplate"&gt;{
+ &amp;#34;name&amp;#34;: &amp;#34;{{ .Site.Title }}&amp;#34;,
+ &amp;#34;short_name&amp;#34;: &amp;#34;{{ .Site.Title }}&amp;#34;,
+ &amp;#34;start_url&amp;#34;: &amp;#34;.&amp;#34;,
+ &amp;#34;display&amp;#34;: &amp;#34;minimal-ui&amp;#34;,
+ &amp;#34;background_color&amp;#34;: &amp;#34;#fff&amp;#34;,
+ &amp;#34;description&amp;#34;: &amp;#34;{{ .Site.Params.description }}&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="links"&gt;Links&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://web.dev/add-manifest/"&gt;https://web.dev/add-manifest/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Bundling with Hugo</title><link>https://seb.xn--ho-hia.de/posts/hugo-bundles/</link><pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/hugo-bundles/</guid><description>&lt;p&gt;&lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; allows &lt;a href="https://gohugo.io/hugo-pipes/bundling/"&gt;bundling&lt;/a&gt; of assets with several built-in functions:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-gotemplate" data-lang="gotemplate"&gt;{{ $normalize := resources.Get &amp;#34;/css/normalize.css&amp;#34; }}
+{{ $font := resources.Get &amp;#34;/css/font.css&amp;#34; }}
+{{ $header := resources.Get &amp;#34;/css/header.css&amp;#34; }}
+{{ $footer := resources.Get &amp;#34;/css/footer.css&amp;#34; }}
+{{ $navigation := resources.Get &amp;#34;/css/navigation.css&amp;#34; }}
+{{ $navigation_mobile := resources.Get &amp;#34;/css/navigation-mobile.css&amp;#34; }}
+{{ $layout := resources.Get &amp;#34;/css/layout.css&amp;#34; }}
+{{ $layout_mobile := resources.Get &amp;#34;/css/layout-mobile.css&amp;#34; }}
+{{ $syntax := resources.Get &amp;#34;/css/syntax.css&amp;#34; }}
+{{ $darkmode := resources.Get &amp;#34;/css/darkmode.css&amp;#34; | resources.Minify | resources.Fingerprint &amp;#34;sha512&amp;#34; }}
+
+{{ $base := slice $normalize $font $header $footer $navigation $layout $syntax | resources.Concat &amp;#34;css/base.css&amp;#34; | resources.Minify | resources.Fingerprint &amp;#34;sha512&amp;#34; }}
+{{ $mobile := slice $navigation_mobile $layout_mobile | resources.Concat &amp;#34;css/mobile.css&amp;#34; | resources.Minify | resources.Fingerprint &amp;#34;sha512&amp;#34; }}
+
+&amp;lt;link href=&amp;#34;{{ $base.Permalink }}&amp;#34; integrity=&amp;#34;{{ $base.Data.Integrity }}&amp;#34; media=&amp;#34;screen&amp;#34; rel=&amp;#34;stylesheet&amp;#34;&amp;gt;
+&amp;lt;link href=&amp;#34;{{ $mobile.Permalink }}&amp;#34; integrity=&amp;#34;{{ $mobile.Data.Integrity }}&amp;#34; media=&amp;#34;screen and (max-width: 800px)&amp;#34; rel=&amp;#34;stylesheet&amp;#34;&amp;gt;
+
+&amp;lt;link href=&amp;#34;{{ $darkmode.Permalink }}&amp;#34; integrity=&amp;#34;{{ $darkmode.Data.Integrity }}&amp;#34; media=&amp;#34;screen and (prefers-color-scheme: dark)&amp;#34; rel=&amp;#34;stylesheet&amp;#34;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>humans.txt with Hugo</title><link>https://seb.xn--ho-hia.de/posts/hugo-humans/</link><pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/hugo-humans/</guid><description>&lt;p&gt;To publish a &lt;a href="http://humanstxt.org/"&gt;humans.txt&lt;/a&gt; document with your &lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; site, configure a &lt;a href="https://en.wikipedia.org/wiki/Media_type"&gt;media type&lt;/a&gt; in your &lt;code&gt;config.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;mediaTypes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;text/plain&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;suffixes&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;txt&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;outputFormats&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Humans&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;name&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Humans&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;mediaType&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;text/plain&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;baseName&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;humans&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isPlainText&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;rel&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;alternate&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isHTML&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;noUgly&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;permalinkable&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Create a new layout in &lt;code&gt;_default/home.humans.txt&lt;/code&gt; with the following content:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-gotemplate" data-lang="gotemplate"&gt;/* TEAM */
+{{ range $.Site.Data.contributors }}
+{{ .title }}: {{ .first_name }} {{ .last_name }}
+Site: {{ .website }}
+{{ end }}
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>FOAF with Hugo</title><link>https://seb.xn--ho-hia.de/posts/hugo-foaf/</link><pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/hugo-foaf/</guid><description>&lt;p&gt;To publish a &lt;a href="http://www.foaf-project.org/"&gt;FOAF&lt;/a&gt; document with your &lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; site, configure a &lt;a href="https://en.wikipedia.org/wiki/Media_type"&gt;media type&lt;/a&gt; in your &lt;code&gt;config.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;mediaTypes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;application/rdf+xml&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;suffixes&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;rdf&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;outputFormats&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Foaf&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;name&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;FOAF&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;mediaType&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;application/rdf+xml&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;baseName&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;foaf&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isPlainText&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;rel&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;alternate&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isHTML&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;noUgly&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;permalinkable&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Create a new layout in &lt;code&gt;_default/home.foaf.rdf&lt;/code&gt; with the following content:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-gotemplate" data-lang="gotemplate"&gt;&amp;lt;rdf:RDF xmlns:rdf=&amp;#34;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;#34; xmlns:rdfs=&amp;#34;http://www.w3.org/2000/01/rdf-schema#&amp;#34; xmlns:foaf=&amp;#34;http://xmlns.com/foaf/0.1/&amp;#34;&amp;gt;
+ &amp;lt;foaf:PersonalProfileDocument rdf:about=&amp;#34;&amp;#34;&amp;gt;
+ &amp;lt;foaf:maker rdf:resource=&amp;#34;#me&amp;#34; /&amp;gt;
+ &amp;lt;foaf:primaryTopic rdf:resource=&amp;#34;{{ .Site.Title }}&amp;#34; /&amp;gt;
+ &amp;lt;/foaf:PersonalProfileDocument&amp;gt;
+
+ &amp;lt;foaf:Project rdf:ID=&amp;#34;{{ .Site.Title }}&amp;#34;&amp;gt;
+ &amp;lt;foaf:name&amp;gt;{{ .Site.Title }}&amp;lt;/foaf:name&amp;gt;
+ &amp;lt;foaf:homepage rdf:resource=&amp;#34;{{ .Site.BaseURL }}&amp;#34; /&amp;gt;
+ &amp;lt;/foaf:Project&amp;gt;
+
+ {{ range $.Site.Data.contributors }}
+ &amp;lt;foaf:Person rdf:ID=&amp;#34;{{ .id }}&amp;#34;&amp;gt;
+ &amp;lt;foaf:name&amp;gt;{{ .first_name }} {{ .last_name }}&amp;lt;/foaf:name&amp;gt;
+ &amp;lt;foaf:title&amp;gt;{{ .title }}&amp;lt;/foaf:title&amp;gt;
+ &amp;lt;foaf:givenname&amp;gt;{{ .first_name }}&amp;lt;/foaf:givenname&amp;gt;
+ &amp;lt;foaf:family_name&amp;gt;{{ .last_name }}&amp;lt;/foaf:family_name&amp;gt;
+ &amp;lt;foaf:mbox rdf:resource=&amp;#34;mailto:{{ .email }}&amp;#34; /&amp;gt;
+ &amp;lt;foaf:homepage rdf:resource=&amp;#34;{{ .website }}&amp;#34; /&amp;gt;
+ &amp;lt;/foaf:Person&amp;gt;
+ {{ end }}
+&amp;lt;/rdf:RDF&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Atom Feed with Hugo</title><link>https://seb.xn--ho-hia.de/posts/hugo-atom/</link><pubDate>Mon, 16 Nov 2020 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/hugo-atom/</guid><description>&lt;p&gt;To publish Atom feeds for your &lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; site, configure a &lt;a href="https://en.wikipedia.org/wiki/Media_type"&gt;media type&lt;/a&gt; in your &lt;code&gt;config.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;mediaTypes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;application/atom+xml&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;suffixes&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;xml&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;outputFormats&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Atom&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;name&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Atom&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;mediaType&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;application/atom+xml&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;baseName&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;atom&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isPlainText&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;rel&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;alternate&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;isHTML&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;noUgly&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;permalinkable&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Create a new layout in &lt;code&gt;_default/list.atom.xml&lt;/code&gt; with the following content:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-gotemplate" data-lang="gotemplate"&gt;{{ printf `&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt;` | safeHTML }}
+&amp;lt;feed xmlns=&amp;#34;http://www.w3.org/2005/Atom&amp;#34;{{ with site.LanguageCode }} xml:lang=&amp;#34;{{ . }}&amp;#34;{{ end }}&amp;gt;
+ &amp;lt;generator uri=&amp;#34;https://gohugo.io/&amp;#34; version=&amp;#34;{{ hugo.Version }}&amp;#34;&amp;gt;Hugo&amp;lt;/generator&amp;gt;
+ {{- $title := site.Title -}}
+ {{- with .Title -}}
+ {{- if (not (eq . site.Title)) -}}
+ {{- $title = printf `%s %s %s` . (i18n &amp;#34;feed_title_on&amp;#34; | default &amp;#34;on&amp;#34;) site.Title -}}
+ {{- end -}}
+ {{- end -}}
+ {{- if .IsTranslated -}}
+ {{ $title = printf &amp;#34;%s (%s)&amp;#34; $title (index site.Data.i18n.languages .Lang) }}
+ {{- end -}}
+ {{ printf `&amp;lt;title type=&amp;#34;html&amp;#34;&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/title&amp;gt;` $title | safeHTML }}
+ {{ with (or (.Param &amp;#34;subtitle&amp;#34;) (.Param &amp;#34;tagline&amp;#34;)) }}
+ {{ printf `&amp;lt;subtitle type=&amp;#34;html&amp;#34;&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/subtitle&amp;gt;` . | safeHTML }}
+ {{ end }}
+ {{ $output_formats := .OutputFormats }}
+ {{ range $output_formats -}}
+ {{- $rel := (or (and (eq &amp;#34;atom&amp;#34; (.Name | lower)) &amp;#34;self&amp;#34;) &amp;#34;alternate&amp;#34;) -}}
+ {{ with $output_formats.Get .Name }}
+ {{ printf `&amp;lt;link href=%q rel=%q type=%q title=%q /&amp;gt;` .Permalink $rel .MediaType.Type .Name | safeHTML }}
+ {{- end -}}
+ {{- end }}
+ {{- range .Translations }}
+ {{ $output_formats := .OutputFormats }}
+ {{- $lang := .Lang }}
+ {{- $langstr := index site.Data.i18n.languages .Lang }}
+ {{ range $output_formats -}}
+ {{ with $output_formats.Get .Name }}
+ {{ printf `&amp;lt;link href=%q rel=&amp;#34;alternate&amp;#34; type=%q hreflang=%q title=&amp;#34;[%s] %s&amp;#34; /&amp;gt;` .Permalink .MediaType.Type $lang $langstr .Name | safeHTML }}
+ {{- end -}}
+ {{- end }}
+ {{- end }}
+ &amp;lt;updated&amp;gt;{{ now.Format &amp;#34;2006-01-02T15:04:05-07:00&amp;#34; | safeHTML }}&amp;lt;/updated&amp;gt;
+ {{ with site.Copyright }}
+ {{- $copyright := replace . &amp;#34;{year}&amp;#34; now.Year -}} {{/* In case the site.copyright uses a special string &amp;#34;{year}&amp;#34; */}}
+ {{- $copyright = replace $copyright &amp;#34;&amp;amp;copy;&amp;#34; &amp;#34;©&amp;#34; -}}
+ &amp;lt;rights&amp;gt;{{ $copyright | plainify }}&amp;lt;/rights&amp;gt;
+ {{- end }}
+ {{ with .Param &amp;#34;feed&amp;#34; }}
+ {{/* For this to work, the $icon file should be present in the assets/ directory */}}
+ {{- $icon := .icon | default &amp;#34;icon.svg&amp;#34; -}}
+ {{- with resources.Get $icon -}}
+ &amp;lt;icon&amp;gt;{{ (. | fingerprint).Permalink }}&amp;lt;/icon&amp;gt;
+ {{- end }}
+
+ {{/* For this to work, the $logo file should be present in the assets/ directory */}}
+ {{- $logo := .logo | default &amp;#34;logo.svg&amp;#34; -}}
+ {{- with resources.Get $logo -}}
+ &amp;lt;logo&amp;gt;{{ (. | fingerprint).Permalink }}&amp;lt;/logo&amp;gt;
+ {{- end }}
+ {{ end }}
+ {{ with site.Author.name -}}
+ &amp;lt;author&amp;gt;
+ &amp;lt;name&amp;gt;{{ . }}&amp;lt;/name&amp;gt;
+ {{ with site.Author.email }}
+ &amp;lt;email&amp;gt;{{ . }}&amp;lt;/email&amp;gt;
+ {{ end -}}
+ &amp;lt;/author&amp;gt;
+ {{- end }}
+ {{ with site.Params.id }}
+ &amp;lt;id&amp;gt;{{ . | plainify }}&amp;lt;/id&amp;gt;
+ {{ else }}
+ &amp;lt;id&amp;gt;{{ .Permalink }}&amp;lt;/id&amp;gt;
+ {{ end }}
+ {{- $limit := (cond (le site.Config.Services.RSS.Limit 0) 65536 site.Config.Services.RSS.Limit) }}
+ {{- $feed_sections := site.Params.feedSections | default site.Params.mainSections -}}
+ {{/* Range through only the pages with a Type in $feed_sections. */}}
+ {{- $pages := where .RegularPages &amp;#34;Type&amp;#34; &amp;#34;in&amp;#34; $feed_sections -}}
+ {{- if (eq .Kind &amp;#34;home&amp;#34;) -}}
+ {{- $pages = where site.RegularPages &amp;#34;Type&amp;#34; &amp;#34;in&amp;#34; $feed_sections -}}
+ {{- end -}}
+ {{/* Remove the pages that have the disable_feed parameter set to true. */}}
+ {{- $pages = where $pages &amp;#34;.Params.disable_feed&amp;#34; &amp;#34;!=&amp;#34; true -}}
+ {{- range first $limit $pages }}
+ {{ $page := . }}
+ &amp;lt;entry&amp;gt;
+ {{ printf `&amp;lt;title type=&amp;#34;html&amp;#34;&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/title&amp;gt;` .Title | safeHTML }}
+ &amp;lt;link href=&amp;#34;{{ .Permalink }}?utm_source=atom_feed&amp;#34; rel=&amp;#34;alternate&amp;#34; type=&amp;#34;text/html&amp;#34; /&amp;gt;
+ {{- range .Translations }}
+ {{- $link := printf &amp;#34;%s?utm_source=atom_feed&amp;#34; .Permalink | safeHTML }}
+ {{- printf `&amp;lt;link href=%q rel=&amp;#34;alternate&amp;#34; type=&amp;#34;text/html&amp;#34; hreflang=%q /&amp;gt;` $link .Lang | safeHTML }}
+ {{- end }}
+ {{/* rel=related: See https://validator.w3.org/feed/docs/atom.html#link */}}
+ {{- range first 5 (site.RegularPages.Related .) }}
+ &amp;lt;link href=&amp;#34;{{ .Permalink }}?utm_source=atom_feed&amp;#34; rel=&amp;#34;related&amp;#34; type=&amp;#34;text/html&amp;#34; title=&amp;#34;{{ .Title }}&amp;#34; /&amp;gt;
+ {{- end }}
+ {{ with .Params.id }}
+ &amp;lt;id&amp;gt;{{ . | plainify }}&amp;lt;/id&amp;gt;
+ {{ else }}
+ &amp;lt;id&amp;gt;{{ .Permalink }}&amp;lt;/id&amp;gt;
+ {{ end }}
+ {{ with .Params.author -}}
+ {{- range . -}} &amp;lt;!-- Assuming the author front-matter to be a list --&amp;gt;
+ &amp;lt;author&amp;gt;
+ &amp;lt;name&amp;gt;{{ . }}&amp;lt;/name&amp;gt;
+ &amp;lt;/author&amp;gt;
+ {{- end -}}
+ {{- end }}
+ &amp;lt;published&amp;gt;{{ .Date.Format &amp;#34;2006-01-02T15:04:05-07:00&amp;#34; | safeHTML }}&amp;lt;/published&amp;gt;
+ &amp;lt;updated&amp;gt;{{ .Lastmod.Format &amp;#34;2006-01-02T15:04:05-07:00&amp;#34; | safeHTML }}&amp;lt;/updated&amp;gt;
+ {{ $description1 := .Description | default &amp;#34;&amp;#34; }}
+ {{ $description := (cond (eq &amp;#34;&amp;#34; $description1) &amp;#34;&amp;#34; (printf &amp;#34;&amp;lt;blockquote&amp;gt;%s&amp;lt;/blockquote&amp;gt;&amp;#34; ($description1 | markdownify))) }}
+ {{ printf `&amp;lt;content type=&amp;#34;html&amp;#34;&amp;gt;&amp;lt;![CDATA[%s%s]]&amp;gt;&amp;lt;/content&amp;gt;` $description .Content | safeHTML }}
+ {{ with site.Taxonomies }}
+ {{ range $taxo,$_ := . }} &amp;lt;!-- Defaults taxos: &amp;#34;tags&amp;#34;, &amp;#34;categories&amp;#34; --&amp;gt;
+ {{ with $page.Param $taxo }}
+ {{ $taxo_list := . }} &amp;lt;!-- $taxo_list will be the tags/categories list --&amp;gt;
+ {{ with site.GetPage (printf &amp;#34;/%s&amp;#34; $taxo) }}
+ {{ $taxonomy_page := . }}
+ {{ range $taxo_list }} &amp;lt;!-- Below, assuming pretty URLs --&amp;gt;
+ &amp;lt;category scheme=&amp;#34;{{ printf &amp;#34;%s%s&amp;#34; $taxonomy_page.Permalink (. | urlize) }}&amp;#34; term=&amp;#34;{{ (. | urlize) }}&amp;#34; label=&amp;#34;{{ . }}&amp;#34; /&amp;gt;
+ {{ end }}
+ {{ end }}
+ {{ end }}
+ {{ end }}
+ {{ end }}
+ &amp;lt;/entry&amp;gt;
+ {{ end }}
+&amp;lt;/feed&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Publish Hugo site with GitHub Actions</title><link>https://seb.xn--ho-hia.de/posts/github-actions-publish-hugo-site/</link><pubDate>Mon, 21 Sep 2020 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/github-actions-publish-hugo-site/</guid><description>&lt;p&gt;The &lt;a href="https://github.com/peaceiris/actions-gh-pages"&gt;peaceiris/actions-gh-pages&lt;/a&gt; action allows to publish a &lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; site in your &lt;a href="https://github.com/features/actions"&gt;GitHub Action&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;&amp;lt;PIPELINE&amp;gt;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;jobs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;build&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;runs-on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;&amp;lt;RUN_ON&amp;gt;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;steps&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;- &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;Deploy Website&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;uses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;peaceiris/actions-gh-pages@v3&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;with&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;github_token&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;${{ secrets.GITHUB_TOKEN }}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;publish_dir&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;&amp;lt;PUBLISH_DIR&amp;gt;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;force_orphan&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;cname&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;&amp;lt;CNAME&amp;gt;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;PIPELINE&amp;gt;&lt;/code&gt;: The name of your pipeline.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;RUN_ON&amp;gt;&lt;/code&gt;: The runner to use, see GitHub&amp;rsquo;s own &lt;a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on"&gt;documentation&lt;/a&gt; for possible values.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;PUBLISH_DIR&amp;gt;&lt;/code&gt;: The file system location of the built site.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;CNAME&amp;gt;&lt;/code&gt;: The &lt;code&gt;CNAME&lt;/code&gt; of your custom domain.&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Use a specific Hugo version with GitHub Actions</title><link>https://seb.xn--ho-hia.de/posts/github-actions-specify-hugo-version/</link><pubDate>Mon, 24 Aug 2020 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/github-actions-specify-hugo-version/</guid><description>&lt;p&gt;The &lt;a href="https://github.com/peaceiris/actions-hugo"&gt;actions-hugo&lt;/a&gt; action allows to use a specific &lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; version in your &lt;a href="https://github.com/features/actions"&gt;GitHub Action&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;&amp;lt;PIPELINE&amp;gt;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;jobs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;build&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;runs-on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;&amp;lt;RUN_ON&amp;gt;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;steps&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;- &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;Setup hugo&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;uses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;peaceiris/actions-hugo@v2&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;with&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;hugo-version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;&amp;lt;HUGO_VERSION&amp;gt;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;PIPELINE&amp;gt;&lt;/code&gt;: The name of your pipeline.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;RUN_ON&amp;gt;&lt;/code&gt;: The runner to use, see GitHub&amp;rsquo;s own &lt;a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on"&gt;documentation&lt;/a&gt; for possible values.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;HUGO_VERSION&amp;gt;&lt;/code&gt;: The &lt;a href="https://github.com/gohugoio/hugo/releases"&gt;released versions&lt;/a&gt; or use &lt;code&gt;latest&lt;/code&gt; to always use the latest version of Hugo.&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

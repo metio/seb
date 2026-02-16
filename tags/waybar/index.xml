@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Waybar on Sebastian Hoß</title><link>https://seb.xn--ho-hia.de/tags/waybar/</link><description>Recent content in Waybar on Sebastian Hoß</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 06 Jan 2023 16:40:24 +0100</lastBuildDate><atom:link href="https://seb.xn--ho-hia.de/tags/waybar/index.xml" rel="self" type="application/rss+xml"/><item><title>Waybar on SwayWM</title><link>https://seb.xn--ho-hia.de/posts/sway-waybar/</link><pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate><guid>https://seb.xn--ho-hia.de/posts/sway-waybar/</guid><description>&lt;p&gt;&lt;a href="https://github.com/Alexays/Waybar/"&gt;Waybar&lt;/a&gt; can be used as a status bar for &lt;a href="https://swaywm.org/"&gt;SwayWM&lt;/a&gt;. You tell Sway to use it with the following snippet in your Sway configuration:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;bar {
+ swaybar_command waybar
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Configure Waybar itself in &lt;code&gt;~/.config/waybar/config&lt;/code&gt;:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;{
+ &amp;#34;layer&amp;#34;: &amp;#34;top&amp;#34;,
+ &amp;#34;modules-left&amp;#34;: [&amp;#34;sway/workspaces&amp;#34;, &amp;#34;sway/mode&amp;#34;],
+ &amp;#34;modules-center&amp;#34;: [&amp;#34;sway/window&amp;#34;],
+ &amp;#34;modules-right&amp;#34;: [&amp;#34;clock&amp;#34;],
+ &amp;#34;sway/window&amp;#34;: {
+ &amp;#34;max-length&amp;#34;: 50
+ },
+ &amp;#34;clock&amp;#34;: {
+ &amp;#34;format-alt&amp;#34;: &amp;#34;{:%a, %d. %b %H:%M}&amp;#34;
+ }
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>
