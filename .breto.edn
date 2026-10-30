@@ -1,0 +1,10 @@
+;; SPDX-FileCopyrightText: The seb Authors
+;; SPDX-License-Identifier: CC0-1.0
+
+{:packages ["@docs"]
+ :commands {"build" {:run ["hugo" "--minify" "--printI18nWarnings" "--printPathWarnings" "--printUnusedTemplates"]
+                     :description "Build the site into public"}
+            "serve" {:run ["hugo" "server" "--minify" "--printI18nWarnings" "--printPathWarnings" "--printUnusedTemplates"]
+                     :description "Serve the site with live reload"}
+            "lint" {:run ["vale" "./content"]
+                    :description "Lint the content with vale"}}}
