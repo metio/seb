@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: The seb Authors
+# SPDX-License-Identifier: CC0-1.0
+
+cff-version: 1.2.0
+title: seb
+message: If you use this software, please cite it as below.
+type: software
+authors:
+- family-names: Hoß
+  given-names: Sebastian
+  email: seb@hoß.de
+url: https://github.com/metio/seb/
+license: CC0-1.0
+keywords:
+  - hugo
+  - hugo-site
+  - zettelkasten

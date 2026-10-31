@@ -1,4 +1,17 @@
+# SPDX-FileCopyrightText: The seb Authors
+# SPDX-License-Identifier: CC0-1.0
+
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.project
+.classpath
+.DS_Store
+.claude/settings.local.json
+.breto.local.edn
+.vale/
 /public/
 /resources/
-.idea/
 .hugo_build.lock
