@@ -5,27 +5,31 @@ on:
       - main
   schedule:
     - cron:  0 2 * * MON
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           # Hugo: Fetch all history for .GitInfo and .Lastmod
           fetch-depth: 0
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
+        uses: peaceiris/actions-hugo@2752ce1d29631191ea3f27c23495fa06139a5b78 # v3
         with:
           hugo-version: latest
       - name: Build Website
         run: hugo --minify --printI18nWarnings --printPathWarnings --printUnusedTemplates
       - id: htmltest
         name: Run htmltest
-        uses: wjdp/htmltest-action@master
+        uses: wjdp/htmltest-action@31be84a95c860a331e0cf9a99f71e3eb39d2f86b # master
         with:
           config: ./htmltest.yml
       - name: Deploy Website
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public

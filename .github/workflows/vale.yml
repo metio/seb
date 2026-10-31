@@ -3,12 +3,17 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: read
+  checks: write
+
 jobs:
   vale:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-      - uses: errata-ai/vale-action@reviewdog
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: errata-ai/vale-action@518a9136acc6e6668ce7c00d367051e0941e87ff # reviewdog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
