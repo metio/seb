@@ -50,10 +50,10 @@
             <logo>{{ (. | fingerprint).Permalink }}</logo>
         {{- end }}
     {{ end }}
-    {{ with site.Author.name -}}
+    {{ with site.Params.author -}}
         <author>
             <name>{{ . }}</name>
-            {{ with site.Author.email }}
+            {{ with site.Params.email }}
                 <email>{{ . }}</email>
             {{ end -}}
         </author>
