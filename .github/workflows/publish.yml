@@ -1,37 +1,23 @@
+# SPDX-FileCopyrightText: The seb Authors
+# SPDX-License-Identifier: CC0-1.0
+
 name: Publish Page
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
   schedule:
-    - cron:  0 2 * * MON
+    - cron: 0 2 * * MON
+  workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          # Hugo: Fetch all history for .GitInfo and .Lastmod
-          fetch-depth: 0
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@2752ce1d29631191ea3f27c23495fa06139a5b78 # v3
-        with:
-          hugo-version: latest
-      - name: Build Website
-        run: hugo --minify --printI18nWarnings --printPathWarnings --printUnusedTemplates
-      - id: htmltest
-        name: Run htmltest
-        uses: wjdp/htmltest-action@31be84a95c860a331e0cf9a99f71e3eb39d2f86b # master
-        with:
-          config: ./htmltest.yml
-      - name: Deploy Website
-        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-          force_orphan: true
-          cname: seb.xn--ho-hia.de
+  website:
+    name: Website
+    uses: metio/ci/.github/workflows/hugo.yml@637b0e032aa1a29d2055cfe99c299f4eb1435e84 # feat/hugo-workflow
+    permissions:
+      contents: write
+    with:
+      cname: seb.xn--ho-hia.de
