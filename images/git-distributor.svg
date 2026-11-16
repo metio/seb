@@ -1,0 +1,135 @@
+<svg height="256" width="392" xmlns="http://www.w3.org/2000/svg">
+    <style>line, path, circle,rect,polygon {
+        stroke: black;
+        stroke-width: 2;
+        stroke-opacity: 1;
+        fill-opacity: 1;
+        stroke-linecap: round;
+        stroke-linejoin: miter;
+        }
+
+        text {
+        fill: black;
+        }
+        rect.backdrop{
+        stroke: none;
+        fill: white;
+        }
+        .broken{
+        stroke-dasharray: 8;
+        }
+        .filled{
+        fill: black;
+        }
+        .bg_filled{
+        fill: white;
+        }
+        .nofill{
+        fill: white;
+        }
+
+        text {
+        font-family: monospace;
+        font-size: 14px;
+        }
+
+        .end_marked_arrow{
+        marker-end: url(#arrow);
+        }
+        .start_marked_arrow{
+        marker-start: url(#arrow);
+        }
+
+        .end_marked_diamond{
+        marker-end: url(#diamond);
+        }
+        .start_marked_diamond{
+        marker-start: url(#diamond);
+        }
+
+        .end_marked_circle{
+        marker-end: url(#circle);
+        }
+        .start_marked_circle{
+        marker-start: url(#circle);
+        }
+
+        .end_marked_open_circle{
+        marker-end: url(#open_circle);
+        }
+        .start_marked_open_circle{
+        marker-start: url(#open_circle);
+        }
+
+        .end_marked_big_open_circle{
+        marker-end: url(#big_open_circle);
+        }
+        .start_marked_big_open_circle{
+        marker-start: url(#big_open_circle);
+        }
+
+        .r1{
+        fill: papayawhip;
+        }
+        .r2{
+        fill: crimson;
+        }
+        .a{
+        stroke-dasharray: 8;
+        fill: lightblue;
+        }
+        .b{
+        stroke: blue;
+        }
+        .bigrect{
+        fill: yellow;
+        stroke: red;
+        }
+        .red{
+        fill:red;
+        stroke:blue;
+        }
+    </style>
+    <defs>
+        <marker id="arrow" markerHeight="7" markerWidth="7" orient="auto-start-reverse" refX="4" refY="2"
+                viewBox="-2 -2 8 8">
+            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+        </marker>
+        <marker id="diamond" markerHeight="7" markerWidth="7" orient="auto-start-reverse" refX="4" refY="2"
+                viewBox="-2 -2 8 8">
+            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+        </marker>
+        <marker id="circle" markerHeight="7" markerWidth="7" orient="auto-start-reverse" refX="4" refY="4"
+                viewBox="0 0 8 8">
+            <circle class="filled" cx="4" cy="4" r="2"></circle>
+        </marker>
+        <marker id="open_circle" markerHeight="7" markerWidth="7" orient="auto-start-reverse" refX="4" refY="4"
+                viewBox="0 0 8 8">
+            <circle class="bg_filled" cx="4" cy="4" r="2"></circle>
+        </marker>
+        <marker id="big_open_circle" markerHeight="7" markerWidth="7" orient="auto-start-reverse" refX="4" refY="4"
+                viewBox="0 0 8 8">
+            <circle class="bg_filled" cx="4" cy="4" r="3"></circle>
+        </marker>
+    </defs>
+    <rect class="backdrop" height="256" width="392" x="0" y="0"></rect>
+    <rect class="solid nofill " height="32" rx="0" width="136" x="124" y="8"></rect>
+    <text class="" x="170" y="28">GitHub</text>
+    <rect class="solid nofill " height="32" rx="0" width="136" x="4" y="200"></rect>
+    <text class="" x="42" y="220">Codeberg</text>
+    <rect class="solid nofill " height="32" rx="0" width="136" x="244" y="200"></rect>
+    <text class="" x="282" y="220">BitBucket</text>
+    <polygon class="filled " points="192,60 196,48 200,60"></polygon>
+    <line class="solid " x1="196" x2="196" y1="64" y2="96"></line>
+    <line class="solid end_marked_arrow " x1="76" x2="76" y1="120" y2="192"></line>
+    <text class="" x="170" y="124">Gitlab</text>
+    <line class="solid end_marked_arrow " x1="316" x2="316" y1="120" y2="192"></line>
+    <g>
+        <line class="solid" x1="124" x2="260" y1="104" y2="104"></line>
+        <line class="solid" x1="124" x2="124" y1="104" y2="136"></line>
+        <line class="solid" x1="260" x2="260" y1="104" y2="136"></line>
+        <line class="solid" x1="76" x2="124" y1="120" y2="120"></line>
+        <line class="solid" x1="260" x2="316" y1="120" y2="120"></line>
+        <line class="solid" x1="124" x2="260" y1="136" y2="136"></line>
+    </g>
+</svg>
